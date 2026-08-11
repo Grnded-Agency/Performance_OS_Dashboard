@@ -165,6 +165,9 @@
   .badge.warn{background:var(--warn-bg);color:var(--warn-ink);} .badge.warn .bd{background:var(--warn);}
   .badge.crit{background:var(--crit-bg);color:var(--crit-ink);} .badge.crit .bd{background:var(--crit);}
   .badge.none{background:var(--none-bg);color:var(--muted);} .badge.none .bd{background:var(--none);}
+  .tdot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:8px;vertical-align:middle;flex:0 0 auto;}
+  .tdot.on{background:var(--good);box-shadow:0 0 0 3px rgba(12,163,12,.16);}
+  .tdot.off{background:var(--none);opacity:.7;}
 
   /* ---------- Cards ---------- */
   .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px;margin-bottom:22px;}
@@ -242,7 +245,7 @@
 <body>
 <header class="topbar">
   <div class="brand">
-    <img src="https://d9hhrg4mnvzow.cloudfront.net/funnel.grndedagency.com/coaches/aca5eede-grnded-logo-transparent-1_103c029000000000000028.png" alt="Grnded Agency Logo">
+    <div class="logo">GA</div>
     <div>
       <h1>Performance OS</h1>
       <div class="sub">Grnded Agency · Client Ad Performance</div>
@@ -340,16 +343,33 @@ const FMT = {
   num:    v => v==null?"—":Math.round(v).toLocaleString(),
   dec1:   v => v==null?"—":(+v).toLocaleString(undefined,{minimumFractionDigits:1,maximumFractionDigits:1})
 };
-// CTR / LP CR are stored as fractions (0.02). If someone types "2" meaning 2%, handle both.
-function asPct(v){ v=+v; return v<=1 ? v*100 : v; }
+// Rates (CTR, LP CR) are normalized to percentage-numbers at parse time
+// (see normalizeRates), so by the time they're displayed they are already
+// e.g. 4 for 4%. asPct is therefore an identity pass-through.
+function asPct(v){ return +v; }
+
+// Per-tab rate format detection. Older tabs store rates as fractions (0.04 = 4%),
+// newer tabs as percentage-numbers (1.63 = 1.63%). We look at the largest CTR/LP-CR
+// in the tab: landing-page conversion rates are reliably >1 when expressed as
+// percentages, so a max at or below 1.5 means the tab is using fractions → scale ×100.
+function normalizeRates(rows){
+  let maxRate=0;
+  rows.forEach(r=>["ctr","lpcr"].forEach(k=>{ if(r[k]!=null && +r[k]>maxRate) maxRate=+r[k]; }));
+  if(maxRate>0 && maxRate<=1.5){
+    rows.forEach(r=>{ if(r.ctr!=null) r.ctr=+r.ctr*100; if(r.lpcr!=null) r.lpcr=+r.lpcr*100; });
+  }
+  return rows;
+}
 
 // key, label, formatter, good direction (+1 higher better, -1 lower better, 0 neutral)
 const METRICS = [
   {k:"spend",       label:"Spend",        fmt:FMT.money0, good:0},
   {k:"conversions", label:"Conversions",  fmt:FMT.num,    good:1},
+  {k:"leads",       label:"New Leads",    fmt:FMT.num,    good:1},
   {k:"ctr",         label:"CTR",          fmt:FMT.pct,    good:1},
   {k:"lpcr",        label:"LP Conv. Rate",fmt:FMT.pct,    good:1},
   {k:"cpc",         label:"CPC",          fmt:FMT.money2, good:-1},
+  {k:"metaCpl",     label:"Meta CPL",     fmt:FMT.money2, good:-1},
   {k:"cpm",         label:"CPM",          fmt:FMT.money2, good:-1},
   {k:"freq",        label:"Frequency",    fmt:FMT.dec1,   good:-1},
   {k:"linkClicks",  label:"Link Clicks",  fmt:FMT.num,    good:1},
@@ -411,23 +431,13 @@ function rowsFromGviz(resp){
   const t = resp && resp.table;
   if(!t || !t.cols) return [];
   const idx = t.cols.map(c => HEADER_MAP[(c.label||"").trim().toLowerCase()] || null);
-  const out=[];
+  const recs=[];
   (t.rows||[]).forEach(row=>{
     const rec={};
     (row.c||[]).forEach((cell,i)=>{ const f=idx[i]; if(f && cell!=null) rec[f]=cell.v; });
-    const d=(rec.date==null?"":String(rec.date)).trim();
-    if(!d || d.toUpperCase()==="TEST") return;
-    if(rec.spend==null || String(rec.spend).trim()==="") return;
-    for(const f of NUM_FIELDS){
-      if(rec[f]!=null && String(rec[f]).trim()!==""){
-        const n=parseFloat(String(rec[f]).replace(/[$,%\s]/g,""));
-        rec[f]=isNaN(n)?null:n;
-      } else rec[f]=null;
-    }
-    rec.date=normDate(d);
-    out.push(rec);
+    recs.push(rec);
   });
-  return out;
+  return finalizeRows(recs);
 }
 
 // minimal RFC-4180 CSV parser
@@ -457,32 +467,61 @@ const HEADER_MAP = {
   "landing page cr":"lpcr","lp cr %":"lpcr","lp cr":"lpcr",
   "status":"status","priority":"priority","action taken":"priority",
   "recommenation":"recommendation","recommendation":"recommendation",
-  "todays test":"test","today's test":"test","meta cpl":"metaCpl","notes":"notes"
+  "todays test":"test","today's test":"test",
+  "meta cpl":"metaCpl","cpl":"metaCpl","meta cost per lead":"metaCpl",
+  "new leads (ghl)":"leads","new leads(ghl)":"leads","new leads":"leads","ghl leads":"leads","leads":"leads",
+  "active":"active","active?":"active","is active":"active","active status":"active",
+  "receiving traffic":"active","receiving traffic?":"active","traffic":"active","status (active)":"active",
+  "notes":"notes"
 };
-const NUM_FIELDS = new Set(["spend","cpm","ctr","cpc","freq","linkClicks","lpViews","visitors","conversions","lpcr","metaCpl"]);
+const NUM_FIELDS = new Set(["spend","cpm","ctr","cpc","freq","linkClicks","lpViews","visitors","conversions","lpcr","metaCpl","leads"]);
+
+// Interpret an "Active" cell → true / false / null(unknown)
+function truthyActive(v){
+  if(v==null) return null;
+  const s=String(v).trim().toLowerCase();
+  if(s==="") return null;
+  if(["true","yes","active","on","1","y","🟢","green","running","live","receiving traffic"].includes(s)) return true;
+  if(["false","no","paused","off","0","n","⚪","🔴","⚫","inactive","stopped","pause"].includes(s)) return false;
+  const num=parseFloat(s); if(!isNaN(num)) return num>0;
+  return null;
+}
+
+// Shared: from mapped records, coerce numerics, capture the account Active flag
+// (even on rows we drop for having no spend), then keep only real data rows.
+function finalizeRows(recs){
+  let activeFlag=null;
+  const out=[];
+  recs.forEach(rec=>{
+    const a=truthyActive(rec.active); if(a!==null) activeFlag=a;
+    for(const f of NUM_FIELDS){
+      if(rec[f]!=null && String(rec[f]).trim()!==""){
+        const n=parseFloat(String(rec[f]).replace(/[$,%\s]/g,""));
+        rec[f]=isNaN(n)?null:n;
+      } else rec[f]=null;
+    }
+    const d=(rec.date==null?"":String(rec.date)).trim();
+    if(!d || d.toUpperCase()==="TEST") return;
+    if(rec.spend==null) return;
+    rec.date=normDate(d);
+    out.push(rec);
+  });
+  normalizeRates(out);
+  out._active=activeFlag;
+  return out;
+}
 
 function rowsFromCSV(text){
   const rows = parseCSV(text);
   if(!rows.length) return [];
-  const headers = rows[0].map(h=>(h||"").trim().toLowerCase());
-  const idx = headers.map(h=>HEADER_MAP[h]||null);
-  const out=[];
+  const idx = rows[0].map(h=>HEADER_MAP[(h||"").trim().toLowerCase()]||null);
+  const recs=[];
   for(let r=1;r<rows.length;r++){
     const rec={};
     rows[r].forEach((cell,i)=>{ const f=idx[i]; if(f) rec[f]=cell; });
-    const d=(rec.date||"").toString().trim();
-    if(!d || d.toUpperCase()==="TEST") continue;
-    if(rec.spend==null || String(rec.spend).trim()==="") continue;
-    for(const f of NUM_FIELDS){
-      if(rec[f]!=null && String(rec[f]).trim()!==""){
-        const n=parseFloat(String(rec[f]).replace(/[$,%\s]/g,""));
-        rec[f]= isNaN(n)?null:n;
-      } else rec[f]=null;
-    }
-    rec.date = normDate(d);
-    out.push(rec);
+    recs.push(rec);
   }
-  return out;
+  return finalizeRows(recs);
 }
 
 function normDate(d){
@@ -520,11 +559,15 @@ async function loadData(){
   }
 }
 
-function sortRows(rows){ return rows.slice().sort((a,b)=> (a.date<b.date?-1:a.date>b.date?1:0)); }
+function sortRows(rows){ const a=rows.slice().sort((x,y)=> (x.date<y.date?-1:x.date>y.date?1:0)); a._active=rows._active; return a; }
 function normalizeSnapshot(snap){
   const out={};
   for(const [k,rows] of Object.entries(snap)){
-    out[k]=sortRows(rows.map(r=>{const c={...r}; NUM_FIELDS.forEach(f=>{ if(c[f]!=null) c[f]=+c[f]; }); return c;}));
+    const mapped=rows.map(r=>{const c={...r}; NUM_FIELDS.forEach(f=>{ if(c[f]!=null) c[f]=+c[f]; }); return c;});
+    normalizeRates(mapped);
+    let af=null; mapped.forEach(r=>{ const t=truthyActive(r.active); if(t!==null) af=t; });
+    mapped._active=af;
+    out[k]=sortRows(mapped);
   }
   return out;
 }
@@ -605,9 +648,9 @@ function aggregate(rows){
   const conv=sum("conversions"), vis=sum("visitors");
   return {
     ad:"All ads", date: latestDateOf(rows), _ads: rows.length,
-    spend:sum("spend"), conversions:conv, linkClicks:sum("linkClicks"),
+    spend:sum("spend"), conversions:conv, leads:sum("leads"), linkClicks:sum("linkClicks"),
     lpViews:sum("lpViews"), visitors:vis,
-    cpm:wavg("cpm"), cpc:wavg("cpc"), freq:wavg("freq"),
+    cpm:wavg("cpm"), cpc:wavg("cpc"), metaCpl:wavg("metaCpl"), freq:wavg("freq"),
     ctr:wavgPct("ctr"),
     lpcr:(vis? conv/vis*100 : wavgPct("lpcr")),
     status:worstStatus(rows), priority:"", recommendation:"", test:""
@@ -617,6 +660,24 @@ function aggregate(rows){
 function clientRep(c){
   const rows=clientRows(c); if(!rows.length) return null;
   return aggregate(rowsAt(rows, latestDateOf(rows)));
+}
+
+/* ---------- active / receiving-traffic ---------- */
+// Explicit Active column wins; otherwise infer from spend/clicks on the latest report.
+function isActive(c){
+  const rows=clientRows(c);
+  if(!rows.length) return {active:false, src:"nodata"};
+  if(rows._active!=null) return {active:rows._active, src:"flag"};
+  const rep=clientRep(c);
+  return {active: !!(rep && ((+rep.spend>0)||(+rep.linkClicks>0))), src:"inferred"};
+}
+function trafficBadge(active){
+  return active
+    ? `<span class="badge good"><span class="bd"></span>Receiving traffic</span>`
+    : `<span class="badge none"><span class="bd"></span>Paused</span>`;
+}
+function trafficDot(active){
+  return `<span class="tdot ${active?'on':'off'}" title="${active?'Receiving traffic':'Paused'}"></span>`;
 }
 
 function render(){
@@ -633,18 +694,28 @@ function renderPortfolio(){
   const avg = k=>{ const v=lat.filter(x=>x.r[k]!=null); return v.length? v.reduce((a,x)=>a+ +x.r[k],0)/v.length : null; };
   const counts={good:0,warn:0,crit:0};
   lat.forEach(x=>{ const c=statusClass(x.r.status).c; if(counts[c]!=null)counts[c]++; });
+  let activeN=0; lat.forEach(x=>{ if(isActive(x.name).active) activeN++; });
+  const pausedN=clients.length-activeN;
+  const hasLeads = lat.some(x=>x.r.leads!=null);
 
   const kpis=[
     {label:"Total Spend", val:FMT.money0(sum("spend"))},
-    {label:"Total Conversions", val:FMT.num(sum("conversions"))},
+    {label:"Total Conversions", val:FMT.num(sum("conversions"))}
+  ];
+  if(hasLeads) kpis.push({label:"Total New Leads", val:FMT.num(sum("leads"))});
+  kpis.push(
     {label:"Avg CTR", val:FMT.pct(avg("ctr"))},
     {label:"Avg LP Conv. Rate", val:FMT.pct(avg("lpcr"))},
     {label:"Avg CPC", val:FMT.money2(avg("cpc"))},
     {label:"Avg Frequency", val:FMT.dec1(avg("freq"))}
-  ];
+  );
   let kh=kpis.map(k=>`<div class="kpi"><div class="label">${k.label}</div><div class="value">${k.val}</div></div>`).join("");
-  kh+=`<div class="kpi health"><div class="label">Client Health</div>
-        <div class="value">${clients.length} active</div>
+  kh+=`<div class="kpi health"><div class="label">Accounts</div>
+        <div class="value">${activeN} of ${clients.length} live</div>
+        <div class="health-chips">
+          <span class="badge good"><span class="bd"></span>${activeN} Receiving traffic</span>
+          <span class="badge none"><span class="bd"></span>${pausedN} Paused</span>
+        </div>
         <div class="health-chips">
           <span class="badge good"><span class="bd"></span>${counts.good} Healthy</span>
           <span class="badge warn"><span class="bd"></span>${counts.warn} Monitor</span>
@@ -657,22 +728,29 @@ function renderPortfolio(){
 }
 
 function renderOverviewTable(lat){
+  const showLeads = lat.some(x=>x.r.leads!=null);
+  const showCpl   = lat.some(x=>x.r.metaCpl!=null);
   const cols=[
     {k:"name",label:"Client",left:true},
+    {k:"traffic",label:"Traffic",left:true},
     {k:"status",label:"Status",left:true},
     {k:"spend",label:"Spend"},
     {k:"conversions",label:"Conv."},
+    ...(showLeads?[{k:"leads",label:"Leads"}]:[]),
     {k:"ctr",label:"CTR"},
     {k:"lpcr",label:"LP CR"},
     {k:"cpc",label:"CPC"},
+    ...(showCpl?[{k:"metaCpl",label:"CPL"}]:[]),
     {k:"freq",label:"Freq"},
     {k:"test",label:"Today's Test",left:true},
     {k:"recommendation",label:"Recommendation",left:true}
   ];
+  const actMap=Object.fromEntries(lat.map(x=>[x.name, isActive(x.name).active]));
   const rows=lat.slice().sort((a,b)=>{
     const k=sortState.key;
     let va,vb;
     if(k==="name"){va=a.name;vb=b.name;}
+    else if(k==="traffic"){va=actMap[a.name]?0:1;vb=actMap[b.name]?0:1;}
     else if(k==="status"){va=statusRank(a.r.status);vb=statusRank(b.r.status);}
     else if(["test","recommendation"].includes(k)){va=(a.r[k]||"");vb=(b.r[k]||"");}
     else {va=a.r[k]??-Infinity; vb=b.r[k]??-Infinity;}
@@ -686,20 +764,24 @@ function renderOverviewTable(lat){
   });
   h+="</tr></thead><tbody>";
   rows.forEach(x=>{
+    const act=actMap[x.name];
     h+=`<tr data-client="${esc(x.name)}">`;
-    h+=`<td class="left"><span class="cname">${esc(x.name)}</span></td>`;
+    h+=`<td class="left"><span class="cname">${trafficDot(act)}${esc(x.name)}</span></td>`;
+    h+=`<td class="left">${trafficBadge(act)}</td>`;
     h+=`<td class="left">${statusBadge(x.r.status)}</td>`;
     h+=`<td>${FMT.money0(x.r.spend)}</td>`;
     h+=`<td>${FMT.num(x.r.conversions)}</td>`;
+    if(showLeads) h+=`<td>${FMT.num(x.r.leads)}</td>`;
     h+=`<td>${FMT.pct(x.r.ctr)}</td>`;
     h+=`<td>${FMT.pct(x.r.lpcr)}</td>`;
     h+=`<td>${FMT.money2(x.r.cpc)}</td>`;
+    if(showCpl) h+=`<td>${FMT.money2(x.r.metaCpl)}</td>`;
     h+=`<td>${FMT.dec1(x.r.freq)}</td>`;
     h+=`<td class="left subtle">${esc(x.r.test||"—")}</td>`;
     h+=`<td class="left subtle">${esc(x.r.recommendation||"—")}</td>`;
     h+="</tr>";
   });
-  if(!rows.length) h+=`<tr><td colspan="10"><div class="empty">No client data yet. Add rows to your sheet and hit Refresh.</div></td></tr>`;
+  if(!rows.length) h+=`<tr><td colspan="${cols.length}"><div class="empty">No client data yet. Add rows to your sheet and hit Refresh.</div></td></tr>`;
   h+="</tbody>";
   const t=document.getElementById("overviewTable"); t.innerHTML=h;
   t.querySelectorAll("th").forEach(th=>th.onclick=()=>{
@@ -794,13 +876,23 @@ function renderClient(){
     return;
   }
 
-  const kpiKeys=["spend","conversions","ctr","lpcr","cpc","cpm","freq","linkClicks"];
+  const hasLeads=rows.some(r=>r.leads!=null), hasCpl=rows.some(r=>r.metaCpl!=null);
+  const kpiKeys=["spend","conversions"];
+  if(hasLeads) kpiKeys.push("leads");
+  kpiKeys.push("ctr","lpcr","cpc");
+  if(hasCpl) kpiKeys.push("metaCpl");
+  kpiKeys.push("cpm","freq","linkClicks");
+  const trendKeys=["spend","conversions"];
+  if(hasLeads) trendKeys.push("leads");
+  trendKeys.push("ctr","lpcr","cpc","freq");
+  const act=isActive(currentClient).active;
 
   // -------- no ad column: behave as a single time series (original behaviour) --------
   if(!hasAds){
     const r=latest(rows), p=prev(rows), st=statusClass(r.status);
     co.innerHTML=`
       <div class="box"><div class="k">Client</div><div class="v">${esc(currentClient)}</div></div>
+      <div class="box"><div class="k">Traffic</div><div class="v">${trafficBadge(act)}</div></div>
       <div class="box"><div class="k">Status</div><div class="v">${statusBadge(r.status)}</div></div>
       <div class="box ${st.c==='crit'?'attention':''}"><div class="k">Priority</div><div class="v">${esc(r.priority||"—")}</div></div>
       <div class="box"><div class="k">Today's Test</div><div class="v">${esc(r.test||"—")}</div></div>
@@ -809,7 +901,7 @@ function renderClient(){
     renderKpiTiles("clientKpiGrid", r, p, kpiKeys);
     adSection.innerHTML="";
     document.getElementById("clientChartTitle").textContent="Trends over time";
-    trendCharts("clientCharts", rows, ["spend","conversions","ctr","lpcr","cpc","freq"]);
+    trendCharts("clientCharts", rows, trendKeys);
     return;
   }
 
@@ -824,8 +916,9 @@ function renderClient(){
     const st=statusClass(rep.status);
     co.innerHTML=`
       <div class="box"><div class="k">Client</div><div class="v">${esc(currentClient)}</div></div>
+      <div class="box"><div class="k">Traffic</div><div class="v">${trafficBadge(act)}</div></div>
       <div class="box ${st.c==='crit'?'attention':''}"><div class="k">Overall status</div><div class="v">${statusBadge(rep.status)}</div></div>
-      <div class="box"><div class="k">Active ads</div><div class="v">${ads.length}</div></div>
+      <div class="box"><div class="k">Ads</div><div class="v">${ads.length}</div></div>
       <div class="box"><div class="k">Latest report</div><div class="v">${esc(fmtDate(ld))}</div></div>`;
     document.getElementById("clientKpiTitle").textContent="Client totals · "+fmtDate(ld)+" · all ads combined"+(prevRep?"  (vs previous report)":"");
     renderKpiTiles("clientKpiGrid", rep, prevRep, kpiKeys);
@@ -835,14 +928,14 @@ function renderClient(){
     let th=`<div class="card"><h3>By ad · ${esc(fmtDate(ld))}</h3>
       <div class="card-sub">Each individual ad's latest reported metrics. Click an ad to see its own trend.</div>
       <div class="table-wrap"><table><thead><tr>
-      <th class="left">Ad</th><th class="left">Status</th><th>Spend</th><th>Conv.</th><th>CTR</th><th>LP CR</th><th>CPC</th><th>CPM</th><th>Freq</th></tr></thead><tbody>`;
+      <th class="left">Ad</th><th class="left">Status</th><th>Spend</th><th>Conv.</th>${hasLeads?"<th>Leads</th>":""}<th>CTR</th><th>LP CR</th><th>CPC</th>${hasCpl?"<th>CPL</th>":""}<th>CPM</th><th>Freq</th></tr></thead><tbody>`;
     adReps.forEach(x=>{
       th+=`<tr data-ad="${esc(x.ad)}">
         <td class="left"><span class="cname">${esc(x.ad)}</span></td>
         <td class="left">${statusBadge(x.r.status)}</td>
-        <td>${FMT.money0(x.r.spend)}</td><td>${FMT.num(x.r.conversions)}</td>
+        <td>${FMT.money0(x.r.spend)}</td><td>${FMT.num(x.r.conversions)}</td>${hasLeads?`<td>${FMT.num(x.r.leads)}</td>`:""}
         <td>${FMT.pct(x.r.ctr)}</td><td>${FMT.pct(x.r.lpcr)}</td>
-        <td>${FMT.money2(x.r.cpc)}</td><td>${FMT.money2(x.r.cpm)}</td><td>${FMT.dec1(x.r.freq)}</td></tr>`;
+        <td>${FMT.money2(x.r.cpc)}</td>${hasCpl?`<td>${FMT.money2(x.r.metaCpl)}</td>`:""}<td>${FMT.money2(x.r.cpm)}</td><td>${FMT.dec1(x.r.freq)}</td></tr>`;
     });
     th+=`</tbody></table></div></div>`;
     adSection.innerHTML=th;
@@ -854,6 +947,7 @@ function renderClient(){
     [{k:"ctr",title:"CTR by ad",fmt:FMT.pct},
      {k:"lpcr",title:"Landing-page conversion rate by ad",fmt:FMT.pct},
      {k:"conversions",title:"Conversions by ad",fmt:FMT.num},
+     ...(hasLeads?[{k:"leads",title:"New leads by ad",fmt:FMT.num}]:[]),
      {k:"spend",title:"Spend by ad",fmt:FMT.money0}].forEach(sp=>{
       const bars=adReps.map(x=>({label:x.ad, value:x.r[sp.k], onClick:a=>{currentAd=a; renderClient();}}))
                        .filter(b=>b.value!=null).sort((a,b)=>b.value-a.value);
@@ -871,6 +965,7 @@ function renderClient(){
   const st=statusClass(r.status);
   co.innerHTML=`
     <div class="box"><div class="k">Client · Ad</div><div class="v">${esc(currentClient)} · ${esc(scope)}</div></div>
+    <div class="box"><div class="k">Traffic</div><div class="v">${trafficBadge(act)}</div></div>
     <div class="box"><div class="k">Status</div><div class="v">${statusBadge(r.status)}</div></div>
     <div class="box ${st.c==='crit'?'attention':''}"><div class="k">Priority</div><div class="v">${esc(r.priority||"—")}</div></div>
     <div class="box"><div class="k">Today's Test</div><div class="v">${esc(r.test||"—")}</div></div>
@@ -879,7 +974,7 @@ function renderClient(){
   renderKpiTiles("clientKpiGrid", r, p, kpiKeys);
   adSection.innerHTML="";
   document.getElementById("clientChartTitle").textContent=scope+" · trends over time";
-  trendCharts("clientCharts", arows, ["spend","conversions","ctr","lpcr","cpc","freq"]);
+  trendCharts("clientCharts", arows, trendKeys);
 }
 function fmtDate(d){ return shortDate(d,true); }
 
@@ -1013,7 +1108,8 @@ function buildClientSelect(){
   const sel=document.getElementById("clientSelect");
   sel.innerHTML=CONFIG.CLIENT_TABS.map(c=>{
     const has=(DATA[c]||[]).length;
-    return `<option value="${esc(c)}">${esc(c)}${has?"":"  (no data)"}</option>`;
+    const mark = !has ? "" : (isActive(c).active ? "🟢 " : "⚪ ");
+    return `<option value="${esc(c)}">${mark}${esc(c)}${has?"":"  (no data)"}</option>`;
   }).join("");
   sel.onchange=()=>{ currentClient=sel.value; currentAd="__all__"; renderClient(); };
 }
