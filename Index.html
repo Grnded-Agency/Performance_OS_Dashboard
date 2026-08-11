@@ -158,6 +158,23 @@
   .kpi.health .value{font-size:23px;}
   .health-chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px;}
 
+  /* ---------- Performance meters ---------- */
+  .perf-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-bottom:26px;}
+  .meter-tile{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:15px 17px;}
+  .meter-tile.muted-tile{opacity:.85;}
+  .meter-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:9px;}
+  .meter-label{font-size:12.5px;font-weight:700;color:var(--ink-2);letter-spacing:.01em;}
+  .meter-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:11px;}
+  .meter-val{font-size:24px;font-weight:750;color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:-.4px;}
+  .meter-tgt{font-size:12px;font-weight:600;color:var(--muted);}
+  .meter-track{position:relative;height:10px;background:var(--surface-2);border-radius:6px;border:1px solid var(--border);}
+  .meter-fill{position:absolute;left:0;top:0;bottom:0;border-radius:6px 3px 3px 6px;min-width:4px;}
+  .meter-fill.lvl-good{background:var(--good);} .meter-fill.lvl-warn{background:var(--warn);}
+  .meter-fill.lvl-crit{background:var(--crit);} .meter-fill.lvl-none{background:var(--accent);}
+  .meter-tick{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--ink);border-radius:2px;}
+  .meter-tick::after{content:"";position:absolute;top:-6px;left:50%;transform:translateX(-50%);border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid var(--ink);}
+  .meter-foot{margin-top:9px;font-size:11.5px;color:var(--muted);font-weight:600;}
+
   /* ---------- Status badge ---------- */
   .badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:650;padding:4px 10px;border-radius:999px;white-space:nowrap;}
   .badge .bd{width:8px;height:8px;border-radius:50%;}
@@ -296,6 +313,8 @@
   <!-- CLIENT VIEW -->
   <section id="clientView" class="hide">
     <div class="callout" id="clientCallout"></div>
+    <div class="section-title" id="clientPerfTitle">Performance vs goals</div>
+    <div class="perf-grid" id="clientPerf"></div>
     <div class="section-title" id="clientKpiTitle">Latest metrics</div>
     <div class="kpi-grid" id="clientKpiGrid"></div>
     <div id="clientAdSection"></div>
@@ -356,9 +375,61 @@ function normalizeRates(rows){
   let maxRate=0;
   rows.forEach(r=>["ctr","lpcr"].forEach(k=>{ if(r[k]!=null && +r[k]>maxRate) maxRate=+r[k]; }));
   if(maxRate>0 && maxRate<=1.5){
-    rows.forEach(r=>{ if(r.ctr!=null) r.ctr=+r.ctr*100; if(r.lpcr!=null) r.lpcr=+r.lpcr*100; });
+    rows.forEach(r=>{ if(r.ctr!=null) r.ctr=+r.ctr*100; if(r.lpcr!=null) r.lpcr=+r.lpcr*100; if(r.goal!=null) r.goal=+r.goal*100; });
   }
   return rows;
+}
+
+/* ---------- performance scoring ----------
+   LP CR is judged against the per-row Success Goal; CTR against a fixed 2% floor.
+   Bands: LP CR ≥ goal = on/above (good), ≥ 80% of goal = close (warn), else below (crit).
+   CTR ≥ 2% = meets (good), 1.5–2% = near (warn), < 1.5% = below (crit). */
+const CTR_MIN = 2;      // percent — fixed minimum expectation
+const LPCR_CLOSE = 0.8; // within 80% of goal counts as "close"
+function perfLPCR(lpcr, goal){
+  if(lpcr==null || goal==null || !(goal>0)) return null;
+  const ratio=lpcr/goal;
+  let level,label;
+  if(ratio>=1){ level="good"; label = ratio>=1.1?"Beating goal":"At goal"; }
+  else if(ratio>=LPCR_CLOSE){ level="warn"; label="Close to goal"; }
+  else { level="crit"; label="Below goal"; }
+  return {level,label,ratio,value:lpcr,target:goal,gap:lpcr-goal};
+}
+function perfCTR(ctr){
+  if(ctr==null) return null;
+  let level,label;
+  if(ctr>=CTR_MIN){ level="good"; label="Meets 2% min"; }
+  else if(ctr>=CTR_MIN*0.75){ level="warn"; label="Near 2% min"; }
+  else { level="crit"; label="Below 2% min"; }
+  return {level,label,ratio:ctr/CTR_MIN,value:ctr,target:CTR_MIN,gap:ctr-CTR_MIN};
+}
+const PERF_RANK={good:2,warn:1,crit:0};
+const PERF_LABEL={good:"On track",warn:"Monitor",crit:"Underperforming"};
+function overallPerf(rec){
+  const parts=[perfLPCR(rec.lpcr,rec.goal), perfCTR(rec.ctr)].filter(Boolean);
+  if(!parts.length) return null;
+  const worst=Math.min(...parts.map(p=>PERF_RANK[p.level]));
+  const level=["crit","warn","good"][worst];
+  return {level, label:PERF_LABEL[level], parts};
+}
+function perfBadge(p){
+  if(!p) return `<span class="badge none"><span class="bd"></span>—</span>`;
+  return `<span class="badge ${p.level}"><span class="bd"></span>${p.label}</span>`;
+}
+// A target meter: current value bar + a goal tick, colored by performance level.
+function meterTile(label, p, targetLabel){
+  if(!p) return `<div class="meter-tile muted-tile"><div class="meter-head"><span class="meter-label">${label}</span></div><div class="meter-foot">No goal set for this account yet.</div></div>`;
+  const max = Math.max(p.value||0, p.target||0)*1.3 || 1;
+  const vpct = Math.max(1.5, Math.min(100, (p.value/max)*100));
+  const tpct = Math.max(0, Math.min(100, (p.target/max)*100));
+  const ofGoal = p.target? Math.round(p.value/p.target*100) : null;
+  const gapTxt = p.gap>=0 ? `+${p.gap.toFixed(2)} pts above target` : `${Math.abs(p.gap).toFixed(2)} pts to target`;
+  return `<div class="meter-tile">
+    <div class="meter-head"><span class="meter-label">${label}</span>${perfBadge(p)}</div>
+    <div class="meter-row"><span class="meter-val">${FMT.pct(p.value)}</span><span class="meter-tgt">${targetLabel||("goal "+FMT.pct(p.target))}</span></div>
+    <div class="meter-track"><div class="meter-fill lvl-${p.level}" style="width:${vpct}%"></div><div class="meter-tick" style="left:${tpct}%"></div></div>
+    <div class="meter-foot">${ofGoal!=null?ofGoal+"% of target · ":""}${gapTxt}</div>
+  </div>`;
 }
 
 // key, label, formatter, good direction (+1 higher better, -1 lower better, 0 neutral)
@@ -470,11 +541,12 @@ const HEADER_MAP = {
   "todays test":"test","today's test":"test",
   "meta cpl":"metaCpl","cpl":"metaCpl","meta cost per lead":"metaCpl",
   "new leads (ghl)":"leads","new leads(ghl)":"leads","new leads":"leads","ghl leads":"leads","leads":"leads",
+  "success goal":"goal","goal":"goal","lp cr goal":"goal","lpcr goal":"goal","landing page cr goal":"goal","cr goal":"goal","target lp cr":"goal","target cr":"goal",
   "active":"active","active?":"active","is active":"active","active status":"active",
   "receiving traffic":"active","receiving traffic?":"active","traffic":"active","status (active)":"active",
   "notes":"notes"
 };
-const NUM_FIELDS = new Set(["spend","cpm","ctr","cpc","freq","linkClicks","lpViews","visitors","conversions","lpcr","metaCpl","leads"]);
+const NUM_FIELDS = new Set(["spend","cpm","ctr","cpc","freq","linkClicks","lpViews","visitors","conversions","lpcr","metaCpl","leads","goal"]);
 
 // Interpret an "Active" cell → true / false / null(unknown)
 function truthyActive(v){
@@ -653,6 +725,7 @@ function aggregate(rows){
     cpm:wavg("cpm"), cpc:wavg("cpc"), metaCpl:wavg("metaCpl"), freq:wavg("freq"),
     ctr:wavgPct("ctr"),
     lpcr:(vis? conv/vis*100 : wavgPct("lpcr")),
+    goal:wavg("goal"),
     status:worstStatus(rows), priority:"", recommendation:"", test:""
   };
 }
@@ -733,6 +806,7 @@ function renderOverviewTable(lat){
   const cols=[
     {k:"name",label:"Client",left:true},
     {k:"traffic",label:"Traffic",left:true},
+    {k:"perf",label:"Performance",left:true},
     {k:"status",label:"Status",left:true},
     {k:"spend",label:"Spend"},
     {k:"conversions",label:"Conv."},
@@ -751,6 +825,7 @@ function renderOverviewTable(lat){
     let va,vb;
     if(k==="name"){va=a.name;vb=b.name;}
     else if(k==="traffic"){va=actMap[a.name]?0:1;vb=actMap[b.name]?0:1;}
+    else if(k==="perf"){va=PERF_RANK[(overallPerf(a.r)||{}).level]??-1;vb=PERF_RANK[(overallPerf(b.r)||{}).level]??-1;}
     else if(k==="status"){va=statusRank(a.r.status);vb=statusRank(b.r.status);}
     else if(["test","recommendation"].includes(k)){va=(a.r[k]||"");vb=(b.r[k]||"");}
     else {va=a.r[k]??-Infinity; vb=b.r[k]??-Infinity;}
@@ -768,6 +843,7 @@ function renderOverviewTable(lat){
     h+=`<tr data-client="${esc(x.name)}">`;
     h+=`<td class="left"><span class="cname">${trafficDot(act)}${esc(x.name)}</span></td>`;
     h+=`<td class="left">${trafficBadge(act)}</td>`;
+    h+=`<td class="left">${perfBadge(overallPerf(x.r))}</td>`;
     h+=`<td class="left">${statusBadge(x.r.status)}</td>`;
     h+=`<td>${FMT.money0(x.r.spend)}</td>`;
     h+=`<td>${FMT.num(x.r.conversions)}</td>`;
@@ -844,6 +920,15 @@ function renderKpiTiles(gridId, rec, prevRec, keys){
     return `<div class="kpi"><div class="label">${m.label}</div><div class="value">${m.fmt(v)}</div>${deltaHtml}</div>`;
   }).join("");
 }
+function renderPerf(rec){
+  const title=document.getElementById("clientPerfTitle");
+  const grid=document.getElementById("clientPerf");
+  const lp=perfLPCR(rec.lpcr, rec.goal), ct=perfCTR(rec.ctr);
+  if(!lp && !ct){ title.classList.add("hide"); grid.classList.add("hide"); grid.innerHTML=""; return; }
+  title.classList.remove("hide"); grid.classList.remove("hide");
+  grid.innerHTML = meterTile("Landing Page CR vs goal", lp)
+                 + meterTile("CTR vs 2% minimum", ct, "min "+FMT.pct(CTR_MIN));
+}
 function trendCharts(wrapId, rows, keys){
   const wrap=document.getElementById(wrapId); wrap.innerHTML="";
   keys.forEach(k=>{
@@ -871,6 +956,8 @@ function renderClient(){
     co.innerHTML=`<div class="box"><div class="k">${esc(currentClient)}</div><div class="v">No data reported yet</div></div>`;
     document.getElementById("clientKpiGrid").innerHTML=`<div class="empty" style="grid-column:1/-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg><div>No rows in the sheet for this client yet.<br>Add a dated row and hit Refresh.</div></div>`;
     adSection.innerHTML=""; document.getElementById("clientCharts").innerHTML="";
+    document.getElementById("clientPerf").classList.add("hide");
+    document.getElementById("clientPerfTitle").classList.add("hide");
     document.getElementById("clientKpiTitle").textContent="Latest metrics";
     document.getElementById("clientChartTitle").textContent="Trends over time";
     return;
@@ -893,10 +980,11 @@ function renderClient(){
     co.innerHTML=`
       <div class="box"><div class="k">Client</div><div class="v">${esc(currentClient)}</div></div>
       <div class="box"><div class="k">Traffic</div><div class="v">${trafficBadge(act)}</div></div>
+      <div class="box ${st.c==='crit'?'attention':''}"><div class="k">Performance</div><div class="v">${perfBadge(overallPerf(r))}</div></div>
       <div class="box"><div class="k">Status</div><div class="v">${statusBadge(r.status)}</div></div>
-      <div class="box ${st.c==='crit'?'attention':''}"><div class="k">Priority</div><div class="v">${esc(r.priority||"—")}</div></div>
       <div class="box"><div class="k">Today's Test</div><div class="v">${esc(r.test||"—")}</div></div>
       <div class="box"><div class="k">Recommendation</div><div class="v">${esc(r.recommendation||"—")}</div></div>`;
+    renderPerf(r);
     document.getElementById("clientKpiTitle").textContent="Latest metrics · "+(r.date||"")+(p?"  (vs previous report)":"");
     renderKpiTiles("clientKpiGrid", r, p, kpiKeys);
     adSection.innerHTML="";
@@ -917,9 +1005,11 @@ function renderClient(){
     co.innerHTML=`
       <div class="box"><div class="k">Client</div><div class="v">${esc(currentClient)}</div></div>
       <div class="box"><div class="k">Traffic</div><div class="v">${trafficBadge(act)}</div></div>
-      <div class="box ${st.c==='crit'?'attention':''}"><div class="k">Overall status</div><div class="v">${statusBadge(rep.status)}</div></div>
+      <div class="box ${(overallPerf(rep)||{}).level==='crit'?'attention':''}"><div class="k">Performance</div><div class="v">${perfBadge(overallPerf(rep))}</div></div>
+      <div class="box"><div class="k">Status</div><div class="v">${statusBadge(rep.status)}</div></div>
       <div class="box"><div class="k">Ads</div><div class="v">${ads.length}</div></div>
       <div class="box"><div class="k">Latest report</div><div class="v">${esc(fmtDate(ld))}</div></div>`;
+    renderPerf(rep);
     document.getElementById("clientKpiTitle").textContent="Client totals · "+fmtDate(ld)+" · all ads combined"+(prevRep?"  (vs previous report)":"");
     renderKpiTiles("clientKpiGrid", rep, prevRep, kpiKeys);
 
@@ -928,13 +1018,15 @@ function renderClient(){
     let th=`<div class="card"><h3>By ad · ${esc(fmtDate(ld))}</h3>
       <div class="card-sub">Each individual ad's latest reported metrics. Click an ad to see its own trend.</div>
       <div class="table-wrap"><table><thead><tr>
-      <th class="left">Ad</th><th class="left">Status</th><th>Spend</th><th>Conv.</th>${hasLeads?"<th>Leads</th>":""}<th>CTR</th><th>LP CR</th><th>CPC</th>${hasCpl?"<th>CPL</th>":""}<th>CPM</th><th>Freq</th></tr></thead><tbody>`;
+      <th class="left">Ad</th><th class="left">Performance</th><th class="left">Status</th><th>Spend</th><th>Conv.</th>${hasLeads?"<th>Leads</th>":""}<th>CTR</th><th>LP CR</th>${adReps.some(x=>x.r.goal!=null)?"<th>Goal</th>":""}<th>CPC</th>${hasCpl?"<th>CPL</th>":""}<th>CPM</th><th>Freq</th></tr></thead><tbody>`;
+    const showGoal=adReps.some(x=>x.r.goal!=null);
     adReps.forEach(x=>{
       th+=`<tr data-ad="${esc(x.ad)}">
         <td class="left"><span class="cname">${esc(x.ad)}</span></td>
+        <td class="left">${perfBadge(overallPerf(x.r))}</td>
         <td class="left">${statusBadge(x.r.status)}</td>
         <td>${FMT.money0(x.r.spend)}</td><td>${FMT.num(x.r.conversions)}</td>${hasLeads?`<td>${FMT.num(x.r.leads)}</td>`:""}
-        <td>${FMT.pct(x.r.ctr)}</td><td>${FMT.pct(x.r.lpcr)}</td>
+        <td>${FMT.pct(x.r.ctr)}</td><td>${FMT.pct(x.r.lpcr)}</td>${showGoal?`<td class="subtle">${FMT.pct(x.r.goal)}</td>`:""}
         <td>${FMT.money2(x.r.cpc)}</td>${hasCpl?`<td>${FMT.money2(x.r.metaCpl)}</td>`:""}<td>${FMT.money2(x.r.cpm)}</td><td>${FMT.dec1(x.r.freq)}</td></tr>`;
     });
     th+=`</tbody></table></div></div>`;
@@ -966,10 +1058,11 @@ function renderClient(){
   co.innerHTML=`
     <div class="box"><div class="k">Client · Ad</div><div class="v">${esc(currentClient)} · ${esc(scope)}</div></div>
     <div class="box"><div class="k">Traffic</div><div class="v">${trafficBadge(act)}</div></div>
+    <div class="box ${(overallPerf(r)||{}).level==='crit'?'attention':''}"><div class="k">Performance</div><div class="v">${perfBadge(overallPerf(r))}</div></div>
     <div class="box"><div class="k">Status</div><div class="v">${statusBadge(r.status)}</div></div>
-    <div class="box ${st.c==='crit'?'attention':''}"><div class="k">Priority</div><div class="v">${esc(r.priority||"—")}</div></div>
     <div class="box"><div class="k">Today's Test</div><div class="v">${esc(r.test||"—")}</div></div>
     <div class="box"><div class="k">Recommendation</div><div class="v">${esc(r.recommendation||"—")}</div></div>`;
+  renderPerf(r);
   document.getElementById("clientKpiTitle").textContent=scope+" · latest metrics · "+fmtDate(r.date)+(p?"  (vs previous report)":"");
   renderKpiTiles("clientKpiGrid", r, p, kpiKeys);
   adSection.innerHTML="";
