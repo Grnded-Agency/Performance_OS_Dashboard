@@ -175,6 +175,62 @@
   .meter-tick::after{content:"";position:absolute;top:-6px;left:50%;transform:translateX(-50%);border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid var(--ink);}
   .meter-foot{margin-top:9px;font-size:11.5px;color:var(--muted);font-weight:600;}
 
+  /* ---------- Daily Diagnosis ---------- */
+  .diag-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:26px;overflow:hidden;}
+  .diag-top{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
+    padding:16px 22px;background:linear-gradient(120deg,var(--navy-900),var(--navy-700));color:#fff;}
+  .diag-eyebrow{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#a9c2e6;}
+  .diag-top h3{margin:2px 0 0;font-size:17px;font-weight:700;color:#fff;}
+  .diag-top .right{display:flex;align-items:center;gap:12px;}
+  .diag-date{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);
+    border-radius:999px;padding:5px 12px;font-size:12.5px;font-weight:600;color:#eaf1fb;}
+  .diag-link{color:#cfe0f5;font-size:12.5px;font-weight:600;text-decoration:none;white-space:nowrap;}
+  .diag-link:hover{color:#fff;text-decoration:underline;}
+  .diag-body{padding:8px 26px 22px;font-size:14px;line-height:1.62;color:var(--ink);max-width:900px;}
+  .diag-body h1{font-size:18px;font-weight:750;margin:22px 0 4px;color:var(--ink);letter-spacing:-.2px;}
+  .diag-body h2{font-size:15px;font-weight:750;margin:24px 0 8px;padding-top:16px;border-top:1px solid var(--border);color:var(--navy-600);letter-spacing:.01em;}
+  html[data-theme="dark"] .diag-body h2{color:#7fb0ee;}
+  .diag-body h3{font-size:13.5px;font-weight:700;margin:16px 0 6px;color:var(--ink-2);}
+  .diag-body p{margin:8px 0;}
+  .diag-body strong{color:var(--ink);font-weight:700;}
+  .diag-body em{color:var(--ink-2);}
+  .diag-body ul,.diag-body ol{margin:8px 0 8px;padding-left:22px;}
+  .diag-body li{margin:5px 0;}
+  .diag-body hr{border:none;border-top:1px solid var(--border);margin:18px 0;}
+  .diag-body a{color:var(--accent);font-weight:600;}
+  .diag-body code{background:var(--surface-2);border:1px solid var(--border);border-radius:5px;padding:1px 6px;font-size:12.5px;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:var(--ink-2);}
+  .diag-body blockquote{margin:10px 0;padding:12px 16px;background:var(--surface-2);border-left:3px solid var(--accent);
+    border-radius:0 10px 10px 0;color:var(--ink);}
+  .diag-body blockquote p:first-child{margin-top:0;} .diag-body blockquote p:last-child{margin-bottom:0;}
+  .diag-body blockquote ul,.diag-body blockquote ol{margin:6px 0;}
+  .diag-body table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px;display:block;overflow-x:auto;}
+  .diag-body thead th{background:var(--surface-2);text-align:right;font-weight:700;color:var(--ink-2);
+    padding:8px 10px;border-bottom:2px solid var(--border);white-space:nowrap;font-size:11.5px;}
+  .diag-body thead th:first-child{text-align:left;}
+  .diag-body tbody td{padding:7px 10px;border-bottom:1px solid var(--border);text-align:right;
+    font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .diag-body tbody td:first-child{text-align:left;font-weight:600;}
+  .diag-body tbody tr:hover{background:var(--surface-2);}
+  .diag-empty{padding:26px 22px;color:var(--muted);font-size:14px;display:flex;align-items:center;gap:12px;}
+  .diag-empty svg{width:26px;height:26px;opacity:.5;flex:0 0 auto;}
+  .diag-datesel{appearance:none;font-family:inherit;font-size:12.5px;font-weight:650;color:#eaf1fb;cursor:pointer;
+    background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.20);border-radius:8px;padding:5px 28px 5px 12px;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23cfe0f5' stroke-width='3'><path d='M6 9l6 6 6-6'/></svg>");
+    background-repeat:no-repeat;background-position:right 9px center;}
+  .diag-datesel option{color:#0b1b33;}
+  .mini-charts{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:12px;margin:14px 0 6px;}
+  .mini-chart{margin:0;background:var(--surface-2);border:1px solid var(--border);border-radius:11px;padding:11px 13px 9px;}
+  .mini-chart figcaption{font-size:12px;font-weight:700;color:var(--ink-2);margin-bottom:9px;}
+  .mc-plot{display:flex;align-items:flex-end;gap:9px;height:80px;}
+  .mc-col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;min-width:0;}
+  .mc-val{font-size:10px;font-weight:700;color:var(--ink);margin-bottom:4px;font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .mc-bar{width:100%;max-width:34px;background:var(--accent);border-radius:4px 4px 0 0;min-height:3px;}
+  .mc-bar.last{background:var(--navy-700);}
+  html[data-theme="dark"] .mc-bar{background:#2f6fc4;} html[data-theme="dark"] .mc-bar.last{background:#7fb0ee;}
+  .mc-xrow{display:flex;gap:9px;margin-top:6px;}
+  .mc-xrow span{flex:1;text-align:center;font-size:9.5px;color:var(--muted);font-weight:600;white-space:nowrap;}
+
   /* ---------- Status badge ---------- */
   .badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:650;padding:4px 10px;border-radius:999px;white-space:nowrap;}
   .badge .bd{width:8px;height:8px;border-radius:50%;}
@@ -210,7 +266,7 @@
   .subtle{color:var(--muted);}
 
   /* ---------- Charts ---------- */
-  .chart-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:18px;}
+  .chart-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;}
   .chart-box h4{margin:0 0 1px;font-size:14px;font-weight:700;color:var(--ink);}
   .chart-box .cs{font-size:11.5px;color:var(--muted);margin-bottom:8px;}
   .chart-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 16px 10px;}
@@ -262,7 +318,7 @@
 <body>
 <header class="topbar">
   <div class="brand">
-    <img src="https://d9hhrg4mnvzow.cloudfront.net/funnel.grndedagency.com/coaches/aca5eede-grnded-logo-transparent-1_103c029000000000000028.png" alt="Grnded Agency Logo">
+    <div class="logo">GA</div>
     <div>
       <h1>Performance OS</h1>
       <div class="sub">Grnded Agency · Client Ad Performance</div>
@@ -313,6 +369,7 @@
   <!-- CLIENT VIEW -->
   <section id="clientView" class="hide">
     <div class="callout" id="clientCallout"></div>
+    <div id="clientDiag"></div>
     <div class="section-title" id="clientPerfTitle">Performance vs goals</div>
     <div class="perf-grid" id="clientPerf"></div>
     <div class="section-title" id="clientKpiTitle">Latest metrics</div>
@@ -349,8 +406,17 @@ const CONFIG = {
   AUTO_REFRESH_MIN: 0   // set e.g. 15 to auto-reload every 15 minutes; 0 = off
 };
 
+/* ---------- Daily Diagnosis documents ----------
+   Keyed by the Sheet's client tab name; each value is an array of dated
+   diagnostics (newest first): [{date, title, url, html}, ...].
+   At runtime the dashboard first tries to fetch an external `diagnostics.json`
+   (so it stays fresh on GitHub Pages without re-uploading the HTML); if that
+   isn't reachable (e.g. opened as a local file), it falls back to this
+   embedded copy. Both share the same shape. */
+const DIAGNOSTICS_EMBEDDED ={"Phil S (Grumpy)": [{"date": "2026-08-13", "title": "Grumpy CFO", "url": "https://drive.google.com/file/d/1sFRwQZKH-GqNFIxb8ZYq2fvWtC4ssI0o/view?usp=drivesdk", "html": "<h2>Supporting Evidence</h2>\n<blockquote>\n<p>The top of the funnel unclogged. Ad 01.01 went from 2 clicks to 9, its CTR nearly tripled to 2.99% (first time above the 2% floor), that traffic reached the page (LP views 1 \u2192 4), and it produced the first real lead in GHL.</p>\n<p><strong>Ad 01.01 \u00b7 3-day trend</strong></p>\n<table>\n<thead>\n<tr>\n<th>Metric</th>\n<th>08.11</th>\n<th>08.12</th>\n<th>08.13</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Spend</td>\n<td>$19.78</td>\n<td>$25.99</td>\n<td>$35.23</td>\n</tr>\n<tr>\n<td>CTR</td>\n<td>1.44%</td>\n<td>0.69%</td>\n<td><strong>2.99%</strong></td>\n</tr>\n<tr>\n<td>CPC</td>\n<td>$6.59</td>\n<td>$13.00</td>\n<td><strong>$3.91</strong></td>\n</tr>\n<tr>\n<td>Link Clicks</td>\n<td>3</td>\n<td>2</td>\n<td><strong>9</strong></td>\n</tr>\n<tr>\n<td>LP Views</td>\n<td>2</td>\n<td>1</td>\n<td><strong>4</strong></td>\n</tr>\n<tr>\n<td>GHL Leads</td>\n<td>0</td>\n<td>0</td>\n<td><strong>1</strong></td>\n</tr>\n</tbody>\n</table>\n<p><strong>Against the short-term goal:</strong> 1 GHL lead on $35.23 (Ad 01.01), or $39.73 combined = a <strong>real CPL of ~$35\u201340</strong> \u2014 still ~2\u00d7 the $20 short-term target, but finite and measurable for the first time.\n<strong>Watch out for Meta's number:</strong> Meta CPL reads $8.81, which looks under goal \u2014 but that's Meta's \"results\" count (4), not actual GHL leads. On the source of truth (GHL = 1 lead), CPL is ~$35, not $8.81. The tracking gap persists (on-page Conversions/LP CR = 0 while GHL = 1; Visitors 54/14 vs LP Views 4/0), so treat the GHL lead as real and don't trust the on-page CR yet.</p>\n</blockquote>\n<h2>Hypotheses (1\u20133)</h2>\n<blockquote>\n<ol>\n<li><strong>The zero-results stretch was mostly a volume problem (higher confidence now).</strong> As clicks rose 2 \u2192 9, a lead appeared. More qualified traffic should yield more leads.</li>\n<li><strong>Ad 01.01 is the real engine; Ad 01.02 isn't competing (medium).</strong> 01.01 is improving (CTR\u2191, CPC\u2193, first lead) while 01.02 spends ~$4.50/day for 1 click \u2014 not enough to be a genuine test arm.</li>\n<li><strong>On-page conversion tracking is under-counting (medium).</strong> GHL caught a lead the page/Meta did not, so the true LP CR is unknown and may be better than the 0% shown.</li>\n</ol>\n</blockquote>\n<h2>Recommended Action</h2>\n<blockquote>\n<ol>\n<li><strong>Keep scaling Ad 01.01 gradually</strong> \u2014 it's trending the right way. Feed it more budget/traffic to build a big-enough sample to pull CPL from ~$35 toward the <strong>$20 short-term goal</strong>, while watching that CPC and CPM stay reasonable (CPM jumped to $117 today).</li>\n<li><strong>Fix on-page conversion tracking</strong> so LP CR reflects the GHL lead \u2014 we need a readable page CR to judge the 29% long-term target.</li>\n<li><strong>Decide on Ad 01.02</strong> \u2014 either fund it enough to actually compete, or pause it and consolidate budget into Ad 01.01.</li>\n</ol>\n</blockquote>\n<h2>Expected Result</h2>\n<blockquote>\n<p>If we scale Ad 01.01's qualified traffic and fix tracking, we'd expect multiple leads per day and CPL trending from ~$35 down toward the $20 short-term target, with a readable LP CR to benchmark against 29%. Sustained, that path is what supports the long-term 100\u2013300 leads/month and 1\u20133 new clients.</p>\n</blockquote>\n<h2>Approval Needed</h2>\n<blockquote>\n<ul>\n<li><strong>Needs your sign-off:</strong> how aggressively to scale Ad 01.01's budget.</li>\n<li><strong>Can proceed now:</strong> the on-page conversion tracking fix.</li>\n<li><strong>Decision for you:</strong> fund Ad 01.02 to make it a real test arm, or pause and consolidate into Ad 01.01?</li>\n</ul>\n</blockquote>\n<h2>Learning Captured</h2>\n<blockquote>\n<p>Open. Early 3-day trend: Ad 01.01 is improving on engagement (CTR\u2191, CPC\u2193) and produced the first lead on 08.13 \u2014 volume looks like the main lever so far. One lead isn't a trend yet; watch whether 08.14+ confirms it.</p>\n</blockquote>"}]};
+
 /* ---------- built-in snapshot (from the uploaded workbook) ---------- */
-const SNAPSHOT = {"Wymore": [], "Ken (Champion)": [], "Eric (Finn)": [], "Cocina Mia": [{"date": "2023-10-02", "spend": 200.0, "cpm": 12.0, "ctr": 0.01, "cpc": 2.5, "freq": 3.2, "linkClicks": 20.0, "lpViews": 15.0, "visitors": 10.0, "conversions": 1.0, "lpcr": 0.1, "status": "🔴 Needs Work", "priority": "High", "recommendation": "Change creative", "test": "New Image"}], "Phil S (Grumpy)": [], "Phil H (Xceleration)": [{"date": "2023-10-03", "spend": 150.0, "cpm": 11.0, "ctr": 0.02, "cpc": 1.8, "freq": 2.1, "linkClicks": 30.0, "lpViews": 25.0, "visitors": 20.0, "conversions": 4.0, "lpcr": 0.2, "status": "🟡 Monitor", "priority": "Medium", "recommendation": "Watch CTR", "test": "Headline Test"}], "JAST": [{"date": "2023-10-05", "spend": 250.0, "cpm": 14.0, "ctr": 0.025, "cpc": 1.6, "freq": 2.5, "linkClicks": 60.0, "lpViews": 50.0, "visitors": 40.0, "conversions": 8.0, "lpcr": 0.18, "status": "🟢 Healthy", "priority": "Medium", "recommendation": "Optimize", "test": "Landing Page B"}], "GRNDED": [{"date": "2023-10-04", "spend": 300.0, "cpm": 15.0, "ctr": 0.04, "cpc": 1.2, "freq": 1.5, "linkClicks": 80.0, "lpViews": 70.0, "visitors": 60.0, "conversions": 15.0, "lpcr": 0.25, "status": "🟢 Healthy", "priority": "Low", "recommendation": "Scale up", "test": "Audience Test"}]};
+const SNAPSHOT = {"Wymore": [{"ad": "Conversion | 01.01 | 2026.08.03", "date": "2026-08-11", "spend": 31.47, "cpm": 73.19, "ctr": 1.63, "cpc": 4.5, "freq": 1.11, "linkClicks": 7.0, "lpViews": 4.0, "visitors": 67.0, "conversions": 4.0, "lpcr": 5.97, "metaCpl": 7.87, "leads": 0.0, "active": "Active", "goal": 10.0, "status": "", "priority": ""}, {"ad": "Conversion | 01.02 | 2026.08.03", "date": "2026-08-11", "spend": 0.11, "cpm": 27.5, "ctr": 0.0, "cpc": 0.0, "freq": 1.0, "linkClicks": 0.0, "lpViews": 0.0, "visitors": 67.0, "conversions": 4.0, "lpcr": 5.97, "metaCpl": 0.0, "leads": null, "active": "", "goal": 10.0, "status": "", "priority": ""}, {"ad": "Conversion | 01.01 | 2026.08.03", "date": "2026-08-12", "spend": 29.79, "cpm": 75.61, "ctr": 1.78, "cpc": 4.26, "freq": 1.11, "linkClicks": 7.0, "lpViews": 2.0, "visitors": 69.0, "conversions": 4.0, "lpcr": 5.8, "metaCpl": 14.9, "leads": 0.0, "active": "", "goal": 10.0, "status": "", "priority": ""}, {"ad": "Conversion | 01.02 | 2026.08.03", "date": "2026-08-12", "spend": 0.48, "cpm": 80.0, "ctr": 0.0, "cpc": 0.0, "freq": 1.0, "linkClicks": 0.0, "lpViews": 0.0, "visitors": 69.0, "conversions": 4.0, "lpcr": 5.8, "metaCpl": 0.0, "leads": null, "active": "", "goal": 10.0, "status": "", "priority": ""}, {"ad": "Conversion | 01.01 | 2026.08.03", "date": "2026-08-13", "spend": 22.43, "cpm": 77.08, "ctr": 0.69, "cpc": 11.22, "freq": 1.13, "linkClicks": 2.0, "lpViews": 0.0, "visitors": 72.0, "conversions": 4.0, "lpcr": 5.56, "metaCpl": 0.0, "leads": 0.0, "active": "", "goal": null, "status": "", "priority": ""}, {"ad": "Conversion | 01.02 | 2026.08.03", "date": "2026-08-13", "spend": 0.0, "cpm": 0.0, "ctr": 0.0, "cpc": 0.0, "freq": 1.0, "linkClicks": 0.0, "lpViews": 0.0, "visitors": 72.0, "conversions": 4.0, "lpcr": 5.56, "metaCpl": 0.0, "leads": null, "active": "", "goal": null, "status": "", "priority": ""}], "Ken (Champion)": [], "Eric (Finn)": [{"ad": "Conversion | 02.01 | 2026.08.08", "date": "2026-08-11", "spend": 3.5, "cpm": 87.5, "ctr": 0.0, "cpc": 0.0, "freq": 1.11, "linkClicks": 0.0, "lpViews": 0.0, "visitors": 36.0, "conversions": 2.0, "lpcr": 5.56, "metaCpl": 0.0, "leads": 2.0, "active": "Active", "goal": 15.0, "status": "", "priority": ""}, {"ad": "Conversion | 02.02 | 2026.08.08", "date": "2026-08-11", "spend": 11.16, "cpm": 79.15, "ctr": 4.96, "cpc": 1.59, "freq": 1.08, "linkClicks": 7.0, "lpViews": 4.0, "visitors": 36.0, "conversions": 2.0, "lpcr": 5.97, "metaCpl": 2.79, "leads": null, "active": "", "goal": 15.0, "status": "", "priority": ""}, {"ad": "Conversion | 02.01 | 2026.08.08", "date": "2026-08-12", "spend": 8.87, "cpm": 76.47, "ctr": 0.86, "cpc": 8.87, "freq": 1.05, "linkClicks": 1.0, "lpViews": 1.0, "visitors": 49.0, "conversions": 3.0, "lpcr": 6.12, "metaCpl": 8.87, "leads": 2.0, "active": "", "goal": null, "status": "", "priority": ""}, {"ad": "Conversion | 02.02 | 2026.08.08", "date": "2026-08-12", "spend": 38.79, "cpm": 76.66, "ctr": 2.77, "cpc": 2.77, "freq": 1.12, "linkClicks": 14.0, "lpViews": 4.0, "visitors": 49.0, "conversions": 3.0, "lpcr": 6.12, "metaCpl": 9.7, "leads": null, "active": "", "goal": null, "status": "", "priority": ""}, {"ad": "Conversion | 02.01 | 2026.08.08", "date": "2026-08-13", "spend": 42.94, "cpm": 32.41, "ctr": 1.81, "cpc": 1.79, "freq": 1.14, "linkClicks": 24.0, "lpViews": 19.0, "visitors": 51.0, "conversions": 3.0, "lpcr": 5.88, "metaCpl": 2.26, "leads": 9.0, "active": "", "goal": null, "status": "", "priority": ""}, {"ad": "Conversion | 02.02 | 2026.08.08", "date": "2026-08-13", "spend": 4.76, "cpm": 48.57, "ctr": 1.02, "cpc": 4.76, "freq": 1.07, "linkClicks": 1.0, "lpViews": 1.0, "visitors": 51.0, "conversions": 3.0, "lpcr": 5.88, "metaCpl": 4.76, "leads": null, "active": "", "goal": null, "status": "", "priority": ""}], "Cocina Mia": [], "Phil S (Grumpy)": [{"ad": "Conversion | 01.01 | 2026.08.07", "date": "2026-08-11", "spend": 19.78, "cpm": 95.1, "ctr": 1.44, "cpc": 6.59, "freq": 1.16, "linkClicks": 3.0, "lpViews": 2.0, "visitors": 49.0, "conversions": 0.0, "lpcr": 0.0, "metaCpl": 9.89, "leads": 0.0, "active": "Active", "goal": 15.0, "status": ""}, {"ad": "Conversion | 01.02 | 2026.08.07", "date": "2026-08-11", "spend": 3.63, "cpm": 93.08, "ctr": 5.13, "cpc": 1.82, "freq": 1.05, "linkClicks": 2.0, "lpViews": 2.0, "visitors": 11.0, "conversions": 0.0, "lpcr": 0.0, "metaCpl": 1.82, "leads": null, "active": "", "goal": 15.0, "status": ""}, {"ad": "Conversion | 01.01 | 2026.08.07", "date": "2026-08-12", "spend": 25.99, "cpm": 89.31, "ctr": 0.69, "cpc": 13.0, "freq": 1.18, "linkClicks": 2.0, "lpViews": 1.0, "visitors": 49.0, "conversions": 0.0, "lpcr": 0.0, "metaCpl": 25.99, "leads": 0.0, "active": "", "goal": null, "status": ""}, {"ad": "Conversion | 01.02 | 2026.08.07", "date": "2026-08-12", "spend": 2.22, "cpm": 65.29, "ctr": 0.0, "cpc": 0.0, "freq": 1.13, "linkClicks": 0.0, "lpViews": 0.0, "visitors": 13.0, "conversions": 0.0, "lpcr": 0.0, "metaCpl": 0.0, "leads": null, "active": "", "goal": null, "status": ""}, {"ad": "Conversion | 01.01 | 2026.08.07", "date": "2026-08-13", "spend": 35.23, "cpm": 117.04, "ctr": 2.99, "cpc": 3.91, "freq": 1.17, "linkClicks": 9.0, "lpViews": 4.0, "visitors": 54.0, "conversions": 0.0, "lpcr": 0.0, "metaCpl": 8.81, "leads": 1.0, "active": "", "goal": null, "status": ""}, {"ad": "Conversion | 01.02 | 2026.08.07", "date": "2026-08-13", "spend": 4.5, "cpm": 90.0, "ctr": 2.0, "cpc": 4.5, "freq": 1.11, "linkClicks": 1.0, "lpViews": 0.0, "visitors": 14.0, "conversions": 0.0, "lpcr": 0.0, "metaCpl": 0.0, "leads": null, "active": "", "goal": null, "status": ""}], "Phil H (Xceleration)": [], "JAST": [], "GRNDED": [{"ad": "Conversion Ad | 2.01 | 2026.08.08", "date": "2026-08-12", "spend": 25.1, "cpm": 104.14, "ctr": 2.49, "cpc": 4.18, "freq": 1.1, "linkClicks": 6.0, "lpViews": 1.0, "visitors": 19.0, "conversions": 4.0, "lpcr": 21.05, "metaCpl": 25.1, "leads": 1.0, "active": "Active", "goal": 15.0, "status": "", "priority": ""}, {"ad": "Conversion Ad | 2.01 | 2026.08.08", "date": "2026-08-13", "spend": 43.61, "cpm": 106.37, "ctr": 1.46, "cpc": 7.27, "freq": 1.1, "linkClicks": 6.0, "lpViews": 2.0, "visitors": 20.0, "conversions": 4.0, "lpcr": 20.0, "metaCpl": 21.81, "leads": 4.0, "active": "", "goal": null, "status": "", "priority": ""}]};
 
 /* ======================================================================
    Metric definitions
@@ -457,6 +523,8 @@ let SOURCE = "snapshot"; // snapshot | live
 let currentView = "all";
 let currentClient = null;
 let currentAd = "__all__";   // "__all__" or a specific ad name
+let DIAG_DATA = {};          // active diagnostics (external file or embedded fallback)
+let currentDiagDate = null;  // selected diagnostic date for the current client (null = latest)
 let sortState = {key:"spend", dir:-1};
 
 /* ======================================================================
@@ -541,7 +609,7 @@ const HEADER_MAP = {
   "todays test":"test","today's test":"test",
   "meta cpl":"metaCpl","cpl":"metaCpl","meta cost per lead":"metaCpl",
   "new leads (ghl)":"leads","new leads(ghl)":"leads","new leads":"leads","ghl leads":"leads","leads":"leads",
-  "success goal":"goal","goal":"goal","lp cr goal":"goal","lpcr goal":"goal","landing page cr goal":"goal","cr goal":"goal","target lp cr":"goal","target cr":"goal",
+  "success goal":"goal","succes goal":"goal","sucess goal":"goal","succes":"goal","success":"goal","goal":"goal","goal %":"goal","lp cr goal":"goal","lpcr goal":"goal","landing page cr goal":"goal","cr goal":"goal","target lp cr":"goal","target cr":"goal",
   "active":"active","active?":"active","is active":"active","active status":"active",
   "receiving traffic":"active","receiving traffic?":"active","traffic":"active","status (active)":"active",
   "notes":"notes"
@@ -894,7 +962,7 @@ function renderCompareCharts(lat){
 
 /* ---------- Client view ---------- */
 function gotoClient(name){
-  currentView="client"; currentClient=name; currentAd="__all__";
+  currentView="client"; currentClient=name; currentAd="__all__"; currentDiagDate=null;
   document.querySelectorAll("#viewToggle button").forEach(b=>b.classList.toggle("active",b.dataset.view==="client"));
   document.getElementById("clientSelect").classList.remove("hide");
   document.getElementById("clientSelect").value=name;
@@ -919,6 +987,66 @@ function renderKpiTiles(gridId, rec, prevRec, keys){
     }
     return `<div class="kpi"><div class="label">${m.label}</div><div class="value">${m.fmt(v)}</div>${deltaHtml}</div>`;
   }).join("");
+}
+function renderDiag(client){
+  const el=document.getElementById("clientDiag");
+  const entries=(DIAG_DATA[client]||[]).slice().sort((a,b)=> a.date<b.date?1:a.date>b.date?-1:0);
+  if(!entries.length){
+    el.innerHTML=`<div class="diag-card"><div class="diag-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg><div>No Daily Funnel Diagnostic logged for <b>${esc(client)}</b> yet. It appears here once a document for this account is generated in Drive.</div></div></div>`;
+    return;
+  }
+  let idx = currentDiagDate ? entries.findIndex(e=>e.date===currentDiagDate) : 0;
+  if(idx<0) idx=0;
+  const d=entries[idx];
+  const dateControl = entries.length>1
+    ? `<select class="diag-datesel" id="diagDateSel" title="Choose a date">`
+      + entries.map((e,i)=>`<option value="${esc(e.date)}"${i===idx?" selected":""}>${esc(fmtDate(e.date))}${i===0?"  · latest":""}</option>`).join("")
+      + `</select>`
+    : `<span class="diag-date">${esc(fmtDate(d.date))}</span>`;
+  el.innerHTML=`<div class="diag-card">
+    <div class="diag-top">
+      <div><div class="diag-eyebrow">Daily Funnel Diagnostic</div><h3>${esc(d.title||client)}</h3></div>
+      <div class="right">${dateControl}${d.url?`<a class="diag-link" href="${esc(d.url)}" target="_blank" rel="noopener">Open in Drive ↗</a>`:""}</div>
+    </div>
+    <div class="diag-body">${d.html||""}</div>
+  </div>`;
+  const sel=document.getElementById("diagDateSel");
+  if(sel) sel.onchange=()=>{ currentDiagDate=sel.value; renderDiag(client); };
+  enhanceDiagTables(el.querySelector(".diag-body"));
+}
+function diagParseNum(t){ const m=String(t).replace(/,/g,"").match(/-?\d+(?:\.\d+)?/); return m?parseFloat(m[0]):null; }
+// Turn each metric-over-time table into an at-a-glance panel of mini bar charts
+// (one chart per row), keeping the original table intact below it.
+function enhanceDiagTables(root){
+  if(!root) return;
+  root.querySelectorAll("table").forEach(tbl=>{
+    const heads=[...tbl.querySelectorAll("thead th")].map(th=>th.textContent.trim());
+    if(heads.length<3) return;                 // need a label column + >= 2 periods
+    const cats=heads.slice(1);
+    const series=[];
+    tbl.querySelectorAll("tbody tr").forEach(tr=>{
+      const cells=[...tr.children];
+      if(!cells.length) return;
+      const label=cells[0].textContent.trim();
+      const pts=cells.slice(1).map(td=>({txt:td.textContent.trim(), v:diagParseNum(td.textContent)}));
+      if(pts.filter(p=>p.v!=null).length>=2) series.push({label, pts});
+    });
+    if(!series.length) return;
+    const panel=document.createElement("div"); panel.className="mini-charts";
+    series.forEach(s=>{
+      const max=Math.max(...s.pts.map(p=>Math.abs(p.v||0)), 0) || 1;
+      let cols="", xs="";
+      s.pts.forEach((p,i)=>{
+        const h = p.v==null ? 0 : Math.max(3, Math.abs(p.v)/max*58);
+        const last = i===s.pts.length-1;
+        cols+=`<div class="mc-col"><div class="mc-val">${esc(p.txt||"")}</div><div class="mc-bar${last?" last":""}" style="height:${h.toFixed(0)}px"></div></div>`;
+        xs+=`<span>${esc(cats[i]||"")}</span>`;
+      });
+      panel.insertAdjacentHTML("beforeend",
+        `<figure class="mini-chart"><figcaption>${esc(s.label)}</figcaption><div class="mc-plot">${cols}</div><div class="mc-xrow">${xs}</div></figure>`);
+    });
+    tbl.insertAdjacentElement("afterend", panel);
+  });
 }
 function renderPerf(rec){
   const title=document.getElementById("clientPerfTitle");
@@ -949,6 +1077,7 @@ function renderClient(){
   const ads=adsOf(currentClient);
   const hasAds=ads.length>0;
   buildAdSelect(ads);
+  renderDiag(currentClient);
 
   const co=document.getElementById("clientCallout");
   const adSection=document.getElementById("clientAdSection");
@@ -1204,7 +1333,7 @@ function buildClientSelect(){
     const mark = !has ? "" : (isActive(c).active ? "🟢 " : "⚪ ");
     return `<option value="${esc(c)}">${mark}${esc(c)}${has?"":"  (no data)"}</option>`;
   }).join("");
-  sel.onchange=()=>{ currentClient=sel.value; currentAd="__all__"; renderClient(); };
+  sel.onchange=()=>{ currentClient=sel.value; currentAd="__all__"; currentDiagDate=null; renderClient(); };
 }
 function buildAdSelect(ads){
   const sel=document.getElementById("adSelect");
@@ -1236,11 +1365,31 @@ document.getElementById("themeBtn").addEventListener("click",()=>{
 
 function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
 
+/* Diagnostics: try the external file (keeps GitHub Pages fresh without
+   re-uploading the HTML); fall back to the embedded copy when it isn't
+   reachable (e.g. opened as a local file). */
+async function loadDiagnostics(){
+  DIAG_DATA = DIAGNOSTICS_EMBEDDED;   // immediate fallback so something always renders
+  // Only fetch the external file when served over http(s) (e.g. GitHub Pages).
+  // A local file:// page can't fetch a sibling file, so we just use the embedded copy.
+  if(location.protocol==="http:"||location.protocol==="https:"){
+    try{
+      const res = await fetch("diagnostics.json", {cache:"no-store"});
+      if(res.ok){
+        const j = await res.json();
+        if(j && typeof j==="object") DIAG_DATA = j;
+      }
+    }catch(e){/* keep embedded */}
+  }
+  if(currentView==="client") renderClient();
+}
+
 /* auto-refresh */
 if(CONFIG.AUTO_REFRESH_MIN>0){ setInterval(loadData, CONFIG.AUTO_REFRESH_MIN*60000); }
 
 /* boot */
 loadData();
+loadDiagnostics();
 </script>
 </body>
 </html>
