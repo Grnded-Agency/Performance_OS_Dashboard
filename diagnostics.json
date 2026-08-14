@@ -1,6 +1,12 @@
 {
  "Wymore": [
   {
+   "date": "2026-08-14",
+   "title": "Wymore Transfer",
+   "url": "https://drive.google.com/file/d/1_vzpE48IpUekUi8fzWfP-WbsYFMlUfaP/view?usp=drivesdk",
+   "html": "<h2>Supporting Evidence</h2>\n<blockquote>\n<p><strong>Ad 01.01 · 4-day trend</strong></p>\n<table>\n<thead>\n<tr>\n<th>Metric</th>\n<th>08.11</th>\n<th>08.12</th>\n<th>08.13</th>\n<th>08.14</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>CTR</td>\n<td>1.63%</td>\n<td>1.78%</td>\n<td>0.69%</td>\n<td><strong>1.57%</strong></td>\n</tr>\n<tr>\n<td>Scroll</td>\n<td>—</td>\n<td>—</td>\n<td>16%</td>\n<td><strong>68%</strong></td>\n</tr>\n<tr>\n<td>GHL Leads</td>\n<td>0</td>\n<td>0</td>\n<td>0</td>\n<td><strong>0</strong></td>\n</tr>\n</tbody>\n</table>\n<p>The account has now had healthy CTR <em>and</em> strong scroll (68%) <em>and</em> still zero GHL leads. When good traffic reaches a page people actually scroll through and nothing lands in the CRM, the break is at the form/capture or the GHL connection — not anything above it.</p>\n</blockquote>\n<h2>Hypotheses (1–3)</h2>\n<blockquote>\n<ol>\n<li>The form isn't submitting into GHL (broken/misconfigured handoff) — the only thing that explains good traffic + good scroll + 0 leads. (high)</li>\n<li>There is no working conversion action on the page (no form/CTA firing). (medium)</li>\n</ol>\n</blockquote>\n<h2>Recommended Action</h2>\n<blockquote>\n<p><strong>One change: audit and fix the landing-page → GHL lead capture.</strong> Do an end-to-end test submission and confirm it lands in GHL. This is unambiguously the single highest-value lever — four days of paid, engaged traffic have produced zero recorded leads, and everything upstream is now healthy.</p>\n</blockquote>\n<h2>Expected Result</h2>\n<blockquote>\n<p>A test submission appears in GHL, and real leads start recording from the traffic already being bought — turning \"0 leads / 4 days\" into a measurable CPL for the first time.</p>\n</blockquote>\n<h2>Approval Needed</h2>\n<blockquote>\n<p>None — this is a fix/verify step, no budget change. (This is now urgent: spend is producing engaged visitors but no captured leads.)</p>\n</blockquote>\n<h2>Learning Captured</h2>\n<blockquote>\n<p>Open. Ruled out traffic, ad, and page-engagement as the blocker (all healthy on 08.14). The problem is conclusively at lead capture/tracking.</p>\n</blockquote>"
+  },
+  {
    "date": "2026-08-13",
    "title": "Wymore Transfer",
    "url": "https://drive.google.com/file/d/1cEniGqF9xYd-vSvgVWHM9v7B6huSrzDC/view?usp=drivesdk",
@@ -20,6 +26,12 @@
   }
  ],
  "Phil S (Grumpy)": [
+  {
+   "date": "2026-08-14",
+   "title": "Grumpy CFO",
+   "url": "https://drive.google.com/file/d/1DzMpJ86QSGcqFMU2qsZmrVjUeVW3eYYJ/view?usp=drivesdk",
+   "html": "<h2>Supporting Evidence</h2>\n<blockquote>\n<p><strong>Account · 4-day trend</strong></p>\n<table>\n<thead>\n<tr>\n<th>Metric</th>\n<th>08.11</th>\n<th>08.12</th>\n<th>08.13</th>\n<th>08.14</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>GHL Leads</td>\n<td>1</td>\n<td>1</td>\n<td>3</td>\n<td><strong>4</strong></td>\n</tr>\n<tr>\n<td>Real CPL</td>\n<td>$23.41</td>\n<td>$28.21</td>\n<td>$13.24</td>\n<td><strong>$9.76</strong></td>\n</tr>\n<tr>\n<td>01.01 CTR</td>\n<td>1.44%</td>\n<td>0.69%</td>\n<td>2.99%</td>\n<td>2.20%</td>\n</tr>\n<tr>\n<td>Landing scroll</td>\n<td>—</td>\n<td>—</td>\n<td>39%</td>\n<td><strong>82%</strong></td>\n</tr>\n</tbody>\n</table>\n<p>Leads and CPL are trending the right way four days running, and the landing page now holds attention (82% scroll). The only soft spot is the Sales page (17% scroll), but it's the minor arm.</p>\n</blockquote>\n<h2>Hypotheses (1–3)</h2>\n<blockquote>\n<ol>\n<li>The Landing setup (Ad 01.01) is a proven winner — good CTR, low CPC, high scroll, improving CPL. (high)</li>\n<li>Ad 01.02 (Sales) is now contributing too, but its page barely gets scrolled (17%). (medium)</li>\n</ol>\n</blockquote>\n<h2>Recommended Action</h2>\n<blockquote>\n<p><strong>One change: scale Ad 01.01's budget.</strong> It's the consistent winner — CPL $9.76 (half the goal), CTR 2.20%, and 82% scroll — so the single highest-value move is more budget behind it, watching CPL holds under $20 as volume grows. (Hold 01.02 and the pages as-is so the scale reads clean.)</p>\n</blockquote>\n<h2>Expected Result</h2>\n<blockquote>\n<p>More leads/day from 01.01 with CPL staying near $10; a clean read on how far it scales before CPL rises — real progress toward the 100–300 leads/month goal.</p>\n</blockquote>\n<h2>Approval Needed</h2>\n<blockquote>\n<p><strong>Budget increase on Ad 01.01 needs your sign-off.</strong></p>\n</blockquote>\n<h2>Learning Captured</h2>\n<blockquote>\n<p>Four straight days of improving CPL ($23 → $10) — the 08.12 CTR dip is fully recovered and the landing page scroll problem resolved (39% → 82%). This is now the model of a healthy account.</p>\n</blockquote>"
+  },
   {
    "date": "2026-08-13",
    "title": "Grumpy CFO",
@@ -41,6 +53,12 @@
  ],
  "Eric (Finn)": [
   {
+   "date": "2026-08-14",
+   "title": "Finn The Finnancial Guide",
+   "url": "https://drive.google.com/file/d/15VLrkKDsChE6J6sJCQ82Rhpzxxn0xfql/view?usp=drivesdk",
+   "html": "<h2>Supporting Evidence</h2>\n<blockquote>\n<p><strong>Ad 02.01 · 4-day trend</strong></p>\n<table>\n<thead>\n<tr>\n<th>Metric</th>\n<th>08.11</th>\n<th>08.12</th>\n<th>08.13</th>\n<th>08.14</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Spend (acct)</td>\n<td>$14.66</td>\n<td>$47.66</td>\n<td>$47.70</td>\n<td><strong>$59.50</strong></td>\n</tr>\n<tr>\n<td>Link Clicks</td>\n<td>7</td>\n<td>15</td>\n<td>25</td>\n<td>24</td>\n</tr>\n<tr>\n<td>GHL Leads</td>\n<td>2</td>\n<td>2</td>\n<td>9</td>\n<td><strong>4</strong></td>\n</tr>\n<tr>\n<td>Real CPL</td>\n<td>$7.33</td>\n<td>$23.83</td>\n<td>$5.30</td>\n<td><strong>$14.88</strong></td>\n</tr>\n</tbody>\n</table>\n<p>The best day (08.13) ran at ~$43 on 02.01 and returned 9 leads at $5.30. Pushing to ~$58 added no clicks and halved the leads — the classic sign of scaling past the efficient spend level. (One caveat: GHL attribution can lag a day, so some 08.14 leads may still post.)</p>\n</blockquote>\n<h2>Hypotheses (1–3)</h2>\n<blockquote>\n<ol>\n<li>Over-scaled past the efficient point — extra spend bought worse inventory (CPC up, CTR down), fewer leads. (high)</li>\n<li>Partly attribution lag — a couple of 08.14 leads may still land in GHL. (medium)</li>\n</ol>\n</blockquote>\n<h2>Recommended Action</h2>\n<blockquote>\n<p><strong>One change: pull Ad 02.01's budget back to ~$43/day</strong> (the 08.13 level that produced 9 leads at $5.30). This tests whether the efficiency returns at the lower spend and finds the account's efficient ceiling. (Hold everything else so the result is clean.)</p>\n</blockquote>\n<h2>Expected Result</h2>\n<blockquote>\n<p>Leads recover toward the 08.13 level and CPL drops back toward $5–$8. If it doesn't, the 9-lead day was the outlier and we've found the real baseline.</p>\n</blockquote>\n<h2>Approval Needed</h2>\n<blockquote>\n<p><strong>Budget decrease on Ad 02.01 needs your sign-off</strong> (it's still your top lead source overall).</p>\n</blockquote>\n<h2>Learning Captured</h2>\n<blockquote>\n<p>Open. Finn remains the strongest account, but 08.14 shows a scaling ceiling: $43 → 9 leads beat $58 → 4 leads. Watch for lagged attribution before concluding.</p>\n</blockquote>"
+  },
+  {
    "date": "2026-08-13",
    "title": "Finn The Finnancial Guide",
    "url": "https://drive.google.com/file/d/16RjAfwXEtJxHtA3g_6Ryur3-m_k-C2u_/view?usp=drivesdk",
@@ -60,6 +78,12 @@
   }
  ],
  "GRNDED": [
+  {
+   "date": "2026-08-14",
+   "title": "Grnded Agency",
+   "url": "https://drive.google.com/file/d/1oh3yg1MG-2xcqBBLXHOd-me9qfCl9tlV/view?usp=drivesdk",
+   "html": "<h2>Supporting Evidence</h2>\n<blockquote>\n<p><strong>Ad 2.01 · 3-day trend</strong></p>\n<table>\n<thead>\n<tr>\n<th>Metric</th>\n<th>08.12</th>\n<th>08.13</th>\n<th>08.14</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>CTR</td>\n<td>2.49%</td>\n<td>1.46%</td>\n<td><strong>1.92%</strong></td>\n</tr>\n<tr>\n<td>GHL Leads</td>\n<td>1</td>\n<td>4</td>\n<td><strong>0</strong></td>\n</tr>\n<tr>\n<td>Unbounce Conv (cum)</td>\n<td>4</td>\n<td>4</td>\n<td><strong>5</strong></td>\n</tr>\n</tbody>\n</table>\n<p>Engagement is fine and the page CR (~22%) is the strongest of the group. But GHL shows 0 while the page shows a new conversion — either an attribution lag or a capture gap. Volume is low (6 clicks), so a single 0-lead day could also be normal variance.</p>\n</blockquote>\n<h2>Hypotheses (1–3)</h2>\n<blockquote>\n<ol>\n<li>Tracking/attribution gap — a lead converted on-page but didn't register in GHL (or is lagging). (high)</li>\n<li>Genuine low-volume variance — 6 clicks can produce a 0-lead day by chance. (medium)</li>\n</ol>\n</blockquote>\n<h2>Recommended Action</h2>\n<blockquote>\n<p><strong>One change: verify today's lead in GHL</strong> — reconcile the Unbounce +1 conversion against GHL (check for a lagged or lost lead). Grnded's page is the strongest of the group (~22% CR), so protecting the lead-capture path is the highest-value move before touching budget or creative.</p>\n</blockquote>\n<h2>Expected Result</h2>\n<blockquote>\n<p>Either the missing lead appears in GHL (attribution lag confirmed, no problem) or we catch a capture gap early — before scaling spend into a leaky tracker.</p>\n</blockquote>\n<h2>Approval Needed</h2>\n<blockquote>\n<p>None — this is a verification step, no budget change.</p>\n</blockquote>\n<h2>Learning Captured</h2>\n<blockquote>\n<p>Open. Strong ad + strong page, but a 4 → 0 GHL lead drop with a page conversion unaccounted for. Confirm tracking before reading too much into one low-volume day.</p>\n</blockquote>"
+  },
   {
    "date": "2026-08-13",
    "title": "Grnded Agency",
