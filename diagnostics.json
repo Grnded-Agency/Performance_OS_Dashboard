@@ -1,6 +1,12 @@
 {
  "Wymore": [
   {
+   "date": "2026-08-18",
+   "title": "Wymore Transfer",
+   "url": "https://drive.google.com/file/d/1MOG1MaFJQemYOV2Gtd-5UyvTTjj8Kycm/view?usp=drivesdk",
+   "html": "<h2>Supporting Evidence</h2>\n<blockquote>\n<p>The 6 Unbounce conversions contradict both the 0 in GHL and the earlier \"capture works\" test — they can't all be true of the same event. Meanwhile the ad went from ~1% CTR to 0.49% at a $19 CPC, so traffic is drying up too.</p>\n</blockquote>\n<h2>Hypotheses</h2>\n<blockquote>\n<ol>\n<li><strong>The 6 Unbounce \"conversions\" are not GHL leads</strong> (different event) → account still has ~0 real leads. (high)</li>\n<li>Real leads exist but aren't syncing to GHL despite the test. (medium)</li>\n<li>Ad 01.01 creative has fatigued (CTR 0.49%, CPC $19). (high, secondary)</li>\n</ol>\n</blockquote>\n<h2>Recommended Action</h2>\n<blockquote>\n<p><strong>One change: reconcile the Unbounce 6 vs GHL 0.</strong> Check what the 6 Unbounce \"conversions\" actually are and whether any correspond to a GHL lead. This single answer determines the whole diagnosis. <strong>Urgent secondary (flag, not the test):</strong> the ad CTR crashed to 0.49% — refresh 01.01 creative once we know leads are (or aren't) flowing.</p>\n</blockquote>\n<h2>Expected Result &amp; Economics</h2>\n<blockquote>\n<p>Resolving the count tells us if Wymore is at ~0 real leads (page/offer problem) or losing synced leads (integration problem) — and only then can CPL be trusted.</p>\n</blockquote>\n<h2>Approval Needed</h2>\n<blockquote>\n<p>None to investigate. Hold spend increases — CPC is $18.97 and lead status is unknown.</p>\n</blockquote>\n<h2>Changes Made / Learning</h2>\n<blockquote>\n<p><strong>Change log:</strong> 08.17 — capture tested, confirmed working (Juan). <strong>Learning:</strong> the 08.18 Unbounce(6)/GHL(0) split reopens the lead question — reconcile before acting on ad or offer.</p>\n</blockquote>"
+  },
+  {
    "date": "2026-08-17",
    "title": "Wymore Transfer",
    "url": "https://drive.google.com/file/d/1QMztKJtD52-fK4Wx0OhKl2JLAGBrbXzp/view?usp=drivesdk",
@@ -45,10 +51,16 @@
  ],
  "Phil S (Grumpy)": [
   {
+   "date": "2026-08-18",
+   "title": "Grumpy CFO",
+   "url": "https://drive.google.com/file/d/1tmGfTiorKL_hfO_646ZG0iUaymaeyMs7/view?usp=drivesdk",
+   "html": "<h2>Supporting Evidence</h2>\n<blockquote>\n<p>Leads up, CPL down, CTR strong on both variants, scroll high through the whole funnel. This is a healthy day. The 6 → 0 Page-2 swing is the only red flag and it looks like a snapshot problem given visitors held steady.</p>\n</blockquote>\n<h2>Hypotheses</h2>\n<blockquote>\n<ol>\n<li><strong>Funnel is performing</strong> — cheap, engaging traffic converting to leads under goal. (high)</li>\n<li>Page-2 conversion count (0) is a data glitch, not a real collapse. (high)</li>\n</ol>\n</blockquote>\n<h2>Recommended Action</h2>\n<blockquote>\n<p><strong>Working — continue, no forced change.</strong> Keep both ad variants running (both healthy). <strong>One verify step:</strong> confirm the Page-2 Sales conversion number (6 → 0 looks wrong) so we can trust the booking rate.</p>\n</blockquote>\n<h2>Expected Result &amp; Economics</h2>\n<blockquote>\n<p>Real CPL $10.78 keeps this comfortably under the $20 goal. Once Page-2 counts are confirmed, we can read the true Page-1 → Page-2 → booked flow and see how close it is to the 5% booking target.</p>\n</blockquote>\n<h2>Approval Needed</h2>\n<blockquote>\n<p>None — just confirm the Page-2 conversion count.</p>\n</blockquote>\n<h2>Changes Made / Learning</h2>\n<blockquote>\n<p><strong>Change log:</strong> none documented. <strong>Learning:</strong> best day for Grumpy — CPL $10.78, both ads healthy, scroll strong end-to-end. Example of \"working, keep testing\" — no change needed.</p>\n</blockquote>"
+  },
+  {
    "date": "2026-08-17",
    "title": "Grumpy CFO",
-   "url": "https://drive.google.com/file/d/1dKEwAv8NwGpOi8nKpJyivodAHb0ir5z5/view?usp=drivesdk",
-   "html": "<h2>Supporting Evidence</h2>\n<blockquote>\n<p>Spend already tilted to the Sales ad (01.02: $31.23, 20 clicks, CTR 4.67% exceptional). That page turns visitors into conversions at 23% — right at the long-term opt-in target. The Landing page, even with strong scroll (87%), sits at 0% — a page that holds attention but never converts usually signals a broken/missing CTA or a tracking fault.</p>\n</blockquote>\n<h2>Hypotheses</h2>\n<blockquote>\n<ol>\n<li><strong>Sales page (01.02) is the winning variant</strong> — 23% CR, cheap CPC. Consolidate here. (high)</li>\n<li><strong>Landing page (01.01) is broken or mis-tracked</strong> — 0 conversions from 105 engaged visitors isn't normal. (high)</li>\n<li>Ads themselves are fine (both strong CTR). (high)</li>\n</ol>\n</blockquote>\n<h2>Recommended Action</h2>\n<blockquote>\n<p><strong>One change (primary): consolidate budget onto the Sales page (01.02).</strong> It's the proven converter (23%, ~$5 per conversion) and the Landing page returns nothing — shifting spend to the winner is the single highest-value move.\n<strong>Investigate (not a spend change): the Landing page's 0% CR</strong> — confirm whether its CTA/form is broken or untracked before fully retiring it.</p>\n</blockquote>\n<h2>Expected Result &amp; Economics</h2>\n<blockquote>\n<p>On 01.02, 20 clicks → 6 conversions at <strong>~$5.20 per conversion</strong> — already at/under the short-term goal. Concentrating budget here should scale conversions at that cost; the Landing-page fix (or retire) stops wasting ~$8/day on a 0% page.</p>\n</blockquote>\n<h2>Approval Needed</h2>\n<blockquote>\n<ul>\n<li>Consolidate budget to the Sales page (01.02) — approval to shift.</li>\n<li>Also: <strong>please enter GHL leads for 08.15–08.17</strong> so CPL can be tied to the source of truth.</li>\n</ul>\n</blockquote>\n<h2>Changes Made / Learning</h2>\n<blockquote>\n<p><strong>Change log:</strong> none documented for this window — <em>log the budget shift once made (date + who).</em>\n<strong>Learning:</strong> the Landing-vs-Sales page test has a clear winner — <strong>Sales page at 23%</strong>. The Landing page's 0% (with high scroll) is the standout issue to resolve.</p>\n</blockquote>"
+   "url": "https://drive.google.com/file/d/1oPvnvevGexih5biI_Uzt1S8EHyzSzO3C/view?usp=drivesdk",
+   "html": "<h2>Supporting Evidence</h2>\n<blockquote>\n<p>01.02 is the stronger creative by a wide margin on engagement and cost. The funnel produced conversions on the Sales page (23%). The only thing preventing a clean read is the GHL(2)-vs-Sales-conv(6) mismatch.</p>\n</blockquote>\n<h2>Hypotheses</h2>\n<blockquote>\n<ol>\n<li><strong>Ad 01.02 is the better variant</strong> — consolidate toward it if the trend holds. (high)</li>\n<li>Funnel is converting, but tracking counts (opt-ins vs bookings) are inconsistent. (medium)</li>\n</ol>\n</blockquote>\n<h2>Recommended Action</h2>\n<blockquote>\n<p><strong>Working — continue the A/B, leaning to 01.02.</strong> No forced change today. <strong>One verify step:</strong> reconcile the GHL opt-ins (2) vs Page-2 Sales conversions (6) so the funnel math is trustworthy.</p>\n</blockquote>\n<h2>Expected Result &amp; Economics</h2>\n<blockquote>\n<p>With clean numbers, we can state a true opt-in% and Page-2 booking%. Real CPL is ~$19.70 — at the short-term goal.</p>\n</blockquote>\n<h2>Approval Needed</h2>\n<blockquote>\n<p>None. (Enter/confirm GHL + Page-2 counts.)</p>\n</blockquote>\n<h2>Changes Made / Learning</h2>\n<blockquote>\n<p><strong>Change log:</strong> none documented. <strong>Learning:</strong> corrected the model — this is one Landing→Sales funnel; 01.02 is the leading ad variant.</p>\n</blockquote>"
   },
   {
    "date": "2026-08-16",
@@ -88,6 +100,12 @@
   }
  ],
  "Eric (Finn)": [
+  {
+   "date": "2026-08-18",
+   "title": "Finn The Finnancial Guide",
+   "url": "https://drive.google.com/file/d/1NkNFZnh5OyE-OMMee5cOg9RBhOWjL1CG/view?usp=drivesdk",
+   "html": "<h2>Supporting Evidence</h2>\n<blockquote>\n<p>Lead flow is steady and cheap; scroll strong (81%). Yet Page 2 booked calls remain 0 across the whole window. Ad 02.02 is still near-dead (2 clicks, 0 leads on $6.27).</p>\n</blockquote>\n<h2>Hypotheses</h2>\n<blockquote>\n<ol>\n<li><strong>Page 2 (booking page) is the blocker</strong> — leads arrive, no one books. (high)</li>\n<li>Ad 02.02 not contributing — turn off. (high)</li>\n<li>Ad 02.01 is a healthy, cheap lead engine — leave it. (high)</li>\n</ol>\n</blockquote>\n<h2>Recommended Action</h2>\n<blockquote>\n<p><strong>One change (primary, standing): fix Page 2.</strong> Pull Page 2 into Mouseflow, find the drop-off, and revise toward the 5% booking target. This is a genuine open constraint, not busywork.\n<strong>Cleanup: turn off Ad 02.02</strong> (0 leads on ~$6+/day).</p>\n</blockquote>\n<h2>Expected Result &amp; Economics</h2>\n<blockquote>\n<p>At a 5% Page-2 rate, the ~29 leads to date would already be producing booked calls (~$227 each per the earlier math). Today the lead spend keeps buying opt-ins that never book.</p>\n</blockquote>\n<h2>Approval Needed</h2>\n<blockquote>\n<p>Turn off 02.02 (quick). Page 2 revision scope — pending Mouseflow.</p>\n</blockquote>\n<h2>Changes Made / Learning</h2>\n<blockquote>\n<p><strong>Change log:</strong> 08.12 — new variant; targeting fixed (supervisor); Page 1 UI fixed (Alyssa).\n<strong>Learning:</strong> Page 1 is durable; the entire payoff is gated on Page 2. Fixing it is the one thing that matters for Finn now.</p>\n</blockquote>"
+  },
   {
    "date": "2026-08-17",
    "title": "Finn The Finnancial Guide",
@@ -132,6 +150,12 @@
   }
  ],
  "GRNDED": [
+  {
+   "date": "2026-08-18",
+   "title": "Grnded Agency",
+   "url": "https://drive.google.com/file/d/1PlUj-i4d5bwHpQ5DXYPpODNWOZz2SDep/view?usp=drivesdk",
+   "html": "<h2>Supporting Evidence</h2>\n<blockquote>\n<p>The single lever we called out — cost of traffic — moved the right way: cheaper reach brought more clicks and more leads at less than half the CPL, without hurting the page's ~22% opt-in. Scroll also jumped to 88%.</p>\n</blockquote>\n<h2>Hypotheses</h2>\n<blockquote>\n<ol>\n<li><strong>Cheaper/broader reach is working</strong> — CPM down, volume and leads up. (high)</li>\n<li>Page 1 remains the group's strongest (~22% opt-in). (high)</li>\n<li>Page 2 is still a blind spot — no booking data yet. (unknown)</li>\n</ol>\n</blockquote>\n<h2>Recommended Action</h2>\n<blockquote>\n<p><strong>Working — continue, no forced change.</strong> The account improved across the board; keep it running as-is and watch that the cheaper-traffic trend holds. If it does for another day or two, it becomes a <strong>scale candidate.</strong>\n<strong>Data (not a change): map Page 2</strong> so we can see the end of the funnel.</p>\n</blockquote>\n<h2>Expected Result &amp; Economics</h2>\n<blockquote>\n<p>If CPM/CPL hold at today's levels, Grnded is the best scale candidate in the portfolio — leads at ~$8.71 with a 22% opt-in page.</p>\n</blockquote>\n<h2>Approval Needed</h2>\n<blockquote>\n<p>None. (Confirm Page 2 location; fix the 08.17/08.18 date in the sheet.)</p>\n</blockquote>\n<h2>Changes Made / Learning</h2>\n<blockquote>\n<p><strong>Change log:</strong> none documented. <strong>Learning:</strong> clean example of \"it's working — keep testing.\" The 08.17 cost concern eased on its own; no intervention needed today.</p>\n</blockquote>"
+  },
   {
    "date": "2026-08-17",
    "title": "Grnded Agency",
