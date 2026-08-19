@@ -1,6 +1,12 @@
 {
  "Wymore": [
   {
+   "date": "2026-08-19",
+   "title": "Wymore Transfer",
+   "url": "https://drive.google.com/file/d/1sp6s48abjBz9YcBkll9Z1WAgNNeYJV-1/view?usp=drivesdk",
+   "html": "<h2>Supporting Evidence</h2>\n<blockquote>\n<p>Old-set spend collapsed to $9.80 with 0 clicks — expected as budget shifts to the duplicated set. No rows for the new ad set have appeared, so there's nothing to evaluate on the change yet.</p>\n</blockquote>\n<h2>Hypotheses</h2>\n<blockquote>\n<ol>\n<li>New ad set is still in learning / not yet spending meaningfully. (high)</li>\n<li>Tighter Manufacturing targeting + new CTA should lift CTR (was 0.49% on 08.18) and opt-in — <strong>to be confirmed once it delivers.</strong> (hypothesis)</li>\n</ol>\n</blockquote>\n<h2>Recommended Action</h2>\n<blockquote>\n<p><strong>Hold — wait for the new ad set to deliver.</strong> No change today; let the new Manufacturing set exit learning and gather 1–2 days of data, then judge CTR and opt-in against the old set. Make sure the new set is actually receiving budget/delivery.</p>\n</blockquote>\n<h2>Expected Result &amp; Economics</h2>\n<blockquote>\n<p>If the tighter targeting works, expect CTR back above 1% and the first real opt-ins in over a week. Opt-in is now measured as GHL leads ÷ visitors on the new set.</p>\n</blockquote>\n<h2>Approval Needed</h2>\n<blockquote>\n<p>None. Confirm the new ad set is live and spending (so tomorrow has data).</p>\n</blockquote>\n<h2>Changes Made / Learning</h2>\n<blockquote>\n<p><strong>08.18 — new ad set launched</strong> (Advantage+ off; USA; detailed targeting narrowed to <em>Interests – Manufacturing</em>; new \"logistics expert / consolidate warehousing\" CTA). <strong>08.19 — metric change:</strong> CR = GHL leads ÷ visitors.\n<strong>Learning:</strong> clean transition day; the verdict on the targeting/copy change comes with the new set's first full day of data.</p>\n</blockquote>"
+  },
+  {
    "date": "2026-08-18",
    "title": "Wymore Transfer",
    "url": "https://drive.google.com/file/d/1MOG1MaFJQemYOV2Gtd-5UyvTTjj8Kycm/view?usp=drivesdk",
@@ -50,6 +56,12 @@
   }
  ],
  "Phil S (Grumpy)": [
+  {
+   "date": "2026-08-19",
+   "title": "Grumpy CFO",
+   "url": "https://drive.google.com/file/d/1bC7uYCixgXN08o3Tq7cZm3yb5sOfZgQd/view?usp=drivesdk",
+   "html": "<h2>Supporting Evidence</h2>\n<blockquote>\n<p>Leads jumped to 8 (best in the run) and CPL fell to $4.33. All the volume came from 01.02; 01.01 spent $4.55 for 0 clicks. The Sales page — where leads actually form — is converting right at the target zone (22.86%).</p>\n</blockquote>\n<h2>Hypotheses</h2>\n<blockquote>\n<ol>\n<li><strong>Ad 01.02 is the winning variant</strong> — carry the account on it. (high)</li>\n<li>Ad 01.01 is dead weight now (0 clicks). (medium)</li>\n<li>Funnel is healthy — Landing hands off to a Sales page converting ~23%. (high)</li>\n</ol>\n</blockquote>\n<h2>Recommended Action</h2>\n<blockquote>\n<p><strong>Working — continue, no forced change.</strong> Lean into <strong>01.02</strong> (the clear winner). Optional cleanup: pause/absorb <strong>01.01</strong> (0 clicks) into 01.02 to stop the small waste — not urgent.</p>\n</blockquote>\n<h2>Expected Result &amp; Economics</h2>\n<blockquote>\n<p>At $4.33 CPL and 8 leads/day, Grumpy is now the strongest performer and a scale candidate — more budget on 01.02 should hold a low CPL while volume grows.</p>\n</blockquote>\n<h2>Approval Needed</h2>\n<blockquote>\n<p>None. (If scaling 01.02 budget, quick sign-off.)</p>\n</blockquote>\n<h2>Changes Made / Learning</h2>\n<blockquote>\n<p><strong>08.19 — metric change:</strong> Landing CR is now GHL leads ÷ visitors; the <strong>Sales-page CR (22.86%)</strong> is the key number. <strong>Learning:</strong> with the cleaner metric, Grumpy is clearly winning — Sales CR 22.86%, CPL $4.33; Ad 01.02 is the answer to the A/B.\n<em>Note: booked-call tracking is no longer in the sheet now that Unbounce conversions are dropped — measuring booked calls would need GHL appointments.</em></p>\n</blockquote>"
+  },
   {
    "date": "2026-08-18",
    "title": "Grumpy CFO",
@@ -101,6 +113,12 @@
  ],
  "Eric (Finn)": [
   {
+   "date": "2026-08-19",
+   "title": "Finn The Finnancial Guide",
+   "url": "https://drive.google.com/file/d/1-11kqPWMpC2eetA875396V1_ExQ6ygc5/view?usp=drivesdk",
+   "html": "<h2>Supporting Evidence</h2>\n<blockquote>\n<p>The earlier rosy \"22% opt-in\" was the cumulative Unbounce-based figure; the consistent GHL/visitor metric puts it at 6.67%. That, plus 02.01 dipping under a 1% CTR, says the top of the funnel (ad + opt-in page) has headroom.</p>\n</blockquote>\n<h2>Hypotheses</h2>\n<blockquote>\n<ol>\n<li><strong>Page 1 opt-in is underperforming</strong> (6.67% vs target) — offer/headline is the lever. (high)</li>\n<li><strong>Ad 02.01 fatiguing</strong> (CTR 0.96%); 02.02 is the fresher variant. (medium)</li>\n</ol>\n</blockquote>\n<h2>Recommended Action</h2>\n<blockquote>\n<p><strong>One change: test a stronger Page 1 opt-in</strong> (headline/offer) to lift the 6.67% toward target — it's the measurable conversion now and it's well below goal. (Secondary watch: 02.01 CTR &lt;1% — lean to 02.02 if it persists.)</p>\n</blockquote>\n<h2>Expected Result &amp; Economics</h2>\n<blockquote>\n<p>Lifting opt-in from ~7% toward 20%+ roughly triples leads at the same traffic cost, pulling CPL well below today's $10.92.</p>\n</blockquote>\n<h2>Approval Needed</h2>\n<blockquote>\n<p>Page 1 opt-in test — align on scope.</p>\n</blockquote>\n<h2>Changes Made / Learning</h2>\n<blockquote>\n<p><strong>08.19 — metric change:</strong> CR = GHL leads ÷ visitors. (08.12 — new variant; targeting + Page 1 UI fixed.) <strong>Learning:</strong> the cleaner metric resets expectations — Finn's opt-in is 6.67%, not 22%; that's the number to move.\n<em>Note: booked-call (Page 2) tracking is no longer in the sheet — need GHL appointments to measure the booking step.</em></p>\n</blockquote>"
+  },
+  {
    "date": "2026-08-18",
    "title": "Finn The Finnancial Guide",
    "url": "https://drive.google.com/file/d/1NkNFZnh5OyE-OMMee5cOg9RBhOWjL1CG/view?usp=drivesdk",
@@ -150,6 +168,12 @@
   }
  ],
  "GRNDED": [
+  {
+   "date": "2026-08-19",
+   "title": "Grnded Agency",
+   "url": "https://drive.google.com/file/d/1OjujC5bAJiF96Z_As287iE6wV7LoC3lx/view?usp=drivesdk",
+   "html": "<h2>Supporting Evidence</h2>\n<blockquote>\n<p>08.18's cheap-traffic win didn't hold — CPM went $96 → $104 and leads dropped to 1. With only 6 clicks and 34 visitors, one lead swings CPL hard, so some of this is low-volume variance. But the pattern (expensive traffic) is the recurring theme.</p>\n</blockquote>\n<h2>Hypotheses</h2>\n<blockquote>\n<ol>\n<li><strong>Traffic cost/volume is the drag</strong> — CPM back over $100, thin clicks. (high)</li>\n<li>Partly low-volume variance — a 1-lead day on 6 clicks. (medium)</li>\n</ol>\n</blockquote>\n<h2>Recommended Action</h2>\n<blockquote>\n<p><strong>One change: keep pushing cheaper/broader reach on 2.01</strong> to get CPM back down (it worked on 08.18). Yesterday's gain reversed, so it's worth another push — not a \"leave it alone\" day.</p>\n</blockquote>\n<h2>Expected Result &amp; Economics</h2>\n<blockquote>\n<p>Getting CPM back toward ~$96 (or lower) should restore multiple leads/day at a sub-$10 CPL like 08.18.</p>\n</blockquote>\n<h2>Approval Needed</h2>\n<blockquote>\n<p>Audience/creative test to lower CPM — quick sign-off.</p>\n</blockquote>\n<h2>Changes Made / Learning</h2>\n<blockquote>\n<p><strong>08.19 — metric change:</strong> CR = GHL leads ÷ visitors. <strong>Learning:</strong> the 08.18 improvement didn't hold — Grnded's leads and CPL are volatile day-to-day on thin volume; cheaper traffic remains the lever. <em>(The prior 08.18 row was mis-dated 08.17 in the sheet — flagged earlier.)</em>\n<em>Note: booked-call (Page 2) tracking not in the sheet; need GHL appointments to measure it.</em></p>\n</blockquote>"
+  },
   {
    "date": "2026-08-18",
    "title": "Grnded Agency",
