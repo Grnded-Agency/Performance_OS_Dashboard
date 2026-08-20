@@ -1,6 +1,12 @@
 {
  "Wymore": [
   {
+   "date": "2026-08-20",
+   "title": "Wymore Transfer",
+   "url": "https://drive.google.com/file/d/1vGPaE27sE0pDUJAY21hrsQMlQjDiUy8j/view?usp=drivesdk",
+   "html": "<h2>Supporting Evidence</h2>\n<blockquote>\n<p>Old set: another day at CTR &lt;1% and 0 GHL leads (its ~9th straight). No new-ad-set rows exist in the tab, so either it isn't delivering, or its results aren't being tracked here. Either way the fix we launched can't be evaluated.</p>\n</blockquote>\n<h2>Hypotheses</h2>\n<blockquote>\n<ol>\n<li><strong>New ad set isn't delivering or isn't being logged</strong> — the reason there's still no signal. (high)</li>\n<li>Old set remains a 0-lead money drain (~$28/day). (high)</li>\n</ol>\n</blockquote>\n<h2>Recommended Action</h2>\n<blockquote>\n<p><strong>One change: confirm the new Manufacturing ad set is live, spending, and tracked in the sheet — and pause/cut the old set's budget.</strong> Two days of ~$28/day on a 0-lead old set while the replacement shows no data is the thing to resolve. Once the new set delivers, evaluate CTR + opt-in against the old.</p>\n</blockquote>\n<h2>Expected Result &amp; Economics</h2>\n<blockquote>\n<p>Getting the new set live + logged gives the first real test of the tighter targeting/new CTA; cutting the old set stops burning ~$28/day for nothing.</p>\n</blockquote>\n<h2>Approval Needed</h2>\n<blockquote>\n<p>OK to reduce/pause the old ad set's budget while the new set ramps.</p>\n</blockquote>\n<h2>Changes Made / Learning</h2>\n<blockquote>\n<p>08.18 — new Manufacturing ad set launched (Advantage+ off, Interests–Manufacturing, new CTA). 08.19+ — GHL-based CR.\n<strong>Learning:</strong> the change was made but isn't visible in the data yet — verify delivery/tracking before drawing any conclusion.</p>\n</blockquote>"
+  },
+  {
    "date": "2026-08-19",
    "title": "Wymore Transfer",
    "url": "https://drive.google.com/file/d/1sp6s48abjBz9YcBkll9Z1WAgNNeYJV-1/view?usp=drivesdk",
@@ -56,6 +62,12 @@
   }
  ],
  "Phil S (Grumpy)": [
+  {
+   "date": "2026-08-20",
+   "title": "Grumpy CFO",
+   "url": "https://drive.google.com/file/d/1eviJn50vuH92LPcMIj8Gsa6WWhS9XDqO/view?usp=drivesdk",
+   "html": "<h2>Supporting Evidence</h2>\n<blockquote>\n<p>Lead history: 08.17 = 2 · 08.18 = 3 · 08.19 = 8 · 08.20 = 2. The 8 flattered the Sales CR; today's 5% is the truer recent level. Ad engagement and scroll (91%/87%) remain strong — the only softness is Sales-page conversion volume, within normal day-to-day swing.</p>\n</blockquote>\n<h2>Hypotheses</h2>\n<blockquote>\n<ol>\n<li>08.19's 8 leads was a one-day spike; 2–3/day is the real baseline. (high)</li>\n<li>Ad 01.02 remains the winning variant; 01.01 contributes nothing. (high)</li>\n</ol>\n</blockquote>\n<h2>Recommended Action</h2>\n<blockquote>\n<p><strong>Working — continue, no forced change.</strong> Keep 01.02 running; still under the short-term CPL goal. <strong>Watch the Sales CR</strong> — if it stays at ~5% for another day (i.e. the 8-lead day really was a one-off), then look at the Sales page. Optional: retire idle 01.01.</p>\n</blockquote>\n<h2>Expected Result &amp; Economics</h2>\n<blockquote>\n<p>Holding ~2–3 leads/day at ~$16 CPL keeps Grumpy under the short-term goal. A repeat of 8+ leads would confirm upside worth scaling 01.02.</p>\n</blockquote>\n<h2>Approval Needed</h2>\n<blockquote>\n<p>None.</p>\n</blockquote>\n<h2>Changes Made / Learning</h2>\n<blockquote>\n<p><strong>Learning:</strong> don't over-read a single spike — 08.19 was high; 08.20 is normal and still under goal. 01.02 is the durable winner.\n<em>Note: booked-call (Page 2 outcome) still not tracked in the sheet — needs GHL appointments.</em></p>\n</blockquote>"
+  },
   {
    "date": "2026-08-19",
    "title": "Grumpy CFO",
@@ -113,6 +125,12 @@
  ],
  "Eric (Finn)": [
   {
+   "date": "2026-08-20",
+   "title": "Finn The Finnancial Guide",
+   "url": "https://drive.google.com/file/d/1sSDlVmh1U61KPiz-O2jON8_H8CNycYmN/view?usp=drivesdk",
+   "html": "<h2>Supporting Evidence</h2>\n<blockquote>\n<p>Two days of GHL-based opt-in in the 4–7% range confirm the earlier ~22% was an artifact of the old Unbounce method. Traffic is fine and cheap (CPM ~$34–40); the landing page just isn't opting enough of them in. 02.02 now spends alongside 02.01 with similar results.</p>\n</blockquote>\n<h2>Hypotheses</h2>\n<blockquote>\n<ol>\n<li><strong>Page 1 opt-in is the constraint</strong> (~4–7% vs 25–30% target) — offer/headline/form is the lever. (high)</li>\n<li>Ads are healthy — not the problem. (high)</li>\n</ol>\n</blockquote>\n<h2>Recommended Action</h2>\n<blockquote>\n<p><strong>One change: test a stronger Page 1 opt-in</strong> (headline/offer/form) to lift it off ~5%. This is a real, repeating gap, not a forced find — it's the single biggest lever for Finn now.</p>\n</blockquote>\n<h2>Expected Result &amp; Economics</h2>\n<blockquote>\n<p>Even moving opt-in from ~5% to ~15% roughly triples leads at the same spend, dropping CPL from ~$20 toward ~$7.</p>\n</blockquote>\n<h2>Approval Needed</h2>\n<blockquote>\n<p>Page 1 opt-in test — align on scope.</p>\n</blockquote>\n<h2>Changes Made / Learning</h2>\n<blockquote>\n<p>08.12 — new variant; targeting + Page 1 UI fixed. <strong>Learning:</strong> the opt-in gap is consistent — this is the thing to fix.\n<em>Note: booked-call (Page 2) not tracked in sheet — needs GHL appointments.</em></p>\n</blockquote>"
+  },
+  {
    "date": "2026-08-19",
    "title": "Finn The Finnancial Guide",
    "url": "https://drive.google.com/file/d/1-11kqPWMpC2eetA875396V1_ExQ6ygc5/view?usp=drivesdk",
@@ -168,6 +186,12 @@
   }
  ],
  "GRNDED": [
+  {
+   "date": "2026-08-20",
+   "title": "Grnded Agency",
+   "url": "https://drive.google.com/file/d/1FSOrJv6d9rUHFCmMXHjM5kjlwLurlpis/view?usp=drivesdk",
+   "html": "<h2>Supporting Evidence</h2>\n<blockquote>\n<p>The 08.19 recommendation to lower CPM hasn't shown up — CPM is still ~$103 across two days (either the audience test wasn't run or hasn't worked). And the cleaner GHL metric reveals opt-in is ~2.8%, not the ~20% the old Unbounce number implied — so the page is a second real lever.</p>\n</blockquote>\n<h2>Hypotheses</h2>\n<blockquote>\n<ol>\n<li><strong>Traffic too expensive</strong> — CPM ~$103 with 5 clicks. (high)</li>\n<li><strong>Page 1 opt-in genuinely low</strong> (~2.8%) — the old metric masked this. (high)</li>\n</ol>\n</blockquote>\n<h2>Recommended Action</h2>\n<blockquote>\n<p><strong>One change: confirm and run the cheaper/broader audience test</strong> (CPM ~$103 is the biggest single cost lever, and it hasn't moved for two days — verify it was actually changed). Hold the page constant so we isolate the traffic effect; the low opt-in is the next lever after traffic cost.</p>\n</blockquote>\n<h2>Expected Result &amp; Economics</h2>\n<blockquote>\n<p>Halving CPM roughly doubles clicks/leads at the same spend; that alone should pull CPL from ~$32 back toward the ~$9 seen on 08.18.</p>\n</blockquote>\n<h2>Approval Needed</h2>\n<blockquote>\n<p>Confirm whether the audience change was made; if not, approve running it.</p>\n</blockquote>\n<h2>Changes Made / Learning</h2>\n<blockquote>\n<p>No changes documented. <strong>Learning:</strong> the GHL-based metric exposes Grnded's real opt-in (~2.8%) — the page looked strong only under the old Unbounce math. Expensive traffic remains the first lever.</p>\n</blockquote>"
+  },
   {
    "date": "2026-08-19",
    "title": "Grnded Agency",
