@@ -1,6 +1,12 @@
 {
  "Wymore": [
   {
+   "date": "2026-08-21",
+   "title": "Wymore Transfer",
+   "url": "https://drive.google.com/file/d/1eS6BRRcDR72i3axrNfCqYHuVZDduh_PG/view?usp=drivesdk",
+   "html": "<h2>Supporting Evidence</h2>\n<blockquote>\n<p>0 clicks and near-zero spend across both ad slots is what a paused-old / in-review-new state looks like. Nothing to evaluate on the swap until Meta approves the new ads and delivery goes Active.</p>\n</blockquote>\n<h2>Hypotheses</h2>\n<blockquote>\n<ol>\n<li><strong>New ads still in review / not Active</strong> — hence 0 delivery today. (high)</li>\n<li>Once Active, the tighter targeting + new headline creative should finally get qualified clicks to the page. (to be tested)</li>\n</ol>\n</blockquote>\n<h2>Recommended Action</h2>\n<blockquote>\n<p><strong>Hold — confirm the two new ads are approved and Active.</strong> No analysis is possible until they deliver. Once Active, the 24-hour watch begins: compare CTR and LP views vs the paused ads, then judge opt-in. If they're still stuck in review, check for a policy issue.</p>\n</blockquote>\n<h2>Expected Result &amp; Economics</h2>\n<blockquote>\n<p>Active delivery gives the first real test of the new creative + Manufacturing targeting; today's $8 bought no clicks, so effectively no spend at risk during the transition.</p>\n</blockquote>\n<h2>Approval Needed</h2>\n<blockquote>\n<p>None — just verify the new ads cleared review and are delivering.</p>\n</blockquote>\n<h2>Changes Made / Learning</h2>\n<blockquote>\n<p><strong>08.20 — new ads swapped into the 08.18 ad set (image-only); old ads paused.</strong> <strong>Learning:</strong> the swap hasn't started delivering yet (0 clicks) — the 24h test window opens when they go Active. (Sheet still shows old <code>…08.03</code> ad naming — reconcile to the real 08.18 ad set.)</p>\n</blockquote>"
+  },
+  {
    "date": "2026-08-20",
    "title": "Wymore Transfer",
    "url": "https://drive.google.com/file/d/1vGPaE27sE0pDUJAY21hrsQMlQjDiUy8j/view?usp=drivesdk",
@@ -62,6 +68,12 @@
   }
  ],
  "Phil S (Grumpy)": [
+  {
+   "date": "2026-08-21",
+   "title": "Grumpy CFO",
+   "url": "https://drive.google.com/file/d/1ILOOJ-5S_Ee4YvW857i8CQDrsMcNf-3C/view?usp=drivesdk",
+   "html": "<h2>Supporting Evidence</h2>\n<blockquote>\n<p>Leads: 08.18 = 3 · 08.19 = 8 · 08.20 = 2 · 08.21 = 7 — averaging ~5/day, well above the early run, at a CPL consistently under goal. 01.02 is carrying the account with the strongest engagement yet (8.74% CTR).</p>\n</blockquote>\n<h2>Hypotheses</h2>\n<blockquote>\n<ol>\n<li><strong>Ad 01.02 is a clear, durable winner</strong> — exceptional CTR, cheap clicks, cheap leads. (high)</li>\n<li>01.01 adds nothing (idle). (high)</li>\n</ol>\n</blockquote>\n<h2>Recommended Action</h2>\n<blockquote>\n<p><strong>Working — continue, and this is now a scale candidate.</strong> 01.02 at $4.07 CPL with an 8.74% CTR can likely take more budget while holding a low CPL. Optional cleanup: retire idle 01.01. No fix needed.</p>\n</blockquote>\n<h2>Expected Result &amp; Economics</h2>\n<blockquote>\n<p>Scaling 01.02 should grow leads while CPL stays near $4–8 — the best economics in the portfolio.</p>\n</blockquote>\n<h2>Approval Needed</h2>\n<blockquote>\n<p>Sign-off if you want to scale 01.02's budget.</p>\n</blockquote>\n<h2>Changes Made / Learning</h2>\n<blockquote>\n<p><strong>Learning:</strong> Grumpy is the model account now — the Landing→Sales funnel with 01.02 delivers leads at ~$4. Consider scaling.\n<em>Note: booked-call (Page 2 outcome) still needs a GHL appointments feed to measure.</em></p>\n</blockquote>"
+  },
   {
    "date": "2026-08-20",
    "title": "Grumpy CFO",
@@ -125,6 +137,12 @@
  ],
  "Eric (Finn)": [
   {
+   "date": "2026-08-21",
+   "title": "Finn The Finnancial Guide",
+   "url": "https://drive.google.com/file/d/1aFDKeOwBknvPnyFE7nVBic4pGZVd8sIy/view?usp=drivesdk",
+   "html": "<h2>Supporting Evidence</h2>\n<blockquote>\n<p>This is the cleanest read yet: engagement is no longer the issue (CTRs 3–4%, cheap clicks), so the ~4% opt-in is squarely a Page-1 conversion problem. Scroll is high (89%) — people read it and still don't opt in.</p>\n</blockquote>\n<h2>Hypotheses</h2>\n<blockquote>\n<ol>\n<li><strong>Page 1 offer/CTA is weak</strong> — high-intent, engaged traffic isn't converting (~4%). (high)</li>\n<li>Ads are excellent — leave them. (high)</li>\n</ol>\n</blockquote>\n<h2>Recommended Action</h2>\n<blockquote>\n<p><strong>One change: test a stronger Page 1 opt-in</strong> (headline/offer/form). The ads are now delivering great traffic cheaply, so fixing the opt-in is the single highest-value lever — and its impact will be clean to read against today's strong ad baseline.</p>\n</blockquote>\n<h2>Expected Result &amp; Economics</h2>\n<blockquote>\n<p>With ~17 engaged visits/day, lifting opt-in from ~4% to ~20% would take leads from 2 to ~7+ at the same spend — CPL from $18.62 toward ~$5.</p>\n</blockquote>\n<h2>Approval Needed</h2>\n<blockquote>\n<p>Page 1 opt-in test — align on scope.</p>\n</blockquote>\n<h2>Changes Made / Learning</h2>\n<blockquote>\n<p>08.12 — new variant; targeting + Page 1 UI fixed. <strong>Learning:</strong> ad side is solved; the opt-in page is the whole constraint now.\n<em>Note: booked-call (Page 2) needs a GHL appointments feed.</em></p>\n</blockquote>"
+  },
+  {
    "date": "2026-08-20",
    "title": "Finn The Finnancial Guide",
    "url": "https://drive.google.com/file/d/1sSDlVmh1U61KPiz-O2jON8_H8CNycYmN/view?usp=drivesdk",
@@ -186,6 +204,12 @@
   }
  ],
  "GRNDED": [
+  {
+   "date": "2026-08-21",
+   "title": "Grnded Agency",
+   "url": "https://drive.google.com/file/d/1wfHqbTy1r4fyIaEiS7rMgl8Xyv58g0Ch/view?usp=drivesdk",
+   "html": "<h2>Supporting Evidence</h2>\n<blockquote>\n<p>CPM trend: $96 → $104 → $104 → $103 → <strong>$127</strong>, with CTR now under 1%. The recommended cheaper-audience test doesn't appear to have been run (no change logged, CPM still climbing). At $14.98 per click and $29.96 per lead, current delivery is unsustainable.</p>\n</blockquote>\n<h2>Hypotheses</h2>\n<blockquote>\n<ol>\n<li><strong>Audience is too narrow/expensive and now fatiguing</strong> — rising CPM + sub-1% CTR. (high)</li>\n<li>Page opt-in is also low (~2.7%), but traffic cost is the first, bigger problem. (medium)</li>\n</ol>\n</blockquote>\n<h2>Recommended Action</h2>\n<blockquote>\n<p><strong>One change (act now, not another \"monitor\"): launch a new/broader audience (and/or refresh the creative) to break the rising-CPM, sub-1% CTR trend.</strong> This has been the standing lever for three days without action; at $30/lead it needs a real change today, not another watch.</p>\n</blockquote>\n<h2>Expected Result &amp; Economics</h2>\n<blockquote>\n<p>A cheaper audience that clears a 1%+ CTR should roughly halve CPC and multiply clicks, pulling CPL from ~$30 back toward the ~$9 seen on 08.18.</p>\n</blockquote>\n<h2>Approval Needed</h2>\n<blockquote>\n<p>Approve launching a new audience test (and/or creative refresh) on 2.01.</p>\n</blockquote>\n<h2>Changes Made / Learning</h2>\n<blockquote>\n<p>No changes documented (the audience test still hasn't been run). <strong>Learning:</strong> Grnded has now regressed for 3 days — expensive traffic became an ad-engagement problem too. It needs action, not observation.</p>\n</blockquote>"
+  },
   {
    "date": "2026-08-20",
    "title": "Grnded Agency",
