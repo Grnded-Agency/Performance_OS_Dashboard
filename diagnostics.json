@@ -1,6 +1,12 @@
 {
  "Wymore": [
   {
+   "date": "2026-08-26",
+   "title": "Wymore Transfer",
+   "url": "https://drive.google.com/file/d/1qgT_OKU5bKFIlKmUnfI0ZcVd8tX7aZSV/view?usp=drivesdk",
+   "html": "<h2>Read (precise)</h2>\n<blockquote>\n<p><strong>A landing-page CRO change went in 08.25 — but today gave it almost no traffic to prove itself.</strong> Per the team's 08.25 note, the landing page was revised (stronger competitor/\"next-peak\" subheadline + reduced form friction, consent checkbox to contact-consent language). That directly targets the 0% conversion I'd flagged — good. <strong>However, 08.26's ad delivery collapsed:</strong> CPM spiked to <strong>$201.79</strong>, CTR fell to <strong>0.69%</strong>, just <strong>1 click / 34 visitors</strong>. So there isn't enough traffic yet to judge whether the CRO fix worked.</p>\n<p><em>(Note: the visitor count reset to 34 — consistent with tracking the revised page fresh. Treat this as day 1 of the new page.)</em></p>\n</blockquote>\n<h2>Status</h2>\n<blockquote>\n<p>Team was <strong>🟡 WATCH</strong>; a CRO change was then made 08.25 (so effectively acted). My read: <strong>Watch — the page fix is in; now the ad/traffic is the blocker.</strong> Can't evaluate the fix on 1 click.</p>\n</blockquote>\n<h2>Recommended Action</h2>\n<blockquote>\n<p><strong>One change: fix ad delivery so the revised page actually gets traffic.</strong> At $201 CPM / 0.69% CTR the CRO test is starving. Address the audience/cost (the team's own prior note suggested testing back to Advantage+ with this creative) so the new page gets enough visitors to read a real conversion rate. Give the CRO fix a fair test once traffic returns.</p>\n</blockquote>\n<h2>Changes / Notes</h2>\n<blockquote>\n<p><strong>Change log — 08.25 (team):</strong> landing-page CRO — stronger subheadline (competitor/next-peak messaging) + reduced form friction (consent checkbox to contact-consent language). Ad/audience/$25 budget unchanged. Scroll now cumulative Total (27% = new baseline, not a decline).</p>\n</blockquote>"
+  },
+  {
    "date": "2026-08-25",
    "title": "Wymore Transfer",
    "url": "https://drive.google.com/file/d/1n8-1dguuwtyxvrLhMtI4kxs3i-9j2swE/view?usp=drivesdk",
@@ -92,6 +98,12 @@
   }
  ],
  "Phil S (Grumpy)": [
+  {
+   "date": "2026-08-26",
+   "title": "Grumpy CFO",
+   "url": "https://drive.google.com/file/d/12BQnqtA2ojBImbZwSvJR4CxdyDTDZEgG/view?usp=drivesdk",
+   "html": "<h2>Read</h2>\n<blockquote>\n<p><strong>Strong day, no bottleneck.</strong> CR 21% beats the 15% goal, 6 new leads came in at a <strong>$5.19 CPL</strong>, and the live ad holds a 3.61% CTR. Best economics in the portfolio.</p>\n</blockquote>\n<h2>Status</h2>\n<blockquote>\n<p>Prior team Status <strong>🟢 LEAVE</strong> — <strong>fully supported.</strong> My read: Leave.</p>\n</blockquote>\n<h2>Recommended Action</h2>\n<blockquote>\n<p><strong>Leave / continue — scale candidate.</strong> 01.02 could take more budget while CPL sits near $5. Optional: retire idle 01.01.</p>\n</blockquote>\n<h2>Notes</h2>\n<blockquote>\n<p>Scroll switched to cumulative Total today — 85%/47% is the new baseline for this metric, not a drop. Booked-call/Sales CR still excluded (data pending).</p>\n</blockquote>"
+  },
   {
    "date": "2026-08-25",
    "title": "Grumpy CFO",
@@ -185,6 +197,12 @@
  ],
  "Eric (Finn)": [
   {
+   "date": "2026-08-26",
+   "title": "Finn The Finnancial Guide",
+   "url": "https://drive.google.com/file/d/1psEOd8aW__7cWAZKpmhLL92Doi1ajnT-/view?usp=drivesdk",
+   "html": "<h2>Read</h2>\n<blockquote>\n<p><strong>Landing stays healthy (20.23% CR, above goal); today's watch is the ad.</strong> 02.01's CTR dropped to <strong>0.72%</strong> (below the 1% floor) and only 1 new lead came in. Cumulatively the page is fine — the soft spot today is 02.01 engagement.</p>\n</blockquote>\n<h2>Status</h2>\n<blockquote>\n<p>Prior team Status <strong>🟢 LEAVE</strong> — <strong>still broadly supported</strong> (CR above goal). My read: <strong>🟡 lean-Watch</strong> on the ad — if 02.01 CTR stays &lt;1% tomorrow, refresh it.</p>\n</blockquote>\n<h2>Recommended Action</h2>\n<blockquote>\n<p><strong>No forced change today</strong> (CR above goal). Watch 02.01's sub-1% CTR; refresh the ad only if it persists.</p>\n</blockquote>\n<h2>Notes</h2>\n<blockquote>\n<p>Scroll now cumulative Total (new baseline). Booked-call/Sales CR excluded.</p>\n</blockquote>"
+  },
+  {
    "date": "2026-08-25",
    "title": "Finn The Finnancial Guide",
    "url": "https://drive.google.com/file/d/1qTHin0N3G4F4SSH-ZxawU-vHuz9A-OVW/view?usp=drivesdk",
@@ -277,6 +295,12 @@
  ],
  "GRNDED": [
   {
+   "date": "2026-08-26",
+   "title": "Grnded Agency",
+   "url": "https://drive.google.com/file/d/1qg0zA9tKSuYMztlZTfre9sk8BYO6NnLq/view?usp=drivesdk",
+   "html": "<h2>Read (precise)</h2>\n<blockquote>\n<p><strong>The 08.25 CTR-dip resolved — good day.</strong> CTR recovered <strong>1.01% to 2.42%</strong>, 2 leads at $16.54 CPL, and the page keeps converting ~24.7% (best in portfolio). The only residual is <strong>CPM still high ($133)</strong> — expensive reach, but at a 2.42% CTR the clicks are flowing.</p>\n</blockquote>\n<h2>Status</h2>\n<blockquote>\n<p>No team Status set. My read: <strong>🟢 Leave</strong> — the 08.25 Watch (CTR at the 1% floor) cleared; nothing to act on today.</p>\n</blockquote>\n<h2>Recommended Action</h2>\n<blockquote>\n<p><strong>Leave / continue.</strong> Don't touch the page (24.7% CR). Keep an eye on CPM; only test a cheaper audience if CTR falls back under 1% while CPM stays &gt;$120.</p>\n</blockquote>\n<h2>Notes</h2>\n<blockquote>\n<p>Scroll now cumulative Total (49%/43% = new baseline). Booked-call/Sales CR excluded.</p>\n</blockquote>"
+  },
+  {
    "date": "2026-08-25",
    "title": "Grnded Agency",
    "url": "https://drive.google.com/file/d/1Qf4x9VGfSzzd2AEKik6U8tzYVcRnBXiR/view?usp=drivesdk",
@@ -363,6 +387,12 @@
  ],
  "Cocina Mia": [
   {
+   "date": "2026-08-26",
+   "title": "Cocina Mia",
+   "url": "https://drive.google.com/file/d/1OfUprIE_aydLyNwhvtksNNz0z4eH03gA/view?usp=drivesdk",
+   "html": "<h2>Key Metrics (precise) — Landing Page</h2>\n<table>\n<thead>\n<tr>\n<th>Ad</th>\n<th>Spend</th>\n<th>Impr.</th>\n<th>CPM</th>\n<th>CTR</th>\n<th>Clicks</th>\n<th>LP Views</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>LP 1.01</td>\n<td>$5.86</td>\n<td>282</td>\n<td>$20.78</td>\n<td>2.13%</td>\n<td>6</td>\n<td>3</td>\n</tr>\n<tr>\n<td>LP 1.02</td>\n<td>$30.53</td>\n<td>1,789</td>\n<td>$17.07</td>\n<td>0.45%</td>\n<td>8</td>\n<td>7</td>\n</tr>\n</tbody>\n</table>\n<p><strong>Landing Page CR (cumulative):</strong> Total Leads <strong>0</strong> / Visitors <strong>130</strong> = <strong>0.00%</strong> (goal 15%).\n<strong>Daily:</strong> New leads <strong>0</strong> · Spend $36.39.</p>\n<h2>Read (precise, still early)</h2>\n<blockquote>\n<p><strong>Day 5, and the gap is now big enough to name specifically.</strong> With a <strong>15% goal</strong>, 130 visitors should have produced ~19-20 leads by now — actual is <strong>0</strong>. Traffic and engagement exist (LP 1.01 CTR 2.13%), so a true 0% is unlikely to be a pure offer problem; <strong>the most probable explanation is a landing-page to GHL tracking/handoff gap.</strong> Still inside the \"let it run a week\" window, so not a strategy overhaul — but this has crossed into \"verify now.\"</p>\n</blockquote>\n<h2>Recommended Action</h2>\n<blockquote>\n<p><strong>One low-risk action: run a test submission on the Landing page and confirm it lands in GHL.</strong> This isn't a strategy change — it rules out a tracking gap before we misread it as a conversion problem (same lesson as Wymore). If tracking is clean and 0 persists past a week, then revisit the offer.</p>\n</blockquote>\n<h2>Notes</h2>\n<blockquote>\n<p>Facebook-Form funnel excluded. Scroll not populated for Cocina. Sheet CPC mirrors CPM — ignored.</p>\n</blockquote>"
+  },
+  {
    "date": "2026-08-25",
    "title": "Cocina Mia",
    "url": "https://drive.google.com/file/d/1JLRWIcClXjjIB7-V2GhLDhNg-S2rvo0L/view?usp=drivesdk",
@@ -388,6 +418,12 @@
   }
  ],
  "Ken (Champion)": [
+  {
+   "date": "2026-08-26",
+   "title": "Ken Champion",
+   "url": "https://drive.google.com/file/d/1vxVmTIl7DUZ0BMc_YehYJiW7caoE2SfC/view?usp=drivesdk",
+   "html": "<h2>Read</h2>\n<blockquote>\n<p><strong>Still the strongest starter in the portfolio.</strong> No new lead today, but cumulative opt-in is <strong>39.47%</strong>, far above the 15% goal, and CTR held at 2.48%. On such small volume a 0-new-lead day is meaningless. Live and healthy since resuming 08.25.</p>\n</blockquote>\n<h2>Status / Action</h2>\n<blockquote>\n<p>No team Status set. Observation mode — <strong>no change; performing well above goal.</strong> Keep running.</p>\n</blockquote>\n<h2>Notes</h2>\n<blockquote>\n<p>15 leads / 38 visitors confirmed real (Juan). Booked-call/Sales CR excluded. Goal read from the Success Goal column (15%).</p>\n</blockquote>"
+  },
   {
    "date": "2026-08-25",
    "title": "Ken Champion",
