@@ -1,6 +1,12 @@
 {
  "Wymore": [
   {
+   "date": "2026-08-27",
+   "title": "Wymore Transfer",
+   "url": "https://drive.google.com/file/d/1FrLQLdfAXqCNV1myze-tLfXf-DOPeQTr/view?usp=drivesdk",
+   "html": "<h2>Read (precise)</h2>\n<blockquote>\n<p><strong>New page variant is live — clean slate on page metrics (do not compare to the old 0%).</strong> But the same upstream problem is blocking the test: <strong>the ad delivered ~1 click at a $167 CPM / 0.61% CTR</strong>, so the new variant received essentially no traffic on Day 1. We can't learn anything about the new page until it gets visitors.</p>\n</blockquote>\n<h2>Status / Action</h2>\n<blockquote>\n<p><strong>One change: fix ad delivery so the new variant gets traffic.</strong> CPM ~$167 with sub-1% CTR is starving the test — as the team's earlier note suggested, test the audience (e.g. back to Advantage+ with this creative) to restore volume. Then give the new page a fair read over the next few days.</p>\n</blockquote>\n<h2>Changes / Notes</h2>\n<blockquote>\n<p><strong>Change log:</strong> new landing-page variant launched (~08.27) — page/scroll/CR baseline restarts here. (Prior CRO tweak 08.25 is superseded by this variant.) Don't flag the visitor/scroll \"drop\" — it's the reset.</p>\n</blockquote>"
+  },
+  {
    "date": "2026-08-26",
    "title": "Wymore Transfer",
    "url": "https://drive.google.com/file/d/1qgT_OKU5bKFIlKmUnfI0ZcVd8tX7aZSV/view?usp=drivesdk",
@@ -98,6 +104,12 @@
   }
  ],
  "Phil S (Grumpy)": [
+  {
+   "date": "2026-08-27",
+   "title": "Grumpy CFO",
+   "url": "https://drive.google.com/file/d/1-IaDN8nCBG3XVBnN4M3QuZCLNmPX5Rzu/view?usp=drivesdk",
+   "html": "<h2>Read</h2>\n<blockquote>\n<p><strong>Healthy, unchanged.</strong> CR 22.14% (above goal), 6 leads at ~$5 CPL, CTR 3.49%. <strong>Sales page now at 26 visitors</strong> (0 booked, but booked-call data is excluded/unreliable) — approaching the team's ~30-visitor checkpoint for judging Page 2.</p>\n</blockquote>\n<h2>Status</h2>\n<blockquote>\n<p>Team 08.26: Ads <strong>🟢</strong> / Page 1 <strong>🟢</strong> (21% CR) / Page 2 <strong>🟡</strong> (small sample). <strong>Fully supported.</strong> My read: Leave.</p>\n</blockquote>\n<h2>Action</h2>\n<blockquote>\n<p><strong>Leave / continue.</strong> Watch Page 2 once booked-call data is trustworthy; the team's ~30-visitor checkpoint is the right trigger.</p>\n</blockquote>"
+  },
   {
    "date": "2026-08-26",
    "title": "Grumpy CFO",
@@ -197,6 +209,12 @@
  ],
  "Eric (Finn)": [
   {
+   "date": "2026-08-27",
+   "title": "Finn The Finnancial Guide",
+   "url": "https://drive.google.com/file/d/1q4Co9dgiiq6HM-nRBo_GfSrK3mL0TcMZ/view?usp=drivesdk",
+   "html": "<h2>Read</h2>\n<blockquote>\n<p><strong>Healthy.</strong> Landing CR 20.60% (above goal), 3 leads at $11.35, and 02.01's CTR recovered above 1% — yesterday's ad dip resolved. Sales page 20 visitors, 0 booked (excluded).</p>\n</blockquote>\n<h2>Status / Action</h2>\n<blockquote>\n<p>Prior <strong>🟢 LEAVE</strong> supported. <strong>Leave / continue.</strong></p>\n</blockquote>"
+  },
+  {
    "date": "2026-08-26",
    "title": "Finn The Finnancial Guide",
    "url": "https://drive.google.com/file/d/1psEOd8aW__7cWAZKpmhLL92Doi1ajnT-/view?usp=drivesdk",
@@ -295,6 +313,12 @@
  ],
  "GRNDED": [
   {
+   "date": "2026-08-27",
+   "title": "Grnded Agency",
+   "url": "https://drive.google.com/file/d/1xtTO1kY4xtC41AQPzeoyQTmw7fVRTqmN/view?usp=drivesdk",
+   "html": "<h2>Read (precise)</h2>\n<blockquote>\n<p><strong>New page variant live — I'm resetting the page-metric baseline (no drop-flagging).</strong> The ad side stayed strong (CTR <strong>2.96%</strong>) and the day produced <strong>4 leads at a $7.29 CPL</strong> — the healthiest daily cost in a while. Residual watch: <strong>CPM still high ($139)</strong>. From here I'll rebuild the Landing CR from the new variant's own visitors.</p>\n</blockquote>\n<h2>Status / Action</h2>\n<blockquote>\n<p>No team Status set. My read: <strong>🟢 Leave / observe the new variant.</strong> Ad healthy, leads cheap today; let the new page accumulate its own visitors before judging CR. Keep watching CPM — test a cheaper audience only if CTR falls under 1%.</p>\n</blockquote>\n<h2>Notes</h2>\n<blockquote>\n<p>Change log: new page variant (~08.27) — page/scroll/CR baseline restarts here; don't flag the reset as a decline.</p>\n</blockquote>"
+  },
+  {
    "date": "2026-08-26",
    "title": "Grnded Agency",
    "url": "https://drive.google.com/file/d/1qg0zA9tKSuYMztlZTfre9sk8BYO6NnLq/view?usp=drivesdk",
@@ -387,6 +411,12 @@
  ],
  "Cocina Mia": [
   {
+   "date": "2026-08-27",
+   "title": "Cocina Mia",
+   "url": "https://drive.google.com/file/d/1vLDoH1CzdajPfMjjDstk_cNyTSR2G3jH/view?usp=drivesdk",
+   "html": "<h2>Key Metrics (precise) — Landing Page (post-CRO)</h2>\n<table>\n<thead>\n<tr>\n<th>Ad</th>\n<th>Spend</th>\n<th>Impr.</th>\n<th>CPM</th>\n<th>CTR</th>\n<th>Clicks</th>\n<th>LP Views</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>LP 1.01</td>\n<td>$5.31</td>\n<td>280</td>\n<td>$18.96</td>\n<td>1.07%</td>\n<td>3</td>\n<td>2</td>\n</tr>\n<tr>\n<td>LP 1.02</td>\n<td>$26.94</td>\n<td>1,663</td>\n<td>$16.20</td>\n<td>1.92%</td>\n<td>32</td>\n<td>26</td>\n</tr>\n</tbody>\n</table>\n<p><strong>Visitors (new page): 13 · Total Leads 0 · Page CR — fresh baseline (Day 1 of revised page).</strong></p>\n<h2>Read (precise)</h2>\n<blockquote>\n<p><strong>The team acted on the 0-lead flag — good.</strong> On 08.26 they made a CRO change (CTA to \"Get My Free Quote →\", simplified the hero; Mouseflow had shown ~60% reaching the CTA but only 2 taps). The page reset to a fresh baseline (13 visitors today), so the prior \"0 leads / 130 visitors\" is superseded — we're now watching the revised page. <strong>1.02 drove strong traffic today (32 clicks, 1.92% CTR).</strong> Too early to judge conversion on 13 visitors.</p>\n</blockquote>\n<h2>Status / Action</h2>\n<blockquote>\n<p>Observation mode — <strong>no change; let the revised page accumulate traffic.</strong> Still worth confirming the LP to GHL test submission fires (rules out tracking while the new page ramps). Reassess CR against the 15% goal after a few days of the new page.</p>\n</blockquote>\n<h2>Notes</h2>\n<blockquote>\n<p>Facebook-Form excluded. Scroll reset with the revised page (fresh baseline). Sheet CPC mirrors CPM — ignored.</p>\n</blockquote>"
+  },
+  {
    "date": "2026-08-26",
    "title": "Cocina Mia",
    "url": "https://drive.google.com/file/d/1OfUprIE_aydLyNwhvtksNNz0z4eH03gA/view?usp=drivesdk",
@@ -418,6 +448,12 @@
   }
  ],
  "Ken (Champion)": [
+  {
+   "date": "2026-08-27",
+   "title": "Ken Champion",
+   "url": "https://drive.google.com/file/d/1DCYuhD_fXUgvgID-driXI9MCmyaesgzg/view?usp=drivesdk",
+   "html": "<h2>Read (precise) + integrity flag</h2>\n<blockquote>\n<p><strong>Two things to be precise about today.</strong></p>\n<ol>\n<li><strong>Live Page-1 CR ~7.89% (below the 15% goal)</strong> per the team's calc — a fair reset of expectations vs the earlier 41.67%; too early to act (lead-optimized delivery still learning).</li>\n<li><strong>Data inconsistency to reconcile:</strong> the \"Total Leads (GHL)\" column now reads <strong>89-90</strong> while Visitors are 38-45 and the stated CR is 7.89% — those don't reconcile (89 leads / 45 visitors is not 7.89%). The 89-90 looks like an all-time GHL total, not this campaign's leads. <strong>Flag for cleanup so the CR denominator/numerator are consistent.</strong></li>\n</ol>\n<p>Also: today's <strong>ad CTR fell to 0.58%</strong> (&lt;1%) at a $10 CPC — an early ad-engagement watch.</p>\n</blockquote>\n<h2>Status / Action</h2>\n<blockquote>\n<p>Observation mode — <strong>no change.</strong> Let the lead-optimized campaign establish a real Page-1 baseline. Watch the 0.58% CTR; reconcile the Total Leads figure so CR is trustworthy.</p>\n</blockquote>"
+  },
   {
    "date": "2026-08-26",
    "title": "Ken Champion",
