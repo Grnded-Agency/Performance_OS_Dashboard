@@ -1,6 +1,12 @@
 {
  "Wymore": [
   {
+   "date": "2026-08-28",
+   "title": "Wymore Transfer",
+   "url": "https://drive.google.com/file/d/1vy5eZn0NGw-np_redrj9dUdmURL7nuWI/view?usp=drivesdk",
+   "html": "<h2>Read (precise)</h2>\n<blockquote>\n<p><strong>The team acted on the delivery problem (good) — but it hasn't moved yet.</strong> Per the 08.27 note, the audience was switched from manual Manufacturing/30-64 <strong>back to Advantage+</strong> (ads/budget/creative/LP unchanged) to widen delivery. One day in, <strong>08.28 still shows only 162 impressions, 1 click, CPM $137</strong> — no improvement yet. Advantage+ can take a day or two to ramp, so it's too early to judge, <strong>but</strong> if impressions stay ~150/day at a ~$137 CPM, the real ceiling is <strong>$25/day budget vs. a very high CPM</strong> — you simply can't buy enough traffic to test the new page.</p>\n</blockquote>\n<h2>Status / Action</h2>\n<blockquote>\n<p><strong>Give the Advantage+ switch 1-2 days.</strong> If impressions/clicks don't rise by ~08.30, the single lever becomes <strong>budget vs. CPM</strong> — either raise the daily budget or find cheaper placements so the new landing page finally gets enough visitors for a real read. Everything downstream (new page) is blocked until traffic exists.</p>\n</blockquote>\n<h2>Changes / Notes</h2>\n<blockquote>\n<p>Change log — <strong>08.27 (team):</strong> audience to Advantage+ (from manual Manufacturing/30-64); all else unchanged. New page variant baseline still fresh (5 visitors). Don't flag the low visitor/scroll numbers — resets.</p>\n</blockquote>"
+  },
+  {
    "date": "2026-08-27",
    "title": "Wymore Transfer",
    "url": "https://drive.google.com/file/d/1FrLQLdfAXqCNV1myze-tLfXf-DOPeQTr/view?usp=drivesdk",
@@ -104,6 +110,12 @@
   }
  ],
  "Phil S (Grumpy)": [
+  {
+   "date": "2026-08-28",
+   "title": "Grumpy CFO",
+   "url": "https://drive.google.com/file/d/1QtxkGflZlZ4UxoMqoJpKG8SazqdcoBU2/view?usp=drivesdk",
+   "html": "<h2>Read</h2>\n<blockquote>\n<p><strong>Healthy and unchanged.</strong> Landing CR ~22% (above goal), 2 leads at ~$15 CPL, CTR softer today (1.93%) but fine. <strong>Sales page reached 31 visitors — past the team's ~30-visitor checkpoint</strong> for Page 2, and it's still 0 booked. Per the team's own plan, this is the point to look at the sales-page offer/message <em>once booked-call data is trustworthy</em> (still excluded today).</p>\n</blockquote>\n<h2>Status / Action</h2>\n<blockquote>\n<p>Prior <strong>🟢 LEAVE</strong> (Page 1) holds. <strong>Leave the ad + Page 1.</strong> Page 2 is now the watch item (checkpoint reached) — action deferred until booked-call tracking is reliable.</p>\n</blockquote>\n<h2>Notes</h2>\n<blockquote>\n<p>Data flag: the 01.01 row shows $30 spend with 0 impressions — looks like a spend mis-entry; treated the delivering ad (01.02) as the real spend. Booked-call/Sales CR excluded.</p>\n</blockquote>"
+  },
   {
    "date": "2026-08-27",
    "title": "Grumpy CFO",
@@ -209,6 +221,12 @@
  ],
  "Eric (Finn)": [
   {
+   "date": "2026-08-28",
+   "title": "Finn The Finnancial Guide",
+   "url": "https://drive.google.com/file/d/164o1iJEvFpxpdj8P2W4nCWWoAHBbBAIM/view?usp=drivesdk",
+   "html": "<h2>Read</h2>\n<blockquote>\n<p><strong>Healthy — and a new page variant is now live.</strong> Landing CR ~20.9% (above goal), 4 leads at a good $8.87 CPL, CTR 1.83%. The new variant reset the page-level visitor count (the low Sales-page number is the reset, <strong>not</strong> a drop). From here I'll rebuild the page-CR baseline from the new variant.</p>\n</blockquote>\n<h2>Status / Action</h2>\n<blockquote>\n<p>Prior <strong>🟢 LEAVE</strong> holds. <strong>Leave / observe the new variant.</strong> Let it accumulate its own visitors before judging the new page's CR.</p>\n</blockquote>"
+  },
+  {
    "date": "2026-08-27",
    "title": "Finn The Finnancial Guide",
    "url": "https://drive.google.com/file/d/1q4Co9dgiiq6HM-nRBo_GfSrK3mL0TcMZ/view?usp=drivesdk",
@@ -313,6 +331,12 @@
  ],
  "GRNDED": [
   {
+   "date": "2026-08-28",
+   "title": "Grnded Agency",
+   "url": "https://drive.google.com/file/d/1lON7dUkIO5ZFm7Rfdg_MBw9tpb57dIhZ/view?usp=drivesdk",
+   "html": "<h2>Read</h2>\n<blockquote>\n<p><strong>Quiet day, not a concern.</strong> 0 new leads on just 5 clicks is normal low-volume variance; the page keeps converting well (~27% cumulative). CTR eased to 1.88% (still healthy) and <strong>CPM remains high ($109)</strong> — the standing watch. No new bottleneck.</p>\n</blockquote>\n<h2>Status / Action</h2>\n<blockquote>\n<p>My read: <strong>🟢 Leave / observe.</strong> Don't touch the page. Keep watching CPM; test a cheaper audience only if CTR drops under 1% while CPM stays &gt;$120.</p>\n</blockquote>"
+  },
+  {
    "date": "2026-08-27",
    "title": "Grnded Agency",
    "url": "https://drive.google.com/file/d/1xtTO1kY4xtC41AQPzeoyQTmw7fVRTqmN/view?usp=drivesdk",
@@ -411,6 +435,12 @@
  ],
  "Cocina Mia": [
   {
+   "date": "2026-08-28",
+   "title": "Cocina Mia",
+   "url": "https://drive.google.com/file/d/1FRXYEnT8LFn7uEuHXEUI-K3oqsi4jwAU/view?usp=drivesdk",
+   "html": "<h2>Key Metrics (precise) — Landing Page (newest variant)</h2>\n<table>\n<thead>\n<tr>\n<th>Ad</th>\n<th>Spend</th>\n<th>Impr.</th>\n<th>CPM</th>\n<th>CTR</th>\n<th>Clicks</th>\n<th>LP Views</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>LP 1.01</td>\n<td>$3.07</td>\n<td>101</td>\n<td>$30.40</td>\n<td>0%</td>\n<td>0</td>\n<td>0</td>\n</tr>\n<tr>\n<td>LP 1.02</td>\n<td>$28.20</td>\n<td>1,703</td>\n<td>$16.56</td>\n<td>1.29%</td>\n<td>22</td>\n<td>18</td>\n</tr>\n</tbody>\n</table>\n<p><strong>Visitors (newest variant): 3 · Total Leads 0 · Page CR — fresh baseline (Day 1 of this variant).</strong> Scroll 56% (new baseline).</p>\n<h2>Read (precise)</h2>\n<blockquote>\n<p><strong>Rapid page iteration — the sample keeps resetting.</strong> Cocina has now changed the landing page twice in three days (CRO 08.26, new variant ~08.28), so the visitor count reset again (3 today). 1.02 is driving solid traffic (22 clicks, 1.29% CTR), but each reset restarts the conversion sample, so we still have <strong>no readable CR</strong>. Not a performance problem — just that no single page version has been given enough runway to measure.</p>\n</blockquote>\n<h2>Status / Action</h2>\n<blockquote>\n<p>Observation mode — <strong>no change.</strong> One practical note: <strong>let the current variant run a few days without another change</strong> so it can accumulate enough visitors to actually read a CR (and confirm the LP to GHL tracking fires). Reassess against the 15% goal once it has a real sample.</p>\n</blockquote>\n<h2>Notes</h2>\n<blockquote>\n<p>Facebook-Form excluded. Sheet CPC mirrors CPM — ignored.</p>\n</blockquote>"
+  },
+  {
    "date": "2026-08-27",
    "title": "Cocina Mia",
    "url": "https://drive.google.com/file/d/1vLDoH1CzdajPfMjjDstk_cNyTSR2G3jH/view?usp=drivesdk",
@@ -448,6 +478,12 @@
   }
  ],
  "Ken (Champion)": [
+  {
+   "date": "2026-08-28",
+   "title": "Ken Champion",
+   "url": "https://drive.google.com/file/d/1F5Xj_eS2aqU3XnPAHGkb58D1ZLZCNbbf/view?usp=drivesdk",
+   "html": "<h2>Read (precise) + integrity flag</h2>\n<blockquote>\n<p><strong>Producing leads at a reasonable cost, CR trending up.</strong> 4 new leads at $12.45 CPL, live Page-1 CR climbing (8.89% to 11.32%) toward the 15% goal as the lead-optimized campaign matures. <strong>Same data flag as yesterday:</strong> \"Total Leads (GHL)\" now reads <strong>94</strong> against ~53 landing visitors, which can't reconcile with the 11.32% CR — the 94 looks like an all-time GHL total, not this campaign's leads. <strong>Please reconcile so the CR numerator/denominator are consistent.</strong></p>\n</blockquote>\n<h2>Status / Action</h2>\n<blockquote>\n<p>Observation mode — <strong>no change; trending the right way.</strong> Reconcile the Total Leads figure. Success Goal read as 15%.</p>\n</blockquote>"
+  },
   {
    "date": "2026-08-27",
    "title": "Ken Champion",
