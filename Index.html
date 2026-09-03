@@ -434,6 +434,11 @@
   .dcw-colhead .dcw-ct{font-size:13px;font-weight:750}
   .dcw-col.review .dcw-colhead .dcw-ct{color:var(--accent)}
   .dcw-colhead .dcw-cn{margin-left:auto;font-size:12px;font-weight:700;color:var(--muted);background:var(--surface);border:1px solid var(--border);border-radius:999px;min-width:22px;height:22px;padding:0 7px;display:grid;place-items:center;font-variant-numeric:tabular-nums}
+  .dcw-colhead-btn{width:100%;background:transparent;border:0;font:inherit;color:inherit;cursor:pointer;border-radius:var(--radius)}
+  .dcw-colhead-btn:hover{background:var(--surface-3)}
+  .dcw-colchev{font-size:11px;color:var(--muted);transition:transform .15s;display:inline-block;width:10px;flex:none}
+  .dcw-colhead-btn[aria-expanded="true"] .dcw-colchev{transform:rotate(90deg)}
+  .dcw-col.collapsed{min-height:0}
   .dcw-cards{display:flex;flex-direction:column;gap:10px;padding:2px 11px 13px}
   .dcw-col-empty{padding:16px 12px 20px;text-align:center;color:var(--muted);font-size:12.5px}
   .dcw-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);box-shadow:var(--shadow);padding:12px 12px 11px}
@@ -484,6 +489,8 @@
   .dcw-seg button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
   .dcw-mfoot{display:flex;gap:9px;justify-content:flex-end;padding:6px 20px 20px}
   .dcw-muted{font-size:12px;color:var(--muted)}
+  .dcw-check{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:var(--ink-2);cursor:pointer;padding:4px 0;text-transform:none;letter-spacing:0}
+  .dcw-check input{width:17px;height:17px;flex:none;accent-color:var(--accent);cursor:pointer}
 </style>
 </head>
 <body>
@@ -605,6 +612,7 @@
             <div class="dcw-field"><label for="dcwAssignee">Assigned to</label><select id="dcwAssignee"></select></div>
             <div class="dcw-field"><label>Priority</label><div class="dcw-seg" id="dcwPri" role="group" aria-label="Priority"><button type="button" data-v="low">Low</button><button type="button" data-v="med" aria-pressed="true">Medium</button><button type="button" data-v="high">High</button></div></div>
           </div>
+          <label class="dcw-check"><input type="checkbox" id="dcwNeedsReview" checked><span>Requires a supervisor to review it before it's marked done</span></label>
           <div class="dcw-muted" id="dcwAssignByNote"></div>
         </div>
         <div class="dcw-mfoot"><button class="dcw-btn ghost" id="dcwMCancel">Cancel</button><button class="dcw-btn primary" id="dcwMSave">Add task</button></div>
@@ -1975,6 +1983,8 @@ loadDiagnostics();
 
   var TASKS=[], PEOPLE=SEED_PEOPLE.slice(), ME=lsGet("dcw_me",""), FILTER={client:"",type:"",who:"",q:"",reviewOnly:false};
   var editingId=null, reviewingId=null, priVal="med", pollTimer=null, firstLoad=true, filled=false;
+  var COLLAPSED=(function(){ try{ return JSON.parse(lsGet("dcw_col_collapsed","")||"{}")||{}; }catch(e){ return {}; } })();
+  function saveCollapsed(){ lsSet("dcw_col_collapsed", JSON.stringify(COLLAPSED)); }
 
   function lsGet(k,d){ try{var v=localStorage.getItem(k);return v==null?d:v;}catch(e){return d;} }
   function lsSet(k,v){ try{localStorage.setItem(k,v);}catch(e){} }
@@ -2078,10 +2088,13 @@ loadDiagnostics();
     function byStatus(k){ return shown.filter(function(t){return t.status===k;}).sort(function(a,b){ var pr={high:0,med:1,low:2}; var d=(pr[a.priority]||1)-(pr[b.priority]||1); if(d)return d; return (b.updatedAt||0)-(a.updatedAt||0); }); }
     var board=E("dcwBoard"); board.innerHTML="";
     COLS.slice(0,3).forEach(function(st){
-      var items=byStatus(st.k);
-      var col=document.createElement("div"); col.className="dcw-col "+st.k;
-      col.innerHTML='<div class="dcw-colhead"><span class="dcw-coldot"></span><span class="dcw-ct">'+st.t+'</span><span class="dcw-cn">'+items.length+'</span></div>';
-      var cards=document.createElement("div"); cards.className="dcw-cards";
+      var items=byStatus(st.k), collapsed=!!COLLAPSED[st.k];
+      var col=document.createElement("div"); col.className="dcw-col "+st.k+(collapsed?" collapsed":"");
+      var head=document.createElement("button"); head.type="button"; head.className="dcw-colhead dcw-colhead-btn"; head.setAttribute("aria-expanded", collapsed?"false":"true");
+      head.innerHTML='<span class="dcw-colchev" aria-hidden="true">▸</span><span class="dcw-coldot"></span><span class="dcw-ct">'+st.t+'</span><span class="dcw-cn">'+items.length+'</span>';
+      head.onclick=function(){ COLLAPSED[st.k]=!collapsed; saveCollapsed(); draw(); };
+      col.appendChild(head);
+      var cards=document.createElement("div"); cards.className="dcw-cards"+(collapsed?" hide":"");
       if(items.length===0 && !(showEx && EX[st.k])) cards.innerHTML='<div class="dcw-col-empty">'+(st.k==="todo"?"Nothing assigned":st.k==="review"?"Nothing waiting on review":"—")+'</div>';
       items.forEach(function(t){ cards.appendChild(card(t,false)); });
       if(showEx && EX[st.k]) cards.appendChild(card(EX[st.k],true));
@@ -2111,7 +2124,7 @@ loadDiagnostics();
   function actions(t){
     var a='<div class="dcw-cactions">';
     if(t.status==="todo") a+='<button class="dcw-abtn go" data-act="start">Start</button><button class="dcw-abtn mini" data-act="edit" title="Edit">✎</button><button class="dcw-abtn mini" data-act="del" title="Delete">🗑</button>';
-    else if(t.status==="doing") a+='<button class="dcw-abtn go" data-act="submit">Submit for review</button><button class="dcw-abtn mini" data-act="back" title="Back to To do">↩</button><button class="dcw-abtn mini" data-act="edit" title="Edit">✎</button>';
+    else if(t.status==="doing") a+=(t.needsReview!==false?'<button class="dcw-abtn go" data-act="submit">Submit for review</button>':'<button class="dcw-abtn approve" data-act="complete">✓ Mark done</button>')+'<button class="dcw-abtn mini" data-act="back" title="Back to To do">↩</button><button class="dcw-abtn mini" data-act="edit" title="Edit">✎</button>';
     else if(t.status==="review") a+='<button class="dcw-abtn approve" data-act="approve">✓ Approve</button><button class="dcw-abtn changes" data-act="changes">Request changes</button>';
     else a+='<span class="dcw-stamp">✓ Completed</span><button class="dcw-abtn mini" data-act="reopen" title="Reopen" style="margin-left:auto">↩</button><button class="dcw-abtn mini" data-act="del" title="Delete">🗑</button>';
     return a+'</div>';
@@ -2134,6 +2147,7 @@ loadDiagnostics();
     if(a==="start")  patch={status:"doing"};
     if(a==="back")   patch={status:"todo"};
     if(a==="submit"){ if(!needMe())return; patch={status:"review",review:null}; }
+    if(a==="complete"){ patch={status:"done",review:null}; }
     if(a==="approve"){ if(!needMe())return; patch={status:"done",review:{result:"approved",by:ME,notes:"",at:Date.now()}}; }
     if(a==="reopen") patch={status:"doing",review:null};
     if(patch){ local(t._id,patch); push("update",{id:t._id,patch:patch}); }
@@ -2149,6 +2163,7 @@ loadDiagnostics();
     E("dcwType").value=t?(t.type||TYPES[0]):TYPES[0];
     var fa=E("dcwAssignee"); fa.value=t?(t.assignee||(PEOPLE.indexOf(ME)>=0?ME:PEOPLE[0])):(PEOPLE.indexOf("Juan")>=0?"Juan":PEOPLE[0]);
     priVal=t?(t.priority||"med"):"med"; setPri(priVal);
+    E("dcwNeedsReview").checked = t ? (t.needsReview!==false) : true;
     E("dcwAssignByNote").textContent=t?("Originally assigned by "+(t.assignedBy||"—")):(ME?("Assigned by "+ME):"");
     open("dcwTaskScrim"); E("dcwTt").focus();
   }
@@ -2178,7 +2193,7 @@ loadDiagnostics();
   E("dcwMSave").onclick=function(){
     if(!needApi())return;
     var title=E("dcwTt").value.trim(); if(!title){ E("dcwTt").focus(); return; }
-    var f={ title:title, client:E("dcwClientM").value, type:E("dcwType").value, details:E("dcwDet").value.trim(), assignee:E("dcwAssignee").value, priority:priVal };
+    var f={ title:title, client:E("dcwClientM").value, type:E("dcwType").value, details:E("dcwDet").value.trim(), assignee:E("dcwAssignee").value, priority:priVal, needsReview:E("dcwNeedsReview").checked };
     if(editingId){ local(editingId,f); push("update",{id:editingId,patch:f}); }
     else { f.assignedBy=ME; f.createdBy=ME; push("create",{task:f}); }
     editingId=null; close("dcwTaskScrim");
