@@ -620,6 +620,10 @@
   </div>
 </div>
 
+<!-- Firebase SDK (powers the Daily Work board) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+
 <script>
 /* ======================================================================
    CONFIG  ──  connect your live Google Sheet here
@@ -1916,12 +1920,31 @@ loadDiagnostics();
 
 /* =====================================================================
    DAILY CLIENT WORK — self-contained module (own scope, dcw- namespace)
-   Reads/writes a hidden "TasksDB" tab in this same sheet via a small
-   Apps Script web app. Paste that web-app URL (…/exec) into DCW_API below.
+   Stores tasks in Firebase Firestore: real-time, shared across all viewers,
+   no login required. Paste your Firebase web config into DCW_FB below.
    ===================================================================== */
 (function(){
-  var DCW_API = "https://script.google.com/macros/s/AKfycbwe3dF602FEdI00GkIXuj0VTeUzBr5xrqRky4_tkDriWnhsAaHpJjIevlUQDY8ZScIccw/exec";          // <-- paste your Apps Script Web App /exec URL here
-  var POLL_MS = 15000;
+  /* ---- Firebase config ----------------------------------------------------
+     From the Firebase console: Project settings (gear) ▸ your Web app ▸
+     "SDK setup and configuration" ▸ Config. Copy the values in here.
+     Leave apiKey blank to keep the board in preview mode.                     */
+  var DCW_FB = {
+    apiKey: "",
+    authDomain: "",
+    projectId: "",
+    storageBucket: "",
+    messagingSenderId: "",
+    appId: ""
+  };
+
+  var DB=null;
+  try{
+    if(window.firebase && DCW_FB && DCW_FB.apiKey){
+      if(!firebase.apps.length) firebase.initializeApp(DCW_FB);
+      DB=firebase.firestore();
+    }
+  }catch(e){ DB=null; }
+  function ready(){ return !!DB; }
 
   var CLIENTS = ["Wymore","Ken (Champion)","Eric (Finn)","Cocina Mia","Phil S (Grumpy)","Phil H (Xceleration)","JAST","GRNDED","General / Internal"];
   var TYPES = ["Page change","New ad","Ad check-up","Copy / creative","Audience / targeting","Other"];
@@ -1938,21 +1961,39 @@ loadDiagnostics();
   function initials(n){ n=(n||"?").trim(); var p=n.split(/\s+/); return ((p[0]||"")[0]||"?").toUpperCase()+((p[1]||"")[0]||"").toUpperCase(); }
   function ago(ts){ if(!ts)return""; var s=(Date.now()-ts)/1000; if(s<60)return"just now"; var m=s/60; if(m<60)return Math.floor(m)+"m"; var h=m/60; if(h<24)return Math.floor(h)+"h"; var d=h/24; if(d<7)return Math.floor(d)+"d"; return Math.floor(d/7)+"w"; }
   function sow(){ var d=new Date(); var day=(d.getDay()+6)%7; d.setHours(0,0,0,0); d.setDate(d.getDate()-day); return d.getTime(); }
-  var ready=function(){ return !!DCW_API; };
 
-  function jsonp(params){
-    return new Promise(function(res,rej){
-      var cb="dcwcb_"+Math.random().toString(36).slice(2), s=document.createElement("script");
-      var to=setTimeout(function(){ clean(); rej(new Error("timeout")); },12000);
-      function clean(){ clearTimeout(to); try{delete window[cb];}catch(e){window[cb]=undefined;} if(s.parentNode)s.parentNode.removeChild(s); }
-      window[cb]=function(d){ clean(); res(d); };
-      s.onerror=function(){ clean(); rej(new Error("neterr")); };
-      s.src=DCW_API+(DCW_API.indexOf("?")<0?"?":"&")+params+"&callback="+cb;
-      document.body.appendChild(s);
-    });
+  var subsStarted=false;
+  function startSubs(){
+    if(subsStarted || !DB) return; subsStarted=true;
+    DB.doc("meta/roster").onSnapshot(function(s){
+      var d=s.exists?(s.data()||{}):{}; var extra=(d.people&&d.people.length)?d.people:[];
+      PEOPLE=SEED_PEOPLE.concat(extra.filter(function(p){return SEED_PEOPLE.indexOf(p)<0;}));
+      renderPeople(); draw();
+    }, function(){});
+    DB.collection("tasks").onSnapshot(function(snap){
+      var arr=[]; snap.forEach(function(doc){ var d=doc.data()||{}; d._id=doc.id; arr.push(normalize(d)); });
+      TASKS=arr; renderPeople(); draw(); setSync("live"); hideBanner();
+    }, function(err){ setSync("err"); banner("Database error: "+((err&&err.message)||err)+". Make sure Firestore is enabled and its rules allow read/write."); });
   }
-  function apiList(){ return jsonp("action=list&_="+Date.now()); }
-  function apiSend(obj){ return jsonp("action="+encodeURIComponent(obj.action)+"&payload="+encodeURIComponent(JSON.stringify(obj))+"&_="+Date.now()); }
+  function createTask(f){
+    if(!DB) return;
+    var cRef=DB.doc("meta/counter"), tRef=DB.collection("tasks").doc(), now=Date.now();
+    DB.runTransaction(function(tx){
+      return tx.get(cRef).then(function(s){
+        var n=(((s.exists&&s.data())||{}).n||0)+1;
+        tx.set(cRef,{n:n});
+        tx.set(tRef, Object.assign({num:n,status:"todo",createdAt:now,updatedAt:now,review:null}, f));
+        return n;
+      });
+    }).catch(function(e){ banner("Couldn't add task: "+((e&&e.message)||e)); });
+  }
+  function updateTask(id,patch){
+    if(!DB) return;
+    var p=Object.assign({},patch); p.updatedAt=Date.now();
+    DB.collection("tasks").doc(id).update(p).catch(function(e){ banner("Couldn't save change: "+((e&&e.message)||e)); });
+  }
+  function deleteTask(id){ if(!DB) return; DB.collection("tasks").doc(id).delete().catch(function(e){ banner("Couldn't delete: "+((e&&e.message)||e)); }); }
+  function addPersonRemote(name){ if(!DB) return; DB.doc("meta/roster").set({people:firebase.firestore.FieldValue.arrayUnion(name)},{merge:true}).catch(function(){}); }
 
   function setSync(state){
     var p=E("dcwSync"), t=E("dcwSyncTxt"); if(!p)return; p.classList.remove("off","err");
@@ -1960,28 +2001,18 @@ loadDiagnostics();
     else if(state==="loading") t.textContent="Loading…";
     else if(state==="preview"){ p.classList.add("off"); t.textContent="Preview (not saved)"; }
     else if(state==="stale"){ p.classList.add("off"); t.textContent="Reconnecting…"; }
-    else { p.classList.add("err"); t.textContent="Can't reach sheet"; }
+    else { p.classList.add("err"); t.textContent="Can't reach database"; }
   }
   function banner(msg){ var b=E("dcwBanner"); b.textContent=msg; b.classList.add("show"); }
   function hideBanner(){ E("dcwBanner").classList.remove("show"); }
 
   function normalize(r){
-    var rev=null; if(r.review){ if(typeof r.review==="string"){ try{rev=JSON.parse(r.review);}catch(e){rev=null;} } else rev=r.review; }
-    return { _id:String(r.id||""), num:+r.num||0, status:r.status||"todo", client:r.client||"", type:r.type||"",
+    var rev=(r.review && r.review.result)?r.review:null;
+    return { _id:String(r._id||""), num:+r.num||0, status:r.status||"todo", client:r.client||"", type:r.type||"",
       title:r.title||"", details:r.details||"", assignee:r.assignee||"", assignedBy:r.assignedBy||"",
       priority:r.priority||"med", review:rev, createdAt:+r.createdAt||0, updatedAt:+r.updatedAt||+r.createdAt||0 };
   }
-  function refresh(showLoading){
-    if(!ready()) return;
-    if(showLoading) setSync("loading");
-    apiList().then(function(d){
-      if(d && d.ok!==false){
-        if(d.people && d.people.length) PEOPLE=d.people.slice();
-        TASKS=(d.tasks||[]).map(normalize); firstLoad=false;
-        renderPeople(); draw(); setSync("live"); hideBanner();
-      } else setSync("err");
-    }).catch(function(){ setSync(firstLoad?"err":"stale"); });
-  }
+  function refresh(){ if(ready()){ startSubs(); draw(); } else draw(); }
 
   function fillStatic(){
     var opt=function(v){ return '<option value="'+esc(v)+'">'+esc(v)+'</option>'; };
@@ -1999,7 +2030,7 @@ loadDiagnostics();
     var fa=E("dcwAssignee"); if(fa){ var ac=fa.value; fa.innerHTML=PEOPLE.map(function(p){return '<option value="'+esc(p)+'">'+esc(p)+'</option>';}).join(""); if(PEOPLE.indexOf(ac)>=0)fa.value=ac; }
   }
   function addPerson(name,setMe){
-    if(PEOPLE.indexOf(name)<0){ PEOPLE.push(name); if(ready()) apiSend({action:"addPerson",name:name}); }
+    if(SEED_PEOPLE.indexOf(name)<0 && PEOPLE.indexOf(name)<0){ PEOPLE.push(name); if(ready()) addPersonRemote(name); }
     if(setMe){ ME=name; lsSet("dcw_me",ME); }
     renderPeople(); draw();
   }
@@ -2054,9 +2085,13 @@ loadDiagnostics();
     return a+'</div>';
   }
   function needMe(){ if(ME)return true; banner("Pick who you are (the “I'm” selector) before assigning or reviewing — so actions are attributed to you."); E("dcwMe").focus(); return false; }
-  function needApi(){ if(ready())return true; banner("Not connected to the sheet yet — paste your Apps Script URL into DCW_API (top of the Daily Work module) to save changes."); return false; }
+  function needApi(){ if(ready())return true; banner("Not connected yet — paste your Firebase config into DCW_FB (top of the Daily Work module in this file) to save changes."); return false; }
   function local(id,patch){ for(var i=0;i<TASKS.length;i++){ if(TASKS[i]._id===id){ for(var k in patch) TASKS[i][k]=patch[k]; TASKS[i].updatedAt=Date.now(); break; } } draw(); }
-  function push(action,payload){ apiSend(Object.assign({action:action},payload)).then(function(){ setTimeout(function(){refresh(false);},400); }).catch(function(){ setTimeout(function(){refresh(false);},700); }); }
+  function push(action,payload){
+    if(action==="create") createTask(payload.task);
+    else if(action==="update") updateTask(payload.id, payload.patch);
+    else if(action==="delete") deleteTask(payload.id);
+  }
 
   function act(a,t){
     if(a==="edit"){ openTask(t); return; }
@@ -2128,12 +2163,10 @@ loadDiagnostics();
   /* activation from the view toggle */
   window.DCW = {
     activate:function(){
-      if(!ready()){ setSync("preview"); banner("Design preview — the task sheet isn't connected yet, so nothing is saved. The cards below are examples. To go live: deploy the Apps Script into this sheet and paste its URL into DCW_API (top of the Daily Work module in this file)."); draw(); return; }
-      draw(); refresh(true);
-      if(pollTimer) clearInterval(pollTimer);
-      pollTimer=setInterval(function(){ refresh(false); }, POLL_MS);
+      if(!ready()){ setSync("preview"); banner("Design preview — Firebase isn't connected yet, so nothing is saved. The cards below are examples. To go live: create a free Firebase project and paste its config into DCW_FB (top of the Daily Work module in this file)."); draw(); return; }
+      setSync("loading"); draw(); startSubs();
     },
-    deactivate:function(){ if(pollTimer){ clearInterval(pollTimer); pollTimer=null; } }
+    deactivate:function(){}
   };
   draw();
 })();
