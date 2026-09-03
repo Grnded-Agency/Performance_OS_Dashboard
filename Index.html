@@ -491,6 +491,38 @@
   .dcw-muted{font-size:12px;color:var(--muted)}
   .dcw-check{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:var(--ink-2);cursor:pointer;padding:4px 0;text-transform:none;letter-spacing:0}
   .dcw-check input{width:17px;height:17px;flex:none;accent-color:var(--accent);cursor:pointer}
+  /* ── Funnel step: card chip ── */
+  .dcw-stepchip{display:flex;align-items:center;gap:8px;width:100%;margin-top:9px;border:1px solid var(--border-strong);background:var(--surface-2);border-radius:9px;padding:6px 8px;cursor:pointer;text-align:left;transition:.12s}
+  .dcw-stepchip:hover{background:var(--surface-3);border-color:var(--accent)}
+  .dcw-stepchip.unset{border-style:dashed;color:var(--muted)}
+  .dcw-stepnum{flex:none;width:22px;height:22px;border-radius:6px;background:var(--accent);color:#fff;font-size:11px;font-weight:800;display:grid;place-items:center}
+  .dcw-stepchip.unset .dcw-stepnum{background:var(--surface-3);color:var(--muted);border:1px solid var(--border-strong)}
+  .dcw-stepmid{flex:1;min-width:0}
+  .dcw-stepcap{font-size:9.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);line-height:1}
+  .dcw-steplab{font-size:12px;font-weight:750;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
+  .dcw-stepbar{flex:none;width:52px;height:5px;border-radius:99px;background:var(--surface-3);overflow:hidden}
+  .dcw-stepbar>span{display:block;height:100%;background:var(--accent);border-radius:99px}
+  /* ── Funnel step: popup stepper ── */
+  .dcw-stepsub{font-size:12.5px;color:var(--muted);margin:-4px 20px 4px}
+  .dcw-stepphase{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:14px 0 8px;padding-top:12px;border-top:1px dashed var(--border)}
+  .dcw-stepphase:first-child{margin-top:2px;padding-top:0;border-top:0}
+  .dcw-steplist{display:flex;flex-direction:column;gap:7px}
+  .dcw-srow{display:flex;align-items:center;gap:11px;width:100%;text-align:left;font-family:inherit;color:inherit;border:1px solid var(--border);background:var(--surface-2);border-radius:10px;padding:9px 11px;cursor:pointer;transition:.12s;opacity:.62}
+  .dcw-srow.ro{cursor:default}
+  .dcw-srow:hover{opacity:1;border-color:var(--accent)}
+  .dcw-sbadge{flex:none;width:26px;height:26px;border-radius:7px;display:grid;place-items:center;font-size:12px;font-weight:800;background:var(--surface-3);color:var(--muted);border:1px solid var(--border-strong)}
+  .dcw-slab{flex:1;min-width:0;font-size:13.5px;font-weight:700;color:var(--ink-2)}
+  .dcw-stag{flex:none;font-size:10px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:3px 8px;border-radius:99px}
+  .dcw-srow.done{opacity:.9}
+  .dcw-srow.done .dcw-sbadge{background:var(--good-bg);color:var(--good-ink);border-color:transparent}
+  .dcw-srow.cur{opacity:1;background:var(--good-bg);border-color:var(--good);box-shadow:0 0 0 3px rgba(12,163,12,.14)}
+  .dcw-srow.cur .dcw-sbadge{background:var(--good);color:#fff;border-color:transparent}
+  .dcw-srow.cur .dcw-slab{color:var(--ink);font-weight:800}
+  .dcw-srow.cur .dcw-stag{background:var(--good);color:#fff}
+  .dcw-srow.next{opacity:1;border-style:dashed;border-color:var(--accent)}
+  .dcw-srow.next .dcw-sbadge{background:var(--accent-soft);color:var(--accent);border-color:var(--accent)}
+  .dcw-srow.next .dcw-stag{background:var(--accent-soft);color:var(--accent)}
+  .dcw-stephint{font-size:12px;color:var(--muted);padding:12px 20px 0;text-align:center}
 </style>
 </head>
 <body>
@@ -612,6 +644,7 @@
             <div class="dcw-field"><label for="dcwAssignee">Assigned to</label><select id="dcwAssignee"></select></div>
             <div class="dcw-field"><label>Priority</label><div class="dcw-seg" id="dcwPri" role="group" aria-label="Priority"><button type="button" data-v="low">Low</button><button type="button" data-v="med" aria-pressed="true">Medium</button><button type="button" data-v="high">High</button></div></div>
           </div>
+          <div class="dcw-field"><label for="dcwStep">Funnel step <span class="dcw-muted">(which stage this account is on)</span></label><select id="dcwStep"></select></div>
           <label class="dcw-check"><input type="checkbox" id="dcwNeedsReview" checked><span>Requires a supervisor to review it before it's marked done</span></label>
           <div class="dcw-muted" id="dcwAssignByNote"></div>
         </div>
@@ -624,6 +657,16 @@
         <div class="dcw-mhead"><h2>Request changes</h2><button class="dcw-x" id="dcwRvClose" aria-label="Close">✕</button></div>
         <div class="dcw-mbody"><div class="dcw-field"><label for="dcwRvNote">What needs to change?</label><textarea id="dcwRvNote" placeholder="Be specific — the doer sees this note on the card."></textarea></div></div>
         <div class="dcw-mfoot"><button class="dcw-btn ghost" id="dcwRvCancel">Cancel</button><button class="dcw-btn primary" id="dcwRvSend" style="background:var(--crit);border-color:var(--crit)">Send back for changes</button></div>
+      </div>
+    </div>
+
+    <div class="dcw-scrim" id="dcwStepScrim">
+      <div class="dcw-modal" role="dialog" aria-modal="true" aria-labelledby="dcwStepTitle" style="max-width:480px">
+        <div class="dcw-mhead"><h2 id="dcwStepTitle">Funnel steps</h2><button class="dcw-x" id="dcwStepClose" aria-label="Close">✕</button></div>
+        <div class="dcw-stepsub" id="dcwStepSub"></div>
+        <div class="dcw-mbody" id="dcwStepBody"></div>
+        <div class="dcw-stephint" id="dcwStepHint"></div>
+        <div class="dcw-mfoot"><button class="dcw-btn ghost" id="dcwStepDone">Close</button></div>
       </div>
     </div>
   </section>
@@ -1978,6 +2021,37 @@ loadDiagnostics();
 
   var CLIENTS = ["Wymore","Ken (Champion)","Eric (Finn)","Cocina Mia","Phil S (Grumpy)","Phil H (Xceleration)","JAST","GRNDED","General / Internal"];
   var TYPES = ["Page change","New ad","Ad check-up","Copy / creative","Audience / targeting","Other"];
+
+  /* ====================================================================
+     FUNNEL STEPS  ──  the 1–18 pipeline shown in the "Steps" popup.
+     This is the ONLY place to edit the pipeline. Rename, reorder, add or
+     remove lines and everything (the dropdown, the card chip, the popup)
+     updates automatically — the count is not hard-wired to 18.
+     `phase` just groups the steps under a heading in the popup.
+     Seeded from your Sprint Prompts docs; tweak the labels to match the
+     exact names your team uses.
+     ==================================================================== */
+  var STEPS = [
+    { label:"Pain Points",           phase:"Lead-Magnet Funnel" },
+    { label:"Headlines",             phase:"Lead-Magnet Funnel" },
+    { label:"Subheadlines",          phase:"Lead-Magnet Funnel" },
+    { label:"Offer (Lead Magnet)",   phase:"Lead-Magnet Funnel" },
+    { label:"Image / Creative",      phase:"Lead-Magnet Funnel" },
+    { label:"Primary Text",          phase:"Lead-Magnet Funnel" },
+    { label:"Landing Page",          phase:"Lead-Magnet Funnel" },
+    { label:"Motivation / Desires",  phase:"Lead-Magnet Funnel" },
+    { label:"Power Offer",           phase:"Core Offer Funnel" },
+    { label:"Offer Headlines",       phase:"Core Offer Funnel" },
+    { label:"Offer Subheadlines",    phase:"Core Offer Funnel" },
+    { label:"Offer Mechanism",       phase:"Core Offer Funnel" },
+    { label:"Ad Copy v1",            phase:"Core Offer Funnel" },
+    { label:"Ad Copy v2",            phase:"Core Offer Funnel" },
+    { label:"Ad Copy v3",            phase:"Core Offer Funnel" },
+    { label:"Sales Page (Long)",     phase:"Core Offer Funnel" },
+    { label:"Sales Page (Bullets)",  phase:"Core Offer Funnel" },
+    { label:"Launch / Live",         phase:"Core Offer Funnel" }
+  ];
+  function stepLabel(n){ return (n>=1 && n<=STEPS.length) ? STEPS[n-1].label : ""; }
   var SEED_PEOPLE = ["Juan","Alyssa"];
   var COLS = [{k:"todo",t:"To do"},{k:"doing",t:"In progress"},{k:"review",t:"Needs review"},{k:"done",t:"Done"}];
 
@@ -2042,7 +2116,7 @@ loadDiagnostics();
     var rev=(r.review && r.review.result)?r.review:null;
     return { _id:String(r._id||""), num:+r.num||0, status:r.status||"todo", client:r.client||"", type:r.type||"",
       title:r.title||"", details:r.details||"", assignee:r.assignee||"", assignedBy:r.assignedBy||"",
-      priority:r.priority||"med", needsReview:(r.needsReview!==false), review:rev, createdAt:+r.createdAt||0, updatedAt:+r.updatedAt||+r.createdAt||0 };
+      priority:r.priority||"med", needsReview:(r.needsReview!==false), review:rev, step:Math.max(0,Math.min(STEPS.length,+r.step||0)), createdAt:+r.createdAt||0, updatedAt:+r.updatedAt||+r.createdAt||0 };
   }
   function refresh(){ if(ready()){ startSubs(); draw(); } else draw(); }
 
@@ -2052,6 +2126,7 @@ loadDiagnostics();
     E("dcwFType").insertAdjacentHTML("beforeend", TYPES.map(opt).join(""));
     E("dcwClientM").innerHTML=CLIENTS.map(opt).join("");
     E("dcwType").innerHTML=TYPES.map(opt).join("");
+    E("dcwStep").innerHTML='<option value="0">— not started —</option>'+STEPS.map(function(s,i){ return '<option value="'+(i+1)+'">'+(i+1)+'. '+esc(s.label)+'</option>'; }).join("");
   }
   function renderPeople(){
     var me=E("dcwMe"), cur=ME;
@@ -2116,10 +2191,23 @@ loadDiagnostics();
     if(t.review && t.review.result){ var ok=t.review.result==="approved";
       h+='<div class="dcw-rnote'+(ok?" ok":"")+'"><span class="dcw-rl">'+(ok?"Approved by "+esc(t.review.by||"—"):"Changes requested by "+esc(t.review.by||"—"))+'</span>'+(t.review.notes?esc(t.review.notes):(ok?"Looks good.":""))+'</div>'; }
     h+='<div class="dcw-cfoot"><span class="dcw-who"><span class="dcw-avatar">'+esc(initials(t.assignee))+'</span>'+esc(t.assignee||"Unassigned")+'</span><span class="dcw-pri '+pri+'"><span class="dcw-pd"></span>'+(pri==="high"?"High":pri==="low"?"Low":"Med")+'</span><span class="dcw-age">'+ago(t.updatedAt||t.createdAt)+'</span></div>';
+    h+=stepChip(t);
     if(!ex) h+=actions(t);
     el.innerHTML=h;
     if(!ex) el.querySelectorAll("[data-act]").forEach(function(b){ b.onclick=function(){ act(b.getAttribute("data-act"),t); }; });
+    else el.querySelectorAll('[data-act="steps"]').forEach(function(b){ b.onclick=function(){ openSteps(t); }; });
     return el;
+  }
+  function stepChip(t){
+    var n=t.step||0, tot=STEPS.length;
+    if(!(n>=1 && n<=tot)){
+      return '<button type="button" class="dcw-stepchip unset" data-act="steps"><span class="dcw-stepnum">+</span><span class="dcw-stepmid"><span class="dcw-steplab">Set funnel step</span></span></button>';
+    }
+    var pct=Math.round(n/tot*100);
+    return '<button type="button" class="dcw-stepchip" data-act="steps" title="View the funnel steps">'+
+      '<span class="dcw-stepnum">'+n+'</span>'+
+      '<span class="dcw-stepmid"><span class="dcw-stepcap">Step '+n+' of '+tot+'</span><span class="dcw-steplab">'+esc(stepLabel(n))+'</span></span>'+
+      '<span class="dcw-stepbar"><span style="width:'+pct+'%"></span></span></button>';
   }
   function actions(t){
     var a='<div class="dcw-cactions">';
@@ -2139,6 +2227,7 @@ loadDiagnostics();
   }
 
   function act(a,t){
+    if(a==="steps"){ openSteps(t); return; }
     if(a==="edit"){ openTask(t); return; }
     if(!needApi()) return;
     if(a==="del"){ if(confirm("Delete task “"+(t.title||"")+"”?")){ TASKS=TASKS.filter(function(x){return x._id!==t._id;}); draw(); push("delete",{id:t._id}); } return; }
@@ -2164,10 +2253,41 @@ loadDiagnostics();
     var fa=E("dcwAssignee"); fa.value=t?(t.assignee||(PEOPLE.indexOf(ME)>=0?ME:PEOPLE[0])):(PEOPLE.indexOf("Juan")>=0?"Juan":PEOPLE[0]);
     priVal=t?(t.priority||"med"):"med"; setPri(priVal);
     E("dcwNeedsReview").checked = t ? (t.needsReview!==false) : true;
+    E("dcwStep").value = String(t ? (t.step||0) : 0);
     E("dcwAssignByNote").textContent=t?("Originally assigned by "+(t.assignedBy||"—")):(ME?("Assigned by "+ME):"");
     open("dcwTaskScrim"); E("dcwTt").focus();
   }
   function setPri(v){ priVal=v; document.querySelectorAll("#dcwPri button").forEach(function(b){ b.setAttribute("aria-pressed", b.getAttribute("data-v")===v?"true":"false"); }); }
+
+  var stepTaskId=null;
+  function openSteps(t){
+    stepTaskId=(t && t._id) ? t._id : null;
+    var cur=t?(t.step||0):0, tot=STEPS.length, editable=!!(stepTaskId && ready());
+    E("dcwStepSub").textContent=((t&&t.client)?t.client+" · ":"")+((t&&t.title)?t.title:"Pipeline overview");
+    var html="", lastPhase=null;
+    STEPS.forEach(function(s,i){
+      var n=i+1;
+      if(s.phase!==lastPhase){ if(lastPhase!==null) html+='</div>'; html+='<div class="dcw-stepphase">'+esc(s.phase)+'</div><div class="dcw-steplist">'; lastPhase=s.phase; }
+      var cls="dcw-srow"+(editable?"":" ro"), tag="", badge=n;
+      if(n<cur){ cls+=" done"; badge="✓"; }
+      else if(n===cur){ cls+=" cur"; tag="You are here"; }
+      else if(n===cur+1 || (cur===0 && n===1)){ cls+=" next"; tag=(cur===0?"Start here":"Up next"); }
+      html+='<button type="button" class="'+cls+'" data-n="'+n+'">'+
+        '<span class="dcw-sbadge">'+badge+'</span>'+
+        '<span class="dcw-slab">'+n+'. '+esc(s.label)+'</span>'+
+        (tag?'<span class="dcw-stag">'+tag+'</span>':'')+'</button>';
+    });
+    if(lastPhase!==null) html+='</div>';
+    var body=E("dcwStepBody"); body.innerHTML=html;
+    E("dcwStepHint").textContent=editable ? "Click any step to move this account there." : (ready()? "" : "Preview — connect Firebase to track real steps.");
+    if(editable){ body.querySelectorAll(".dcw-srow").forEach(function(b){ b.onclick=function(){ setStep(+b.getAttribute("data-n")); }; }); }
+    open("dcwStepScrim");
+  }
+  function setStep(n){
+    if(!stepTaskId || !needApi()) return;
+    var patch={step:n}; local(stepTaskId,patch); push("update",{id:stepTaskId,patch:patch});
+    for(var i=0;i<TASKS.length;i++){ if(TASKS[i]._id===stepTaskId){ openSteps(TASKS[i]); return; } }
+  }
 
   function open(id){ E(id).classList.add("open"); }
   function close(id){ E(id).classList.remove("open"); }
@@ -2188,12 +2308,13 @@ loadDiagnostics();
   document.querySelectorAll("#dcwPri button").forEach(function(b){ b.onclick=function(){ setPri(b.getAttribute("data-v")); }; });
   E("dcwMClose").onclick=function(){ close("dcwTaskScrim"); }; E("dcwMCancel").onclick=function(){ close("dcwTaskScrim"); };
   E("dcwRvClose").onclick=function(){ close("dcwRevScrim"); }; E("dcwRvCancel").onclick=function(){ close("dcwRevScrim"); };
+  E("dcwStepClose").onclick=function(){ close("dcwStepScrim"); }; E("dcwStepDone").onclick=function(){ close("dcwStepScrim"); };
   document.querySelectorAll("#dcwRoot .dcw-scrim").forEach(function(s){ s.addEventListener("click",function(e){ if(e.target===s) s.classList.remove("open"); }); });
   document.addEventListener("keydown",function(e){ if(e.key==="Escape") document.querySelectorAll("#dcwRoot .dcw-scrim.open").forEach(function(s){s.classList.remove("open");}); });
   E("dcwMSave").onclick=function(){
     if(!needApi())return;
     var title=E("dcwTt").value.trim(); if(!title){ E("dcwTt").focus(); return; }
-    var f={ title:title, client:E("dcwClientM").value, type:E("dcwType").value, details:E("dcwDet").value.trim(), assignee:E("dcwAssignee").value, priority:priVal, needsReview:E("dcwNeedsReview").checked };
+    var f={ title:title, client:E("dcwClientM").value, type:E("dcwType").value, details:E("dcwDet").value.trim(), assignee:E("dcwAssignee").value, priority:priVal, needsReview:E("dcwNeedsReview").checked, step:(+E("dcwStep").value||0) };
     if(editingId){ local(editingId,f); push("update",{id:editingId,patch:f}); }
     else { f.assignedBy=ME; f.createdBy=ME; push("create",{task:f}); }
     editingId=null; close("dcwTaskScrim");
@@ -2205,10 +2326,10 @@ loadDiagnostics();
   };
 
   var EX={
-    todo:{client:"Cocina Mia",type:"Page change",title:"Move lead form above the fold",details:"Scroll depth only 15% — put the form higher on the landing page.",assignee:"Juan",priority:"high",num:12,status:"todo",updatedAt:Date.now()-36e5},
-    doing:{client:"Wymore",type:"New ad",title:"Build 2 new Advantage+ creatives",details:"CTR stuck sub-1%; test fresh creative.",assignee:"Juan",priority:"med",num:11,status:"doing",updatedAt:Date.now()-72e5},
-    review:{client:"GRNDED",type:"Page change",title:"New landing variant — ready for review",details:"Rebuilt hero + CTA. Link in details.",assignee:"Juan",priority:"med",num:10,status:"review",updatedAt:Date.now()-18e5},
-    done:{client:"Phil S (Grumpy)",type:"Ad check-up",title:"48h check — scale winner 01.02",details:"$4 CPL, scaled budget +20%.",assignee:"Juan",priority:"low",num:9,status:"done",review:{result:"approved",by:"Alyssa",notes:"Nice — keep scaling."},updatedAt:Date.now()-9e5}
+    todo:{client:"Cocina Mia",type:"Page change",title:"Move lead form above the fold",details:"Scroll depth only 15% — put the form higher on the landing page.",assignee:"Juan",priority:"high",num:12,status:"todo",step:7,updatedAt:Date.now()-36e5},
+    doing:{client:"Wymore",type:"New ad",title:"Build 2 new Advantage+ creatives",details:"CTR stuck sub-1%; test fresh creative.",assignee:"Juan",priority:"med",num:11,status:"doing",step:13,updatedAt:Date.now()-72e5},
+    review:{client:"GRNDED",type:"Page change",title:"New landing variant — ready for review",details:"Rebuilt hero + CTA. Link in details.",assignee:"Juan",priority:"med",num:10,status:"review",step:16,updatedAt:Date.now()-18e5},
+    done:{client:"Phil S (Grumpy)",type:"Ad check-up",title:"48h check — scale winner 01.02",details:"$4 CPL, scaled budget +20%.",assignee:"Juan",priority:"low",num:9,status:"done",step:18,review:{result:"approved",by:"Alyssa",notes:"Nice — keep scaling."},updatedAt:Date.now()-9e5}
   };
 
   /* activation from the view toggle */
