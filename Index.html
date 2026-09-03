@@ -378,6 +378,102 @@
     .kpi .value{font-size:23px;}
     .funnel-panel .kpi-grid{grid-template-columns:1fr 1fr;}
   }
+  /* ===================== Daily Client Work board (namespaced) ===================== */
+  #dcwRoot{ --info:#1b6fd0; --info-bg:#e3eefb; --surface-3:#eef2f8; --shadow-lift:0 8px 30px rgba(11,27,51,.14); --radius-sm:9px; --col-todo:#8792a6; --col-doing:#c98a00; --col-review:#1b4c86; --col-done:#0ca30c; }
+  @media (prefers-color-scheme: dark){ html:not([data-theme="light"]) #dcwRoot{ --info:#4f8fd8; --info-bg:#16294a; --surface-3:#16233a; --shadow-lift:0 10px 34px rgba(0,0,0,.5); --col-todo:#7788a0; --col-doing:#e0a723; --col-review:#4f8fd8; --col-done:#2bb32b; } }
+  html[data-theme="dark"] #dcwRoot{ --info:#4f8fd8; --info-bg:#16294a; --surface-3:#16233a; --shadow-lift:0 10px 34px rgba(0,0,0,.5); --col-todo:#7788a0; --col-doing:#e0a723; --col-review:#4f8fd8; --col-done:#2bb32b; }
+  #dcwRoot .dcw-subbar{display:flex;align-items:center;gap:11px;flex-wrap:wrap;margin:2px 0 16px}
+  .dcw-pill{display:inline-flex;align-items:center;gap:7px;background:var(--surface);border:1px solid var(--border);color:var(--ink-2);border-radius:999px;padding:5px 12px;font-size:12px;font-weight:650;cursor:pointer}
+  .dcw-pill .dcw-dot{width:7px;height:7px;border-radius:50%;background:var(--good);box-shadow:0 0 0 3px rgba(12,163,12,.16)}
+  .dcw-pill.off .dcw-dot{background:var(--warn);box-shadow:0 0 0 3px rgba(201,138,0,.16)}
+  .dcw-pill.err .dcw-dot{background:var(--crit);box-shadow:0 0 0 3px rgba(208,59,59,.16)}
+  .dcw-mepick{display:inline-flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--border-strong);color:var(--ink-2);border-radius:999px;padding:4px 8px 4px 12px;font-size:12px;font-weight:650}
+  .dcw-mepick select{background:transparent;border:0;color:var(--ink);font:inherit;font-weight:700;outline:none;cursor:pointer;padding:2px 2px}
+  .dcw-tspring{flex:1}
+  .dcw-btn{border:1px solid var(--border-strong);background:var(--surface);color:var(--ink);border-radius:9px;padding:8px 13px;font-size:13px;font-weight:650;display:inline-flex;align-items:center;gap:7px;transition:.12s;cursor:pointer}
+  .dcw-btn:hover{background:var(--surface-2)}
+  .dcw-btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+  .dcw-btn.primary:hover{filter:brightness(1.07)}
+  .dcw-btn.ghost{background:transparent}
+  .dcw-banner{background:var(--warn-bg);border:1px solid rgba(201,138,0,.28);color:var(--ink);border-radius:11px;padding:11px 14px;font-size:13px;margin-bottom:16px;display:none;line-height:1.5}
+  .dcw-banner.show{display:block}
+  .dcw-counters{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:16px}
+  .dcw-metric{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px 16px;overflow:hidden}
+  .dcw-metric .dcw-cap{width:34px;height:3px;border-radius:3px;margin-bottom:11px;background:var(--muted)}
+  .dcw-metric.todo .dcw-cap{background:var(--col-todo)} .dcw-metric.doing .dcw-cap{background:var(--col-doing)}
+  .dcw-metric.review .dcw-cap{background:var(--col-review)} .dcw-metric.done .dcw-cap{background:var(--col-done)}
+  .dcw-metric .dcw-lab{font-size:11.5px;font-weight:650;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+  .dcw-metric .dcw-val{font-size:30px;font-weight:780;letter-spacing:-.02em;margin-top:2px;font-variant-numeric:tabular-nums}
+  .dcw-metric .dcw-hint{font-size:11.5px;color:var(--muted);margin-top:1px}
+  .dcw-metric.review{cursor:pointer}
+  .dcw-metric.review.hot{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent), var(--shadow)}
+  .dcw-metric.review.on{outline:2px solid var(--accent)}
+  .dcw-toolbar2{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+  .dcw-search,.dcw-filter{border:1px solid var(--border-strong);background:var(--surface);color:var(--ink);border-radius:9px;padding:8px 11px;font-size:13px;font-family:inherit;outline:none}
+  .dcw-search{min-width:180px;flex:1;max-width:320px}
+  .dcw-search:focus,.dcw-filter:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+  .dcw-board{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;padding-bottom:40px;align-items:start}
+  @media(max-width:1100px){.dcw-board{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media(max-width:680px){.dcw-board{grid-template-columns:1fr}.dcw-counters{grid-template-columns:1fr 1fr}}
+  .dcw-col{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);display:flex;flex-direction:column;min-height:110px}
+  .dcw-col.review{background:color-mix(in srgb,var(--accent-soft) 40%, var(--surface-2))}
+  .dcw-colhead{display:flex;align-items:center;gap:9px;padding:13px 14px 10px}
+  .dcw-coldot{width:9px;height:9px;border-radius:50%;flex:none}
+  .dcw-col.todo .dcw-coldot{background:var(--col-todo)} .dcw-col.doing .dcw-coldot{background:var(--col-doing)}
+  .dcw-col.review .dcw-coldot{background:var(--col-review)} .dcw-col.done .dcw-coldot{background:var(--col-done)}
+  .dcw-colhead .dcw-ct{font-size:13px;font-weight:750}
+  .dcw-col.review .dcw-colhead .dcw-ct{color:var(--accent)}
+  .dcw-colhead .dcw-cn{margin-left:auto;font-size:12px;font-weight:700;color:var(--muted);background:var(--surface);border:1px solid var(--border);border-radius:999px;min-width:22px;height:22px;padding:0 7px;display:grid;place-items:center;font-variant-numeric:tabular-nums}
+  .dcw-cards{display:flex;flex-direction:column;gap:10px;padding:2px 11px 13px}
+  .dcw-col-empty{padding:16px 12px 20px;text-align:center;color:var(--muted);font-size:12.5px}
+  .dcw-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);box-shadow:var(--shadow);padding:12px 12px 11px}
+  .dcw-card.ex{opacity:.6;border-style:dashed;box-shadow:none}
+  .dcw-card.done-c{background:var(--surface-2)}
+  .dcw-crow{display:flex;align-items:center;gap:6px;margin-bottom:8px;flex-wrap:wrap}
+  .dcw-chip{font-size:10.5px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;border-radius:6px;padding:2px 7px;border:1px solid var(--border);color:var(--ink-2);background:var(--surface-2)}
+  .dcw-chip.client{background:var(--navy-600);color:#fff;border-color:transparent}
+  html[data-theme="dark"] .dcw-chip.client{background:var(--accent)}
+  .dcw-tid{margin-left:auto;font-size:11px;font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums}
+  .dcw-tt{font-size:14px;font-weight:700;line-height:1.32;letter-spacing:-.01em;text-wrap:balance;margin:0}
+  .dcw-det{font-size:12.5px;color:var(--ink-2);margin-top:4px;white-space:pre-wrap;overflow-wrap:anywhere}
+  .dcw-cfoot{display:flex;align-items:center;gap:8px;margin-top:11px;flex-wrap:wrap}
+  .dcw-who{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;color:var(--ink-2);font-weight:600}
+  .dcw-avatar{width:20px;height:20px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-size:9px;font-weight:750;flex:none}
+  .dcw-pri{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700}
+  .dcw-pri .dcw-pd{width:8px;height:8px;border-radius:50%}
+  .dcw-pri.high{color:var(--crit-ink)} .dcw-pri.high .dcw-pd{background:var(--crit)}
+  .dcw-pri.med{color:var(--warn-ink)} .dcw-pri.med .dcw-pd{background:var(--warn)}
+  .dcw-pri.low{color:var(--muted)} .dcw-pri.low .dcw-pd{background:var(--muted)}
+  .dcw-age{font-size:11px;color:var(--muted);margin-left:auto}
+  .dcw-rnote{margin-top:9px;background:var(--warn-bg);border-radius:8px;padding:7px 9px;font-size:12px;color:var(--ink)}
+  .dcw-rnote.ok{background:var(--good-bg)}
+  .dcw-rnote .dcw-rl{font-size:10px;font-weight:750;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);display:block;margin-bottom:2px}
+  .dcw-cactions{display:flex;gap:7px;margin-top:11px;flex-wrap:wrap;border-top:1px solid var(--border);padding-top:10px}
+  .dcw-abtn{flex:1;min-width:0;border:1px solid var(--border-strong);background:var(--surface-2);color:var(--ink);border-radius:8px;padding:7px 8px;font-size:12px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:5px;transition:.12s;cursor:pointer}
+  .dcw-abtn:hover{background:var(--surface-3)}
+  .dcw-abtn.go{background:var(--accent);border-color:var(--accent);color:#fff}
+  .dcw-abtn.approve{background:var(--good);border-color:var(--good);color:#fff}
+  .dcw-abtn.changes{background:var(--surface);color:var(--crit-ink);border-color:var(--crit)}
+  .dcw-abtn.mini{flex:0 0 auto;width:32px;padding:7px 0;color:var(--muted)}
+  .dcw-abtn.mini:hover{color:var(--ink)}
+  .dcw-stamp{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:var(--good-ink)}
+  .dcw-scrim{position:fixed;inset:0;background:rgba(8,17,33,.55);display:none;align-items:center;justify-content:center;padding:20px;z-index:120}
+  .dcw-scrim.open{display:flex}
+  .dcw-modal{background:var(--surface);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow-lift);width:100%;max-width:520px;max-height:90vh;overflow:auto}
+  .dcw-mhead{display:flex;align-items:center;justify-content:space-between;padding:18px 20px 6px}
+  .dcw-mhead h2{font-size:17px;font-weight:750;margin:0}
+  .dcw-x{width:34px;height:34px;border-radius:9px;border:1px solid var(--border);background:var(--surface-2);color:var(--ink);display:grid;place-items:center;cursor:pointer}
+  .dcw-mbody{padding:8px 20px 20px;display:flex;flex-direction:column;gap:14px}
+  .dcw-field label{display:block;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:5px}
+  .dcw-field input,.dcw-field select,.dcw-field textarea{width:100%;border:1px solid var(--border-strong);background:var(--surface-2);color:var(--ink);border-radius:9px;padding:10px 11px;font-size:14px;font-family:inherit;outline:none}
+  .dcw-field textarea{resize:vertical;min-height:78px;line-height:1.5}
+  .dcw-field input:focus,.dcw-field select:focus,.dcw-field textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+  .dcw-grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .dcw-seg{display:flex;gap:6px}
+  .dcw-seg button{flex:1;border:1px solid var(--border-strong);background:var(--surface-2);color:var(--ink-2);border-radius:8px;padding:8px;font-size:12.5px;font-weight:700;cursor:pointer}
+  .dcw-seg button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+  .dcw-mfoot{display:flex;gap:9px;justify-content:flex-end;padding:6px 20px 20px}
+  .dcw-muted{font-size:12px;color:var(--muted)}
 </style>
 </head>
 <body>
@@ -410,6 +506,7 @@
     <div class="segmented" id="viewToggle">
       <button data-view="all" class="active">Portfolio</button>
       <button data-view="client">By Client</button>
+      <button data-view="daily">Daily Work</button>
     </div>
     <select class="client-select hide" id="clientSelect"></select>
     <select class="client-select hide" id="adSelect" title="Choose an ad"></select>
@@ -447,6 +544,58 @@
     <div class="section-title" id="clientChartTitle">Trends over time</div>
     <div class="chart-grid" id="clientCharts"></div>
     <div id="clientGroup" class="hide"></div>
+  </section>
+
+  <!-- DAILY WORK VIEW -->
+  <section id="dcwRoot" class="hide">
+    <div class="dcw-subbar">
+      <div class="section-title" style="margin:0 4px 0 0">Daily Client Work</div>
+      <span class="dcw-pill" id="dcwSync" title="Refresh now"><span class="dcw-dot"></span><span id="dcwSyncTxt">Connecting…</span></span>
+      <label class="dcw-mepick">I'm <select id="dcwMe" aria-label="Who are you"><option value="">— pick —</option></select></label>
+      <div class="dcw-tspring"></div>
+      <button class="dcw-btn primary" id="dcwNew">+ New task</button>
+    </div>
+    <div class="dcw-banner" id="dcwBanner"></div>
+    <div class="dcw-counters">
+      <div class="dcw-metric todo"><div class="dcw-cap"></div><div class="dcw-lab">To do</div><div class="dcw-val" id="dcwCTodo">0</div><div class="dcw-hint">assigned, not started</div></div>
+      <div class="dcw-metric doing"><div class="dcw-cap"></div><div class="dcw-lab">In progress</div><div class="dcw-val" id="dcwCDoing">0</div><div class="dcw-hint">being worked on</div></div>
+      <div class="dcw-metric review hot" id="dcwReviewMetric" title="Show only what needs review"><div class="dcw-cap"></div><div class="dcw-lab">Needs review</div><div class="dcw-val" id="dcwCReview">0</div><div class="dcw-hint">waiting on a supervisor</div></div>
+      <div class="dcw-metric done"><div class="dcw-cap"></div><div class="dcw-lab">Done this week</div><div class="dcw-val" id="dcwCDone">0</div><div class="dcw-hint">approved &amp; closed</div></div>
+    </div>
+    <div class="dcw-toolbar2">
+      <input class="dcw-search" id="dcwSearch" placeholder="Search tasks…" aria-label="Search tasks">
+      <select class="dcw-filter" id="dcwFClient" aria-label="Filter by client"><option value="">All clients</option></select>
+      <select class="dcw-filter" id="dcwFWho" aria-label="Filter by person"><option value="">Everyone</option></select>
+    </div>
+    <div class="dcw-board" id="dcwBoard"></div>
+
+    <div class="dcw-scrim" id="dcwTaskScrim">
+      <div class="dcw-modal" role="dialog" aria-modal="true" aria-labelledby="dcwMTitle">
+        <div class="dcw-mhead"><h2 id="dcwMTitle">New task</h2><button class="dcw-x" id="dcwMClose" aria-label="Close">✕</button></div>
+        <div class="dcw-mbody">
+          <div class="dcw-field"><label for="dcwTt">Task</label><input id="dcwTt" placeholder="e.g. Move Cocina LP form above the fold"></div>
+          <div class="dcw-grid2">
+            <div class="dcw-field"><label for="dcwClientM">Client</label><select id="dcwClientM"></select></div>
+            <div class="dcw-field"><label for="dcwType">Type</label><select id="dcwType"></select></div>
+          </div>
+          <div class="dcw-field"><label for="dcwDet">Details <span class="dcw-muted">(optional — links, context)</span></label><textarea id="dcwDet" placeholder="Anything the reviewer needs: the page/ad link, what changed, what to check…"></textarea></div>
+          <div class="dcw-grid2">
+            <div class="dcw-field"><label for="dcwAssignee">Assigned to</label><select id="dcwAssignee"></select></div>
+            <div class="dcw-field"><label>Priority</label><div class="dcw-seg" id="dcwPri" role="group" aria-label="Priority"><button type="button" data-v="low">Low</button><button type="button" data-v="med" aria-pressed="true">Medium</button><button type="button" data-v="high">High</button></div></div>
+          </div>
+          <div class="dcw-muted" id="dcwAssignByNote"></div>
+        </div>
+        <div class="dcw-mfoot"><button class="dcw-btn ghost" id="dcwMCancel">Cancel</button><button class="dcw-btn primary" id="dcwMSave">Add task</button></div>
+      </div>
+    </div>
+
+    <div class="dcw-scrim" id="dcwRevScrim">
+      <div class="dcw-modal" role="dialog" aria-modal="true" style="max-width:440px">
+        <div class="dcw-mhead"><h2>Request changes</h2><button class="dcw-x" id="dcwRvClose" aria-label="Close">✕</button></div>
+        <div class="dcw-mbody"><div class="dcw-field"><label for="dcwRvNote">What needs to change?</label><textarea id="dcwRvNote" placeholder="Be specific — the doer sees this note on the card."></textarea></div></div>
+        <div class="dcw-mfoot"><button class="dcw-btn ghost" id="dcwRvCancel">Cancel</button><button class="dcw-btn primary" id="dcwRvSend" style="background:var(--crit);border-color:var(--crit)">Send back for changes</button></div>
+      </div>
+    </div>
   </section>
 </main>
 
@@ -1628,13 +1777,15 @@ document.getElementById("viewToggle").addEventListener("click",e=>{
   const b=e.target.closest("button"); if(!b)return;
   currentView=b.dataset.view;
   document.querySelectorAll("#viewToggle button").forEach(x=>x.classList.toggle("active",x===b));
-  const isClient=currentView==="client";
+  const isClient=currentView==="client", isDaily=currentView==="daily";
   document.getElementById("clientSelect").classList.toggle("hide",!isClient);
   document.getElementById("summaryBtn").classList.toggle("hide",!isClient);
   if(!isClient) document.getElementById("adSelect").classList.add("hide");
-  document.getElementById("portfolioView").classList.toggle("hide",isClient);
+  document.getElementById("portfolioView").classList.toggle("hide", isClient||isDaily);
   document.getElementById("clientView").classList.toggle("hide",!isClient);
-  render();
+  document.getElementById("dcwRoot").classList.toggle("hide",!isDaily);
+  if(isDaily){ if(window.DCW) window.DCW.activate(); }
+  else { if(window.DCW) window.DCW.deactivate(); render(); }
 });
 document.getElementById("refreshBtn").addEventListener("click",()=>{ hideBanner(); loadData(); });
 document.getElementById("themeBtn").addEventListener("click",()=>{
@@ -1762,6 +1913,230 @@ if(CONFIG.AUTO_REFRESH_MIN>0){ setInterval(loadData, CONFIG.AUTO_REFRESH_MIN*600
 /* boot */
 loadData();
 loadDiagnostics();
+
+/* =====================================================================
+   DAILY CLIENT WORK — self-contained module (own scope, dcw- namespace)
+   Reads/writes a hidden "TasksDB" tab in this same sheet via a small
+   Apps Script web app. Paste that web-app URL (…/exec) into DCW_API below.
+   ===================================================================== */
+(function(){
+  var DCW_API = "";          // <-- paste your Apps Script Web App /exec URL here
+  var POLL_MS = 15000;
+
+  var CLIENTS = ["Wymore","Ken (Champion)","Eric (Finn)","Cocina Mia","Phil S (Grumpy)","Phil H (Xceleration)","JAST","GRNDED","General / Internal"];
+  var TYPES = ["Page change","New ad","Ad check-up","Copy / creative","Audience / targeting","Other"];
+  var SEED_PEOPLE = ["Juan","Alyssa"];
+  var COLS = [{k:"todo",t:"To do"},{k:"doing",t:"In progress"},{k:"review",t:"Needs review"},{k:"done",t:"Done"}];
+
+  var TASKS=[], PEOPLE=SEED_PEOPLE.slice(), ME=lsGet("dcw_me",""), FILTER={client:"",who:"",q:"",reviewOnly:false};
+  var editingId=null, reviewingId=null, priVal="med", pollTimer=null, firstLoad=true, filled=false;
+
+  function lsGet(k,d){ try{var v=localStorage.getItem(k);return v==null?d:v;}catch(e){return d;} }
+  function lsSet(k,v){ try{localStorage.setItem(k,v);}catch(e){} }
+  function E(id){ return document.getElementById(id); }
+  function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];}); }
+  function initials(n){ n=(n||"?").trim(); var p=n.split(/\s+/); return ((p[0]||"")[0]||"?").toUpperCase()+((p[1]||"")[0]||"").toUpperCase(); }
+  function ago(ts){ if(!ts)return""; var s=(Date.now()-ts)/1000; if(s<60)return"just now"; var m=s/60; if(m<60)return Math.floor(m)+"m"; var h=m/60; if(h<24)return Math.floor(h)+"h"; var d=h/24; if(d<7)return Math.floor(d)+"d"; return Math.floor(d/7)+"w"; }
+  function sow(){ var d=new Date(); var day=(d.getDay()+6)%7; d.setHours(0,0,0,0); d.setDate(d.getDate()-day); return d.getTime(); }
+  var ready=function(){ return !!DCW_API; };
+
+  function jsonp(params){
+    return new Promise(function(res,rej){
+      var cb="dcwcb_"+Math.random().toString(36).slice(2), s=document.createElement("script");
+      var to=setTimeout(function(){ clean(); rej(new Error("timeout")); },12000);
+      function clean(){ clearTimeout(to); try{delete window[cb];}catch(e){window[cb]=undefined;} if(s.parentNode)s.parentNode.removeChild(s); }
+      window[cb]=function(d){ clean(); res(d); };
+      s.onerror=function(){ clean(); rej(new Error("neterr")); };
+      s.src=DCW_API+(DCW_API.indexOf("?")<0?"?":"&")+params+"&callback="+cb;
+      document.body.appendChild(s);
+    });
+  }
+  function apiList(){ return jsonp("action=list&_="+Date.now()); }
+  function apiSend(obj){ return jsonp("action="+encodeURIComponent(obj.action)+"&payload="+encodeURIComponent(JSON.stringify(obj))+"&_="+Date.now()); }
+
+  function setSync(state){
+    var p=E("dcwSync"), t=E("dcwSyncTxt"); if(!p)return; p.classList.remove("off","err");
+    if(state==="live") t.textContent="Live · synced";
+    else if(state==="loading") t.textContent="Loading…";
+    else if(state==="preview"){ p.classList.add("off"); t.textContent="Preview (not saved)"; }
+    else if(state==="stale"){ p.classList.add("off"); t.textContent="Reconnecting…"; }
+    else { p.classList.add("err"); t.textContent="Can't reach sheet"; }
+  }
+  function banner(msg){ var b=E("dcwBanner"); b.textContent=msg; b.classList.add("show"); }
+  function hideBanner(){ E("dcwBanner").classList.remove("show"); }
+
+  function normalize(r){
+    var rev=null; if(r.review){ if(typeof r.review==="string"){ try{rev=JSON.parse(r.review);}catch(e){rev=null;} } else rev=r.review; }
+    return { _id:String(r.id||""), num:+r.num||0, status:r.status||"todo", client:r.client||"", type:r.type||"",
+      title:r.title||"", details:r.details||"", assignee:r.assignee||"", assignedBy:r.assignedBy||"",
+      priority:r.priority||"med", review:rev, createdAt:+r.createdAt||0, updatedAt:+r.updatedAt||+r.createdAt||0 };
+  }
+  function refresh(showLoading){
+    if(!ready()) return;
+    if(showLoading) setSync("loading");
+    apiList().then(function(d){
+      if(d && d.ok!==false){
+        if(d.people && d.people.length) PEOPLE=d.people.slice();
+        TASKS=(d.tasks||[]).map(normalize); firstLoad=false;
+        renderPeople(); draw(); setSync("live"); hideBanner();
+      } else setSync("err");
+    }).catch(function(){ setSync(firstLoad?"err":"stale"); });
+  }
+
+  function fillStatic(){
+    var opt=function(v){ return '<option value="'+esc(v)+'">'+esc(v)+'</option>'; };
+    E("dcwFClient").insertAdjacentHTML("beforeend", CLIENTS.map(opt).join(""));
+    E("dcwClientM").innerHTML=CLIENTS.map(opt).join("");
+    E("dcwType").innerHTML=TYPES.map(opt).join("");
+  }
+  function renderPeople(){
+    var me=E("dcwMe"), cur=ME;
+    me.innerHTML='<option value="">— pick —</option>'+PEOPLE.map(function(p){return '<option value="'+esc(p)+'"'+(p===cur?" selected":"")+'>'+esc(p)+'</option>';}).join("")+'<option value="__add">+ add me…</option>';
+    me.value=PEOPLE.indexOf(cur)>=0?cur:"";
+    var fw=E("dcwFWho"), wc=fw.value;
+    fw.innerHTML='<option value="">Everyone</option><option value="__me">Assigned to me</option>'+PEOPLE.map(function(p){return '<option value="'+esc(p)+'">'+esc(p)+'</option>';}).join("");
+    fw.value=wc;
+    var fa=E("dcwAssignee"); if(fa){ var ac=fa.value; fa.innerHTML=PEOPLE.map(function(p){return '<option value="'+esc(p)+'">'+esc(p)+'</option>';}).join(""); if(PEOPLE.indexOf(ac)>=0)fa.value=ac; }
+  }
+  function addPerson(name,setMe){
+    if(PEOPLE.indexOf(name)<0){ PEOPLE.push(name); if(ready()) apiSend({action:"addPerson",name:name}); }
+    if(setMe){ ME=name; lsSet("dcw_me",ME); }
+    renderPeople(); draw();
+  }
+
+  function passes(t){
+    if(FILTER.reviewOnly && t.status!=="review") return false;
+    if(FILTER.client && t.client!==FILTER.client) return false;
+    if(FILTER.who==="__me"){ if(t.assignee!==ME) return false; }
+    else if(FILTER.who && t.assignee!==FILTER.who) return false;
+    if(FILTER.q){ var h=((t.title||"")+" "+(t.details||"")+" "+(t.client||"")+" "+(t.type||"")+" "+(t.assignee||"")).toLowerCase(); if(h.indexOf(FILTER.q)<0) return false; }
+    return true;
+  }
+  function draw(){
+    var live=TASKS.slice(), wk=sow();
+    E("dcwCTodo").textContent  = live.filter(function(t){return t.status==="todo";}).length;
+    E("dcwCDoing").textContent = live.filter(function(t){return t.status==="doing";}).length;
+    E("dcwCReview").textContent= live.filter(function(t){return t.status==="review";}).length;
+    E("dcwCDone").textContent  = live.filter(function(t){return t.status==="done"&&(t.updatedAt||0)>=wk;}).length;
+    E("dcwReviewMetric").classList.toggle("hot", live.some(function(t){return t.status==="review";}));
+    var shown=live.filter(passes), showEx=(!ready() && TASKS.length===0);
+    var board=E("dcwBoard"); board.innerHTML="";
+    COLS.forEach(function(st){
+      var items=shown.filter(function(t){return t.status===st.k;}).sort(function(a,b){ var pr={high:0,med:1,low:2}; var d=(pr[a.priority]||1)-(pr[b.priority]||1); if(d)return d; return (b.updatedAt||0)-(a.updatedAt||0); });
+      var col=document.createElement("div"); col.className="dcw-col "+st.k;
+      col.innerHTML='<div class="dcw-colhead"><span class="dcw-coldot"></span><span class="dcw-ct">'+st.t+'</span><span class="dcw-cn">'+items.length+'</span></div>';
+      var cards=document.createElement("div"); cards.className="dcw-cards";
+      if(items.length===0 && !(showEx && EX[st.k])) cards.innerHTML='<div class="dcw-col-empty">'+(st.k==="todo"?"Nothing assigned":st.k==="review"?"Nothing waiting on review":"—")+'</div>';
+      items.forEach(function(t){ cards.appendChild(card(t,false)); });
+      if(showEx && EX[st.k]) cards.appendChild(card(EX[st.k],true));
+      col.appendChild(cards); board.appendChild(col);
+    });
+  }
+  function card(t,ex){
+    var el=document.createElement("div"); el.className="dcw-card"+(ex?" ex":"")+(t.status==="done"?" done-c":"");
+    var pri=(t.priority||"med");
+    var h='<div class="dcw-crow"><span class="dcw-chip client">'+esc(t.client||"—")+'</span><span class="dcw-chip type">'+esc(t.type||"Task")+'</span><span class="dcw-tid">'+(ex?"example":("#"+(t.num||"—")))+'</span></div>'+
+      '<h3 class="dcw-tt">'+esc(t.title||"(untitled)")+'</h3>'+(t.details?'<div class="dcw-det">'+esc(t.details)+'</div>':'');
+    if(t.review && t.review.result){ var ok=t.review.result==="approved";
+      h+='<div class="dcw-rnote'+(ok?" ok":"")+'"><span class="dcw-rl">'+(ok?"Approved by "+esc(t.review.by||"—"):"Changes requested by "+esc(t.review.by||"—"))+'</span>'+(t.review.notes?esc(t.review.notes):(ok?"Looks good.":""))+'</div>'; }
+    h+='<div class="dcw-cfoot"><span class="dcw-who"><span class="dcw-avatar">'+esc(initials(t.assignee))+'</span>'+esc(t.assignee||"Unassigned")+'</span><span class="dcw-pri '+pri+'"><span class="dcw-pd"></span>'+(pri==="high"?"High":pri==="low"?"Low":"Med")+'</span><span class="dcw-age">'+ago(t.updatedAt||t.createdAt)+'</span></div>';
+    if(!ex) h+=actions(t);
+    el.innerHTML=h;
+    if(!ex) el.querySelectorAll("[data-act]").forEach(function(b){ b.onclick=function(){ act(b.getAttribute("data-act"),t); }; });
+    return el;
+  }
+  function actions(t){
+    var a='<div class="dcw-cactions">';
+    if(t.status==="todo") a+='<button class="dcw-abtn go" data-act="start">Start</button><button class="dcw-abtn mini" data-act="edit" title="Edit">✎</button><button class="dcw-abtn mini" data-act="del" title="Delete">🗑</button>';
+    else if(t.status==="doing") a+='<button class="dcw-abtn go" data-act="submit">Submit for review</button><button class="dcw-abtn mini" data-act="back" title="Back to To do">↩</button><button class="dcw-abtn mini" data-act="edit" title="Edit">✎</button>';
+    else if(t.status==="review") a+='<button class="dcw-abtn approve" data-act="approve">✓ Approve</button><button class="dcw-abtn changes" data-act="changes">Request changes</button>';
+    else a+='<span class="dcw-stamp">✓ Completed</span><button class="dcw-abtn mini" data-act="reopen" title="Reopen" style="margin-left:auto">↩</button>';
+    return a+'</div>';
+  }
+  function needMe(){ if(ME)return true; banner("Pick who you are (the “I'm” selector) before assigning or reviewing — so actions are attributed to you."); E("dcwMe").focus(); return false; }
+  function needApi(){ if(ready())return true; banner("Not connected to the sheet yet — paste your Apps Script URL into DCW_API (top of the Daily Work module) to save changes."); return false; }
+  function local(id,patch){ for(var i=0;i<TASKS.length;i++){ if(TASKS[i]._id===id){ for(var k in patch) TASKS[i][k]=patch[k]; TASKS[i].updatedAt=Date.now(); break; } } draw(); }
+  function push(action,payload){ apiSend(Object.assign({action:action},payload)).then(function(){ setTimeout(function(){refresh(false);},400); }).catch(function(){ setTimeout(function(){refresh(false);},700); }); }
+
+  function act(a,t){
+    if(a==="edit"){ openTask(t); return; }
+    if(!needApi()) return;
+    if(a==="del"){ if(confirm("Delete task “"+(t.title||"")+"”?")){ TASKS=TASKS.filter(function(x){return x._id!==t._id;}); draw(); push("delete",{id:t._id}); } return; }
+    if(a==="changes"){ if(!needMe())return; reviewingId=t._id; E("dcwRvNote").value=""; open("dcwRevScrim"); E("dcwRvNote").focus(); return; }
+    var patch=null;
+    if(a==="start")  patch={status:"doing"};
+    if(a==="back")   patch={status:"todo"};
+    if(a==="submit"){ if(!needMe())return; patch={status:"review",review:null}; }
+    if(a==="approve"){ if(!needMe())return; patch={status:"done",review:{result:"approved",by:ME,notes:"",at:Date.now()}}; }
+    if(a==="reopen") patch={status:"doing",review:null};
+    if(patch){ local(t._id,patch); push("update",{id:t._id,patch:patch}); }
+  }
+
+  function openTask(t){
+    editingId=t?t._id:null;
+    E("dcwMTitle").textContent=t?"Edit task":"New task";
+    E("dcwMSave").textContent=t?"Save changes":"Add task";
+    E("dcwTt").value=t?(t.title||""):"";
+    E("dcwDet").value=t?(t.details||""):"";
+    E("dcwClientM").value=t?(t.client||CLIENTS[0]):CLIENTS[0];
+    E("dcwType").value=t?(t.type||TYPES[0]):TYPES[0];
+    var fa=E("dcwAssignee"); fa.value=t?(t.assignee||(PEOPLE.indexOf(ME)>=0?ME:PEOPLE[0])):(PEOPLE.indexOf("Juan")>=0?"Juan":PEOPLE[0]);
+    priVal=t?(t.priority||"med"):"med"; setPri(priVal);
+    E("dcwAssignByNote").textContent=t?("Originally assigned by "+(t.assignedBy||"—")):(ME?("Assigned by "+ME):"");
+    open("dcwTaskScrim"); E("dcwTt").focus();
+  }
+  function setPri(v){ priVal=v; document.querySelectorAll("#dcwPri button").forEach(function(b){ b.setAttribute("aria-pressed", b.getAttribute("data-v")===v?"true":"false"); }); }
+
+  function open(id){ E(id).classList.add("open"); }
+  function close(id){ E(id).classList.remove("open"); }
+
+  /* wire controls (elements exist — script runs at end of body) */
+  fillStatic(); renderPeople();
+  E("dcwSync").onclick=function(){ refresh(true); };
+  E("dcwSearch").oninput=function(){ FILTER.q=this.value.toLowerCase(); draw(); };
+  E("dcwFClient").onchange=function(){ FILTER.client=this.value; draw(); };
+  E("dcwFWho").onchange=function(){ FILTER.who=this.value; draw(); };
+  E("dcwReviewMetric").onclick=function(){ FILTER.reviewOnly=!FILTER.reviewOnly; this.classList.toggle("on",FILTER.reviewOnly); draw(); };
+  E("dcwMe").onchange=function(){ if(this.value==="__add"){ var n=prompt("Add your name to the team roster:"); this.value=ME||""; if(n&&n.trim())addPerson(n.trim(),true); return; } ME=this.value; lsSet("dcw_me",ME); renderPeople(); draw(); };
+  E("dcwNew").onclick=function(){ if(!needMe())return; openTask(null); };
+  document.querySelectorAll("#dcwPri button").forEach(function(b){ b.onclick=function(){ setPri(b.getAttribute("data-v")); }; });
+  E("dcwMClose").onclick=function(){ close("dcwTaskScrim"); }; E("dcwMCancel").onclick=function(){ close("dcwTaskScrim"); };
+  E("dcwRvClose").onclick=function(){ close("dcwRevScrim"); }; E("dcwRvCancel").onclick=function(){ close("dcwRevScrim"); };
+  document.querySelectorAll("#dcwRoot .dcw-scrim").forEach(function(s){ s.addEventListener("click",function(e){ if(e.target===s) s.classList.remove("open"); }); });
+  document.addEventListener("keydown",function(e){ if(e.key==="Escape") document.querySelectorAll("#dcwRoot .dcw-scrim.open").forEach(function(s){s.classList.remove("open");}); });
+  E("dcwMSave").onclick=function(){
+    if(!needApi())return;
+    var title=E("dcwTt").value.trim(); if(!title){ E("dcwTt").focus(); return; }
+    var f={ title:title, client:E("dcwClientM").value, type:E("dcwType").value, details:E("dcwDet").value.trim(), assignee:E("dcwAssignee").value, priority:priVal };
+    if(editingId){ local(editingId,f); push("update",{id:editingId,patch:f}); }
+    else { f.assignedBy=ME; f.createdBy=ME; push("create",{task:f}); }
+    editingId=null; close("dcwTaskScrim");
+  };
+  E("dcwRvSend").onclick=function(){
+    if(!reviewingId) return close("dcwRevScrim");
+    var note=E("dcwRvNote").value.trim(), patch={status:"doing",review:{result:"changes",by:ME,notes:note,at:Date.now()}};
+    local(reviewingId,patch); push("update",{id:reviewingId,patch:patch}); reviewingId=null; close("dcwRevScrim");
+  };
+
+  var EX={
+    todo:{client:"Cocina Mia",type:"Page change",title:"Move lead form above the fold",details:"Scroll depth only 15% — put the form higher on the landing page.",assignee:"Juan",priority:"high",num:12,status:"todo",updatedAt:Date.now()-36e5},
+    doing:{client:"Wymore",type:"New ad",title:"Build 2 new Advantage+ creatives",details:"CTR stuck sub-1%; test fresh creative.",assignee:"Juan",priority:"med",num:11,status:"doing",updatedAt:Date.now()-72e5},
+    review:{client:"GRNDED",type:"Page change",title:"New landing variant — ready for review",details:"Rebuilt hero + CTA. Link in details.",assignee:"Juan",priority:"med",num:10,status:"review",updatedAt:Date.now()-18e5},
+    done:{client:"Phil S (Grumpy)",type:"Ad check-up",title:"48h check — scale winner 01.02",details:"$4 CPL, scaled budget +20%.",assignee:"Juan",priority:"low",num:9,status:"done",review:{result:"approved",by:"Alyssa",notes:"Nice — keep scaling."},updatedAt:Date.now()-9e5}
+  };
+
+  /* activation from the view toggle */
+  window.DCW = {
+    activate:function(){
+      if(!ready()){ setSync("preview"); banner("Design preview — the task sheet isn't connected yet, so nothing is saved. The cards below are examples. To go live: deploy the Apps Script into this sheet and paste its URL into DCW_API (top of the Daily Work module in this file)."); draw(); return; }
+      draw(); refresh(true);
+      if(pollTimer) clearInterval(pollTimer);
+      pollTimer=setInterval(function(){ refresh(false); }, POLL_MS);
+    },
+    deactivate:function(){ if(pollTimer){ clearInterval(pollTimer); pollTimer=null; } }
+  };
+  draw();
+})();
 </script>
 </body>
 </html>
