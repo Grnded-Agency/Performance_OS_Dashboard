@@ -2042,7 +2042,7 @@ loadDiagnostics();
     var rev=(r.review && r.review.result)?r.review:null;
     return { _id:String(r._id||""), num:+r.num||0, status:r.status||"todo", client:r.client||"", type:r.type||"",
       title:r.title||"", details:r.details||"", assignee:r.assignee||"", assignedBy:r.assignedBy||"",
-      priority:r.priority||"med", review:rev, createdAt:+r.createdAt||0, updatedAt:+r.updatedAt||+r.createdAt||0 };
+      priority:r.priority||"med", needsReview:(r.needsReview!==false), review:rev, createdAt:+r.createdAt||0, updatedAt:+r.updatedAt||+r.createdAt||0 };
   }
   function refresh(){ if(ready()){ startSubs(); draw(); } else draw(); }
 
